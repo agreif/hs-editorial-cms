@@ -27,6 +27,9 @@ data AppMessage =
   | MsgUserPassword
   | MsgUserEmail
   | MsgUserIsAdmin
+  | MsgUserIsEditor
+  | MsgUserIsReviewer
+  | MsgUserIsAuthor
   | MsgUserIsResetPassword
   | MsgConfigCode
   | MsgConfigStringValue
@@ -56,6 +59,9 @@ renderMessageGerman MsgUserIdent = "Login"
 renderMessageGerman MsgUserPassword = "Passwort"
 renderMessageGerman MsgUserEmail = "Email"
 renderMessageGerman MsgUserIsAdmin = "Ist Admin?"
+renderMessageGerman MsgUserIsEditor = "Ist Redaktuer?"
+renderMessageGerman MsgUserIsReviewer = "Ist Reviewer?"
+renderMessageGerman MsgUserIsAuthor = "Ist Autor?"
 renderMessageGerman MsgUserIsResetPassword = "Neues Passwort generieren? (Wird per Email zugesendet)"
 renderMessageGerman MsgConfigCode = "Code"
 renderMessageGerman MsgConfigStringValue = "String-Wert"
@@ -85,6 +91,9 @@ renderMessageEnglish MsgUserIdent = "Login"
 renderMessageEnglish MsgUserPassword = "Password"
 renderMessageEnglish MsgUserEmail = "Email"
 renderMessageEnglish MsgUserIsAdmin = "Is admin?"
+renderMessageEnglish MsgUserIsEditor = "Is editor?"
+renderMessageEnglish MsgUserIsReviewer = "Is reviewer?"
+renderMessageEnglish MsgUserIsAuthor = "Is author?"
 renderMessageEnglish MsgUserIsResetPassword = "Generate new password? (Will be sent by email)"
 renderMessageEnglish MsgConfigCode = "Code"
 renderMessageEnglish MsgConfigStringValue = "String-Value"
@@ -114,6 +123,9 @@ data Translation = Translation
   , msgUserPassword :: Text
   , msgUserEmail :: Text
   , msgUserIsAdmin :: Text
+  , msgUserIsEditor :: Text
+  , msgUserIsReviewer :: Text
+  , msgUserIsAuthor :: Text
   , msgUserIsResetPassword :: Text
   , msgConfigCode :: Text
   , msgConfigStringValue :: Text
@@ -147,6 +159,9 @@ translationDe = Translation
   , msgUserPassword = "Passwort"
   , msgUserEmail = "Email"
   , msgUserIsAdmin = "Ist Admin?"
+  , msgUserIsEditor = "Ist Redaktuer?"
+  , msgUserIsReviewer = "Ist Reviewer?"
+  , msgUserIsAuthor = "Ist Autor?"
   , msgUserIsResetPassword = "Neues Passwort generieren? (Wird per Email zugesendet)"
   , msgConfigCode = "Code"
   , msgConfigStringValue = "String-Wert"
@@ -177,6 +192,9 @@ translationEn = Translation
   , msgUserPassword = "Password"
   , msgUserEmail = "Email"
   , msgUserIsAdmin = "Is admin?"
+  , msgUserIsEditor = "Is editor?"
+  , msgUserIsReviewer = "Is reviewer?"
+  , msgUserIsAuthor = "Is author?"
   , msgUserIsResetPassword = "Generate new password? (Will be sent by email)"
   , msgConfigCode = "Code"
   , msgConfigStringValue = "String-Value"

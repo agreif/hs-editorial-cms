@@ -258,6 +258,12 @@
                 {parent.data.translation.msgUserEmail}
               <th>
                 {parent.data.translation.msgUserIsAdmin}
+              <th>
+                {parent.data.translation.msgUserIsEditor}
+              <th>
+                {parent.data.translation.msgUserIsReviewer}
+              <th>
+                {parent.data.translation.msgUserIsAuthor}
               <th .uk-align-right>
                 <button .uk-background-primary .uk-light .uk-padding-small .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgGlobalAddUser}" uk-tooltip onclick="{addUser}">
                   <span uk-icon="icon: plus">
@@ -270,6 +276,15 @@
               <td .uk-table-link>
                 <a onclick="{editUser}" .uk-link-reset>
                   <span uk-icon="icon: check" if="{entity.isAdmin}">
+              <td .uk-table-link>
+                <a onclick="{editUser}" .uk-link-reset>
+                  <span uk-icon="icon: check" if="{entity.isEditor}">
+              <td .uk-table-link>
+                <a onclick="{editUser}" .uk-link-reset>
+                  <span uk-icon="icon: check" if="{entity.isReviewer}">
+              <td .uk-table-link>
+                <a onclick="{editUser}" .uk-link-reset>
+                  <span uk-icon="icon: check" if="{entity.isAuthor}">
               <td .uk-width-small>
                 <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgGlobalDeleteUser}" uk-tooltip onclick="{deleteUser}">
                   <span uk-icon="icon: trash">

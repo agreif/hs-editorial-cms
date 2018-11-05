@@ -6,6 +6,9 @@ User
     password Text Maybe
     email Text
     isAdmin Bool
+    isEditor Bool
+    isReviewer Bool
+    isAuthor Bool
     version Int
     createdAt UTCTime
     createdBy Text
@@ -21,6 +24,9 @@ UserHistory
     password Text Maybe
     email Text
     isAdmin Bool
+    isEditor Bool
+    isReviewer Bool
+    isAuthor Bool
     version Int
     createdAt UTCTime
     createdBy Text

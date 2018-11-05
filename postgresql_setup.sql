@@ -12,9 +12,9 @@ as $function$
        if to_regclass('user_history') is not null then
            if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
                 insert into user_history
-                       (id, ident, password, email, is_admin, version, created_at, created_by, updated_at, updated_by)
+                       (id, ident, password, email, is_admin, is_editor, is_reviewer, is_author, version, created_at, created_by, updated_at, updated_by)
                        values
-                       (new.id, new.ident, new.password, new.email, new.is_admin, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                       (new.id, new.ident, new.password, new.email, new.is_admin, new.is_editor, new.is_reviewer, new.is_author, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
                 return new;
             end if;
        end if;
