@@ -148,6 +148,9 @@ instance ToJSON User where
     [ "ident" .= userIdent o
     , "email" .= userEmail o
     , "isAdmin" .= userIsAdmin o
+    , "isEditor" .= userIsEditor o
+    , "isReviewer" .= userIsReviewer o
+    , "isAuthor" .= userIsAuthor o
     ]
 
 data JDataPages = JDataPages
