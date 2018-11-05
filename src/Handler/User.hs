@@ -23,6 +23,9 @@ data VAddUser = VAddUser
   { vAddUserIdent :: Text
   , vAddUserEmail :: Text
   , vAddUserIsAdmin :: Bool
+  , vAddUserIsEditor :: Bool
+  , vAddUserIsReviewer :: Bool
+  , vAddUserIsAuthor :: Bool
   }
 -- gen data add - end
 
@@ -53,6 +56,9 @@ postAddUserR = do
             , userPassword = (Just passwdHash)
             , userEmail = vAddUserEmail vAddUser
             , userIsAdmin = vAddUserIsAdmin vAddUser
+            , userIsEditor = vAddUserIsEditor vAddUser
+            , userIsReviewer = vAddUserIsReviewer vAddUser
+            , userIsAuthor = vAddUserIsAuthor vAddUser
             , userVersion = 1
             , userCreatedAt = curTime
             , userCreatedBy = userIdent authUser
@@ -79,7 +85,16 @@ vAddUserForm maybeUser extra = do
   (isAdminResult, isAdminView) <- mreq checkBoxField
     isAdminFs
     (userIsAdmin <$> maybeUser)
-  let vAddUserResult = VAddUser <$> identResult <*> emailResult <*> isAdminResult
+  (isEditorResult, isEditorView) <- mreq checkBoxField
+    isEditorFs
+    (userIsEditor <$> maybeUser)
+  (isReviewerResult, isReviewerView) <- mreq checkBoxField
+    isReviewerFs
+    (userIsReviewer <$> maybeUser)
+  (isAuthorResult, isAuthorView) <- mreq checkBoxField
+    isAuthorFs
+    (userIsAuthor <$> maybeUser)
+  let vAddUserResult = VAddUser <$> identResult <*> emailResult <*> isAdminResult <*> isEditorResult <*> isReviewerResult <*> isAuthorResult
   let formWidget = toWidget [whamlet|
     #{extra}
     <div .uk-margin-small :not $ null $ fvErrors identView:.uk-form-danger>
@@ -99,6 +114,24 @@ vAddUserForm maybeUser extra = do
       <div .uk-form-controls>
         ^{fvInput isAdminView}
         $maybe err <- fvErrors isAdminView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isEditorView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isEditorView:.uk-text-danger for=#{fvId isEditorView}>#{fvLabel isEditorView}
+      <div .uk-form-controls>
+        ^{fvInput isEditorView}
+        $maybe err <- fvErrors isEditorView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isReviewerView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isReviewerView:.uk-text-danger for=#{fvId isReviewerView}>#{fvLabel isReviewerView}
+      <div .uk-form-controls>
+        ^{fvInput isReviewerView}
+        $maybe err <- fvErrors isReviewerView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isAuthorView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isAuthorView:.uk-text-danger for=#{fvId isAuthorView}>#{fvLabel isAuthorView}
+      <div .uk-form-controls>
+        ^{fvInput isAuthorView}
+        $maybe err <- fvErrors isAuthorView
           &nbsp;#{err}
     |]
   return (vAddUserResult, formWidget)
@@ -127,6 +160,30 @@ vAddUserForm maybeUser extra = do
       , fsName = Just "isAdmin"
       , fsAttrs = [ ("class","uk-checkbox") ]
       }
+    isEditorFs :: FieldSettings App
+    isEditorFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsEditor
+      , fsTooltip = Nothing
+      , fsId = Just "isEditor"
+      , fsName = Just "isEditor"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
+    isReviewerFs :: FieldSettings App
+    isReviewerFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsReviewer
+      , fsTooltip = Nothing
+      , fsId = Just "isReviewer"
+      , fsName = Just "isReviewer"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
+    isAuthorFs :: FieldSettings App
+    isAuthorFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsAuthor
+      , fsTooltip = Nothing
+      , fsId = Just "isAuthor"
+      , fsName = Just "isAuthor"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
 -- gen add form - end
 
 -------------------------------------------------------
@@ -138,6 +195,9 @@ data VEditUser = VEditUser
   { vEditUserIdent :: Text
   , vEditUserEmail :: Text
   , vEditUserIsAdmin :: Bool
+  , vEditUserIsEditor :: Bool
+  , vEditUserIsReviewer :: Bool
+  , vEditUserIsAuthor :: Bool
   , vEditUserIsResetPassword :: Bool
   , vEditUserVersion :: Int
   }
@@ -205,13 +265,22 @@ vEditUserForm maybeUser extra = do
   (isAdminResult, isAdminView) <- mreq checkBoxField
     isAdminFs
     (userIsAdmin <$> maybeUser)
+  (isEditorResult, isEditorView) <- mreq checkBoxField
+    isEditorFs
+    (userIsEditor <$> maybeUser)
+  (isReviewerResult, isReviewerView) <- mreq checkBoxField
+    isReviewerFs
+    (userIsReviewer <$> maybeUser)
+  (isAuthorResult, isAuthorView) <- mreq checkBoxField
+    isAuthorFs
+    (userIsAuthor <$> maybeUser)
   (isResetPasswordResult, isResetPasswordView) <- mreq checkBoxField
     isResetPasswordFs
     (Nothing)
   (versionResult, versionView) <- mreq hiddenField
     versionFs
     (userVersion <$> maybeUser)
-  let vEditUserResult = VEditUser <$> identResult <*> emailResult <*> isAdminResult <*> isResetPasswordResult <*> versionResult
+  let vEditUserResult = VEditUser <$> identResult <*> emailResult <*> isAdminResult <*> isEditorResult <*> isReviewerResult <*> isAuthorResult <*> isResetPasswordResult <*> versionResult
   let formWidget = toWidget [whamlet|
     #{extra}
     ^{fvInput versionView}
@@ -232,6 +301,24 @@ vEditUserForm maybeUser extra = do
       <div .uk-form-controls>
         ^{fvInput isAdminView}
         $maybe err <- fvErrors isAdminView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isEditorView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isEditorView:.uk-text-danger for=#{fvId isEditorView}>#{fvLabel isEditorView}
+      <div .uk-form-controls>
+        ^{fvInput isEditorView}
+        $maybe err <- fvErrors isEditorView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isReviewerView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isReviewerView:.uk-text-danger for=#{fvId isReviewerView}>#{fvLabel isReviewerView}
+      <div .uk-form-controls>
+        ^{fvInput isReviewerView}
+        $maybe err <- fvErrors isReviewerView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors isAuthorView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors isAuthorView:.uk-text-danger for=#{fvId isAuthorView}>#{fvLabel isAuthorView}
+      <div .uk-form-controls>
+        ^{fvInput isAuthorView}
+        $maybe err <- fvErrors isAuthorView
           &nbsp;#{err}
     <div .uk-margin-small :not $ null $ fvErrors isResetPasswordView:.uk-form-danger>
       <label .uk-form-label :not $ null $ fvErrors isResetPasswordView:.uk-text-danger for=#{fvId isResetPasswordView}>#{fvLabel isResetPasswordView}
@@ -264,6 +351,30 @@ vEditUserForm maybeUser extra = do
       , fsTooltip = Nothing
       , fsId = Just "isAdmin"
       , fsName = Just "isAdmin"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
+    isEditorFs :: FieldSettings App
+    isEditorFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsEditor
+      , fsTooltip = Nothing
+      , fsId = Just "isEditor"
+      , fsName = Just "isEditor"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
+    isReviewerFs :: FieldSettings App
+    isReviewerFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsReviewer
+      , fsTooltip = Nothing
+      , fsId = Just "isReviewer"
+      , fsName = Just "isReviewer"
+      , fsAttrs = [ ("class","uk-checkbox") ]
+      }
+    isAuthorFs :: FieldSettings App
+    isAuthorFs = FieldSettings
+      { fsLabel = SomeMessage MsgUserIsAuthor
+      , fsTooltip = Nothing
+      , fsId = Just "isAuthor"
+      , fsName = Just "isAuthor"
       , fsAttrs = [ ("class","uk-checkbox") ]
       }
     isResetPasswordFs :: FieldSettings App
