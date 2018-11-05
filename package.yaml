@@ -1,4 +1,4 @@
-name:    hs-editorialcms
+name:    hs-editorial-cms
 version: "0.0.0"
 
 dependencies:
@@ -75,7 +75,7 @@ library:
 
 # Runnable executable for our application
 executables:
-  hs-editorialcms:
+  hs-editorial-cms:
     main: main.hs
     source-dirs: app
     ghc-options:
@@ -83,19 +83,19 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - hs-editorialcms
+    - hs-editorial-cms
     when:
     - condition: flag(library-only)
       buildable: false
 
 # Test suite
 tests:
-  hs-editorialcms-test:
+  hs-editorial-cms-test:
     main: Spec.hs
     source-dirs: test
     ghc-options: -Wall
     dependencies:
-    - hs-editorialcms
+    - hs-editorial-cms
     - hspec >=2.0.0
     - yesod-test
 

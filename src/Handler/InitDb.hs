@@ -43,7 +43,7 @@ getInitDbR adminEmail = do
     maybeConfigAppName <- selectFirst [ConfigCode ==. "app_name"] []
     case maybeConfigAppName of
       Nothing -> do
-        let appName = "hs-hs-editorialcms"
+        let appName = "hs-editorial-cms"
         _ <- insert $ Config { configCode = "app_name"
                              , configStringValue = Just appName
                              , configIntValue = Nothing
