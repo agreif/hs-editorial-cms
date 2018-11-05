@@ -101,7 +101,7 @@ instance Yesod App where
     isAuthorized (HomeR) _ = do
         _ <- requireAuthId
         return Authorized
-    isAuthorized (MyprojectR _) _ = do
+    isAuthorized (EcmsR _) _ = do
         _ <- requireAuthId
         return Authorized
     isAuthorized (AdminR _) _ = do

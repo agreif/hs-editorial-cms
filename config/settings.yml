@@ -29,12 +29,12 @@ approot:        "_env:APPROOT:http://localhost:3000"
 # See https://github.com/yesodweb/yesod/wiki/Configuration#parsing-numeric-values-as-strings
 
 database:
-  user:     "_env:PGUSER:hs-editorialcms"
-  password: "_env:PGPASS:hs-editorialcms"
+  user:     "_env:PGUSER:editorialcms"
+  password: "_env:PGPASS:editorialcms"
   host:     "_env:PGHOST:localhost"
   port:     "_env:PGPORT:5432"
   # See config/test-settings.yml for an override during tests
-  database: "_env:PGDATABASE:hs-editorialcms"
+  database: "_env:PGDATABASE:editorialcms"
   poolsize: "_env:PGPOOLSIZE:10"
 
 #copyright: Insert copyright statement here

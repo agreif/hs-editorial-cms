@@ -7,7 +7,7 @@
 / HomeR GET
 /initdb/#Text InitDbR GET
 
-/myproject/admin AdminR:
+/ecms/admin AdminR:
   home AdminHomeR GET
   adminPageDataJson AdminPageDataJsonR GET
 
@@ -24,8 +24,8 @@
   sendTestMailForm AddTestmailFormR GET
   sendTestMail AddTestmailR POST
 
-/myproject MyprojectR:
-  home MyprojectHomeR GET
+/ecms EcmsR:
+  home EcmsHomeR GET
   riotTags RiotTagsR GET
 
   homePageDataJson HomePageDataJsonR GET

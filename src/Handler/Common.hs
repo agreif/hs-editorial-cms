@@ -228,8 +228,8 @@ mainNavData user mainNav = do
     [ JDataNavItem
       { jDataNavItemLabel = msgHome
       , jDataNavItemIsActive = mainNav == MainNavHome
-      , jDataNavItemUrl = urlRenderer $ MyprojectR MyprojectHomeR
-      , jDataNavItemPageDataUrl = urlRenderer $ MyprojectR HomePageDataJsonR
+      , jDataNavItemUrl = urlRenderer $ EcmsR EcmsHomeR
+      , jDataNavItemPageDataUrl = urlRenderer $ EcmsR HomePageDataJsonR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }

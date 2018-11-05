@@ -7,7 +7,7 @@ fi
 
 stack clean
 
-PGUSER=hs-editorialcms \
-    PGPASS=hs-editorialcms \
-    PGDATABASE=hs-editorialcms \
+PGUSER=editorialcms \
+    PGPASS=editorialcms \
+    PGDATABASE=editorialcms \
     stack exec -- yesod devel

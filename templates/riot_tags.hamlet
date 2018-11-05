@@ -195,8 +195,8 @@
     \ }
     \ editMyProfile(event) {
     \   event.preventDefault()
-    \   dataJsonUrl = window.history.state ? window.history.state.dataJsonUrl : "@{MyprojectR HomePageDataJsonR}"
-    \   parent.tag.showModalForm("@{MyprojectR EditMyprofileFormR}", dataJsonUrl)
+    \   dataJsonUrl = window.history.state ? window.history.state.dataJsonUrl : "@{EcmsR HomePageDataJsonR}"
+    \   parent.tag.showModalForm("@{EcmsR EditMyprofileFormR}", dataJsonUrl)
     \ }
     \ changeLanguageDe(event) {
     \   event.preventDefault()
