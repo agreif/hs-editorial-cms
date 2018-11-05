@@ -1,31 +1,15 @@
-# Project specifics
-   - yesod-postgres template
-   - auth-hashdb
-   - riot-js component-based UI library
-   - UIkit front-end framework
-   - model create and edit forms are generated
-   - send email on user creation and password change by admin
-
-# Screenshots
-![Home](../screenshots/hs-editorialcms/home.png)
-![MyProfile-Edit](../screenshots/hs-editorialcms/myprofile-edit.png)
-![Admin-User](../screenshots/hs-editorialcms/admin-user.png)
-![Admin-Config](../screenshots/hs-editorialcms/admin-config.png)
-
-# Template installation
-```
-stack new my-project https://raw.githubusercontent.com/Greif-IT/hs-stack-templates/master/hs-editorialcms.hsfiles
-```
+# hs-editorial-cms
+Lightweight Editorial Content Management System for journals and magazines
 
 # Create PostgreSQL database (ubuntu)
 ```
-sudo su postgres -c 'createuser --createdb --encrypted --no-inherit --login --pwprompt --no-createrole --no-superuser --no-replication my-project'
-sudo su postgres -c 'createdb --encoding=UTF-8 --owner=my-project --template=template0 my-project'
+sudo su postgres -c 'createuser --createdb --encrypted --no-inherit --login --pwprompt --no-createrole --no-superuser --no-replication editorialcms'
+sudo su postgres -c 'createdb --encoding=UTF-8 --owner=my-project --template=template0 editorialcms'
 ```
 
 # Run Yesod server
 ```
-cd my-project
+cd hs-editorialcms
 sh run_dev.sh
 ```
 # Initialize admin user
@@ -55,23 +39,6 @@ sh run_passwd.sh mySecretPassword78574
 will generate the hash: sha256|17|sm/d6UdH7+nRXZt7bJaAeg==|HVpHzSBOHQPwZiqmfEHiCZZPZh4tFLQyEuDKsNdqcN0=
 
 then you can update the apprpriate database row for the admin user or some other user
-
-# Generate model code
-most of the models are generated with the 'ginger' haskell templating engine.
-In the haskell code you see the generator markers like
-```haskell
--- gen data edit - start
-data VEditConfig = VEditConfig
-  { vEditConfigCode :: Maybe Text
-  , vEditConfigStringValue :: Maybe Text
-  , vEditConfigIntValue :: Maybe Int
-  , vEditConfigDoubleValue :: Maybe Double
-  , vEditConfigBoolValue :: Bool
-  , vEditConfigVersion :: Int
-  }
--- gen data edit - end
-```
-
 
 All model definitions and the ginger templates are in the hs-generator subproject.
 If model definitions changed you can regenerate the haskell code with
