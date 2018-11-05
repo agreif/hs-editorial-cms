@@ -15,8 +15,8 @@ stanzas:
     #
     # The path given is for Stack projects. If you're still using cabal, change
     # to
-    # exec: ../dist/build/hs-editorialcms/hs-editorialcms
-    exec: ../dist/bin/hs-editorialcms
+    # exec: ../dist/build/hs-editorial-cms/hs-editorial-cms
+    exec: ../dist/bin/hs-editorial-cms
 
     # Command line options passed to your application.
     args: []
@@ -25,7 +25,7 @@ stanzas:
       # You can specify one or more hostnames for your application to respond
       # to. The primary hostname will be used for generating your application
       # root.
-      - www.hs-editorialcms.com
+      - www.hs-editorial-cms.com
 
     # Enable to force Keter to redirect to https
     # Can be added to any stanza
@@ -34,7 +34,7 @@ stanzas:
   # Static files.
   - type: static-files
     hosts:
-      - static.hs-editorialcms.com
+      - static.hs-editorial-cms.com
     root: ../static
 
     # Uncomment to turn on directory listings.
@@ -44,9 +44,9 @@ stanzas:
   - type: redirect
 
     hosts:
-      - hs-editorialcms.com
+      - hs-editorial-cms.com
     actions:
-      - host: www.hs-editorialcms.com
+      - host: www.hs-editorial-cms.com
         # secure: false
         # port: 80
 

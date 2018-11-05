@@ -1,5 +1,5 @@
 {-# LANGUAGE PackageImports #-}
-import "hs-editorialcms" Application (develMain)
+import "hs-editorial-cms" Application (develMain)
 import Prelude (IO)
 
 main :: IO ()
