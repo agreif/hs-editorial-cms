@@ -1,0 +1,20 @@
+name: hs-generator
+version: '0.0.0'
+
+extra-source-files:
+- package.yaml
+
+ghc-options: -Wall
+
+executables:
+  hs-generator:
+    source-dirs: src
+    main: Main.hs
+    dependencies:
+    - base
+    - aeson
+    - hs-yesod-model-generator
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
