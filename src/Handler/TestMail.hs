@@ -42,7 +42,7 @@ getAddTestmailFormR = do
   (formWidget, _) <- generateFormPost $ vAddTestmailForm (Nothing)
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgGlobalSendTestMail}
+      <h1>_{MsgTestmailSendTestMail}
       <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AdminR $ AddTestmailR}>
         <div #modal-form-widget>
           ^{formWidget}

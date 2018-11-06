@@ -34,7 +34,7 @@ getEditConfigFormR configId = do
   (formWidget, _) <- generateFormPost $ vEditConfigForm (Just config)
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgGlobalEditConfig}
+      <h1>_{MsgConfigEditConfig}
       <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AdminR $ EditConfigR configId}>
         <div #modal-form-widget>
           ^{formWidget}
