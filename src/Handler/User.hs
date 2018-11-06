@@ -35,7 +35,7 @@ getAddUserFormR = do
   (formWidget, _) <- generateFormPost $ vAddUserForm (Nothing)
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgGlobalAddUser}
+      <h1>_{MsgUserAddUser}
       <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AdminR $ AddUserR}>
         <div #modal-form-widget>
           ^{formWidget}
@@ -210,7 +210,7 @@ getEditUserFormR userId = do
   (formWidget, _) <- generateFormPost $ vEditUserForm (Just user)
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgGlobalEditUser}
+      <h1>_{MsgUserEditUser}
       <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AdminR $ EditUserR userId}>
         <div #modal-form-widget>
           ^{formWidget}
@@ -416,7 +416,7 @@ getDeleteUserFormR userId = do
   (formWidget, _) <- generateFormPost $ vDeleteUserForm
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgGlobalDeleteUser}
+      <h1>_{MsgUserDeleteUser}
       <form #modal-form .uk-form-horizontal method=post action=@{AdminR $ DeleteUserR userId}>
         <div #modal-form-widget>
           ^{formWidget}

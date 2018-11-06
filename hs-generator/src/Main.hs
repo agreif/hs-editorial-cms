@@ -34,9 +34,9 @@ context =
         , bCrudModelDeletePostLoadsModel = False
         , bCrudModelAddPostExtraStoreFunc = Nothing
         , bCrudModelEditPostExtraStoreFunc = Nothing
-        , bCrudModelAddFormTitleMsg = Just "MsgGlobalAddUser"
-        , bCrudModelEditFormTitleMsg = Just "MsgGlobalEditUser"
-        , bCrudModelDeleteFormTitleMsg = Just "MsgGlobalDeleteUser"
+        , bCrudModelAddFormTitleMsg = Just "MsgUserAddUser"
+        , bCrudModelEditFormTitleMsg = Just "MsgUserEditUser"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgUserDeleteUser"
         , bCrudModelParentHsType = Nothing
         , bCrudModelFormRouteHsType = "AdminR"
         , bCrudModelFields =
@@ -323,6 +323,12 @@ context =
                   }
               }
             ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "users", bTranslationDe = "Nutzer", bTranslationEn = "Users" }
+          , BTranslation { bTranslationKey = "addUser", bTranslationDe = "Nutzer hinzufügen", bTranslationEn = "Add user" }
+          , BTranslation { bTranslationKey = "editUser", bTranslationDe = "Nutzer bearbeiten", bTranslationEn = "Edit user" }
+          , BTranslation { bTranslationKey = "deleteUser", bTranslationDe = "Nutzer löschen", bTranslationEn = "Delete user" }
+          ]
         }
       , BCrudModel
         { bCrudModelName = "config"
@@ -345,7 +351,7 @@ context =
         , bCrudModelAddPostExtraStoreFunc = Nothing
         , bCrudModelEditPostExtraStoreFunc = Nothing
         , bCrudModelAddFormTitleMsg = Nothing
-        , bCrudModelEditFormTitleMsg = Just "MsgGlobalEditConfig"
+        , bCrudModelEditFormTitleMsg = Just "MsgConfigEditConfig"
         , bCrudModelDeleteFormTitleMsg = Nothing
         , bCrudModelParentHsType = Nothing
         , bCrudModelFormRouteHsType = "AdminR"
@@ -541,6 +547,10 @@ context =
                   }
               }
             ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "configurations", bTranslationDe = "Konfigurationen", bTranslationEn = "Configurations" }
+          , BTranslation { bTranslationKey = "editConfig", bTranslationDe = "Konfiguration bearbeiten", bTranslationEn = "Edit config" }
+          ]
         }
       , BCrudModel
         { bCrudModelName = "testmail"
@@ -562,7 +572,7 @@ context =
         , bCrudModelDeletePostLoadsModel = False
         , bCrudModelAddPostExtraStoreFunc = Nothing
         , bCrudModelEditPostExtraStoreFunc = Nothing
-        , bCrudModelAddFormTitleMsg = Just "MsgGlobalSendTestMail"
+        , bCrudModelAddFormTitleMsg = Just "MsgTestmailSendTestMail"
         , bCrudModelEditFormTitleMsg = Nothing
         , bCrudModelDeleteFormTitleMsg = Nothing
         , bCrudModelParentHsType = Nothing
@@ -592,6 +602,10 @@ context =
               , bCrudFieldEditView = Nothing
               }
             ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "testMail", bTranslationDe = "Test-Mail", bTranslationEn = "Test-Mail" }
+          , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
+          ]
         }
       ]
 
@@ -609,14 +623,6 @@ context =
     , BTranslation { bTranslationKey = "myProfile", bTranslationDe = "Mein Profil", bTranslationEn = "My Profile" }
     , BTranslation { bTranslationKey = "editMyProfile", bTranslationDe = "Mein Profil bearbeiten", bTranslationEn = "Edit my profile" }
     , BTranslation { bTranslationKey = "reallyDelete", bTranslationDe = "Möchten sie wirklich löschen?", bTranslationEn = "Are you sure to delete?" }
-    , BTranslation { bTranslationKey = "users", bTranslationDe = "Nutzer", bTranslationEn = "Users" }
-    , BTranslation { bTranslationKey = "addUser", bTranslationDe = "Nutzer hinzufügen", bTranslationEn = "Add user" }
-    , BTranslation { bTranslationKey = "editUser", bTranslationDe = "Nutzer bearbeiten", bTranslationEn = "Edit user" }
-    , BTranslation { bTranslationKey = "deleteUser", bTranslationDe = "Nutzer löschen", bTranslationEn = "Delete user" }
-    , BTranslation { bTranslationKey = "configurations", bTranslationDe = "Konfigurationen", bTranslationEn = "Configurations" }
-    , BTranslation { bTranslationKey = "editConfig", bTranslationDe = "Konfiguration bearbeiten", bTranslationEn = "Edit config" }
-    , BTranslation { bTranslationKey = "testMail", bTranslationDe = "Test-Mail", bTranslationEn = "Test-Mail" }
-    , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
     , BTranslation { bTranslationKey = "cancel", bTranslationDe = "Abbrechen", bTranslationEn = "Cancel" }
     ]
   }
