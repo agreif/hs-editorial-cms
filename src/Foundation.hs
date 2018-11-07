@@ -74,7 +74,7 @@ instance Yesod App where
     -- default session idle timeout is 120 minutes
     makeSessionBackend :: App -> IO (Maybe SessionBackend)
     makeSessionBackend _ = Just <$> defaultClientSessionBackend
-        120    -- timeout in minutes
+        1    -- timeout in minutes
         "config/client_session_key.aes"
 
     -- Yesod Middleware allows you to run code before and after each handler function.
@@ -85,7 +85,13 @@ instance Yesod App where
     -- To add it, chain it together with the defaultMiddleware: yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
     yesodMiddleware :: ToTypedContent res => Handler res -> Handler res
-    yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
+    yesodMiddleware app = do
+      maybeRoute <- getCurrentRoute
+      let dontCheckCsrf = case maybeRoute of
+                            Just (AuthR _) -> True  -- Don't check AuthR
+                            Nothing        -> True  -- Don't check for 404s
+                            _              -> False -- Check other routes
+      defaultYesodMiddleware $ defaultCsrfSetCookieMiddleware $ (if dontCheckCsrf then id else defaultCsrfCheckMiddleware) app
 
     defaultLayout :: Widget -> Handler Html
     defaultLayout widget = do
