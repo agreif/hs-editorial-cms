@@ -107,7 +107,7 @@ data JDataNavItem = JDataNavItem
   { jDataNavItemLabel :: Text
   , jDataNavItemIsActive :: Bool
   , jDataNavItemUrl :: Maybe Text
-  , jDataNavItemPageDataUrl :: Maybe Text
+  , jDataNavItemDataUrl :: Maybe Text
   , jDataNavItemBadge :: Maybe Text
   , jDataNavItemDropdownItems :: Maybe [JDataNavItem]
   }
@@ -116,7 +116,7 @@ instance ToJSON JDataNavItem where
     [ "label" .= jDataNavItemLabel o
     , "isActive" .= jDataNavItemIsActive o
     , "url" .= jDataNavItemUrl o
-    , "dataUrl" .= jDataNavItemPageDataUrl o
+    , "dataUrl" .= jDataNavItemDataUrl o
     , "badge" .= jDataNavItemBadge o
     , "dropdownItems" .= jDataNavItemDropdownItems o
     ]
@@ -305,7 +305,7 @@ mainNavData user mainNav = do
       { jDataNavItemLabel = msgHome
       , jDataNavItemIsActive = mainNav == MainNavHome
       , jDataNavItemUrl = Just $ urlRenderer $ EcmsR EcmsHomeR
-      , jDataNavItemPageDataUrl = Just $ urlRenderer $ EcmsR HomePageDataJsonR
+      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR HomePageDataJsonR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }
@@ -316,7 +316,7 @@ mainNavData user mainNav = do
                 { jDataNavItemLabel = msgAdmin
                 , jDataNavItemIsActive = mainNav == MainNavAdmin
                 , jDataNavItemUrl = Just $ urlRenderer $ AdminR AdminHomeR
-                , jDataNavItemPageDataUrl = Just $ urlRenderer $ AdminR AdminPageDataJsonR
+                , jDataNavItemDataUrl = Just $ urlRenderer $ AdminR AdminPageDataJsonR
                 , jDataNavItemBadge = Nothing
                 , jDataNavItemDropdownItems = Nothing
                 } ]
@@ -326,7 +326,7 @@ mainNavData user mainNav = do
       { jDataNavItemLabel = msgSubmissions
       , jDataNavItemIsActive = mainNav == MainNavSubmission
       , jDataNavItemUrl = Just $ urlRenderer $ EcmsR SubmissionListR
-      , jDataNavItemPageDataUrl = Just $ urlRenderer $ EcmsR SubmissionListPageDataJsonR
+      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR SubmissionListPageDataJsonR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }
