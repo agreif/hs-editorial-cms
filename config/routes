@@ -9,7 +9,7 @@
 
 /ecms/admin AdminR:
   home AdminHomeR GET
-  adminPageDataJson AdminPageDataJsonR GET
+  adminData AdminDataR GET
 
   addUserForm AddUserFormR GET
   addUser AddUserR POST
@@ -28,7 +28,7 @@
   home EcmsHomeR GET
   riotTags RiotTagsR GET
 
-  homePageDataJson HomePageDataJsonR GET
+  homeData HomeDataR GET
 
   language/de/#Text LanguageDeR POST
   language/en/#Text LanguageEnR POST
@@ -37,12 +37,12 @@
   editMyProfile EditMyprofileR POST
 
   submissionList SubmissionListR GET
-  submissionListPageDataJsonR SubmissionListPageDataJsonR GET
-  submissionListPageDataJsonR/#Int SubmissionListPageNumPageDataJsonR GET POST
+  submissionListDataR SubmissionListDataR GET
+  submissionListDataR/#Int SubmissionListPageNumDataR GET POST
   addSubmissionForm AddSubmissionFormR GET
   addSubmission AddSubmissionR POST
   submissionDetail/#SubmissionId SubmissionDetailR GET
-  submissionDetailPageDataJsonR/#SubmissionId SubmissionDetailPageDataJsonR GET
+  submissionDetailDataR/#SubmissionId SubmissionDetailDataR GET
   editSubmissionForm/#SubmissionId EditSubmissionFormR GET
   editSubmission/#SubmissionId EditSubmissionR POST
   deleteSubmissionForm/#SubmissionId DeleteSubmissionFormR GET

@@ -305,7 +305,7 @@ mainNavData user mainNav = do
       { jDataNavItemLabel = msgHome
       , jDataNavItemIsActive = mainNav == MainNavHome
       , jDataNavItemUrl = Just $ urlRenderer $ EcmsR EcmsHomeR
-      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR HomePageDataJsonR
+      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR HomeDataR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }
@@ -316,7 +316,7 @@ mainNavData user mainNav = do
                 { jDataNavItemLabel = msgAdmin
                 , jDataNavItemIsActive = mainNav == MainNavAdmin
                 , jDataNavItemUrl = Just $ urlRenderer $ AdminR AdminHomeR
-                , jDataNavItemDataUrl = Just $ urlRenderer $ AdminR AdminPageDataJsonR
+                , jDataNavItemDataUrl = Just $ urlRenderer $ AdminR AdminDataR
                 , jDataNavItemBadge = Nothing
                 , jDataNavItemDropdownItems = Nothing
                 } ]
@@ -326,7 +326,7 @@ mainNavData user mainNav = do
       { jDataNavItemLabel = msgSubmissions
       , jDataNavItemIsActive = mainNav == MainNavSubmission
       , jDataNavItemUrl = Just $ urlRenderer $ EcmsR SubmissionListR
-      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR SubmissionListPageDataJsonR
+      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR SubmissionListDataR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }
