@@ -17,7 +17,7 @@ import Control.Monad.Random
 import qualified Data.Char as C
 import qualified Data.List as L
 import qualified Data.Text as T
-import Text.Printf
+import qualified Text.Printf as PF
 import qualified Data.Maybe as M
 import qualified Data.Conduit.Binary as CB
 import qualified Data.ByteString as B
@@ -106,8 +106,8 @@ instance ToJSON JData where
 data JDataNavItem = JDataNavItem
   { jDataNavItemLabel :: Text
   , jDataNavItemIsActive :: Bool
-  , jDataNavItemUrl :: Text
-  , jDataNavItemPageDataUrl :: Text
+  , jDataNavItemUrl :: Maybe Text
+  , jDataNavItemPageDataUrl :: Maybe Text
   , jDataNavItemBadge :: Maybe Text
   , jDataNavItemDropdownItems :: Maybe [JDataNavItem]
   }
@@ -143,6 +143,26 @@ instance ToJSON JDataHistoryState where
     , "title" .= jDataHistoryStateTitle o
     ]
 
+
+data JDataPaginationItem = JDataPaginationItem
+  { jDataPaginationItemLabel :: Maybe Text
+  , jDataPaginationItemDataUrl :: Maybe Text
+  , jDataPaginationItemIsActive :: Bool
+  , jDataPaginationItemIsDisabled :: Bool
+  , jDataPaginationItemIsPrevious :: Bool
+  , jDataPaginationItemIsNext :: Bool
+  }
+instance ToJSON JDataPaginationItem where
+  toJSON o = object
+    [ "label" .= jDataPaginationItemLabel o
+    , "dataUrl" .= jDataPaginationItemDataUrl o
+    , "isActive" .= jDataPaginationItemIsActive o
+    , "isDisabled" .= jDataPaginationItemIsDisabled o
+    , "isPrevious" .= jDataPaginationItemIsPrevious o
+    , "isNext" .= jDataPaginationItemIsNext o
+    ]
+
+
 instance ToJSON User where
   toJSON o = object
     [ "ident" .= userIdent o
@@ -156,17 +176,23 @@ instance ToJSON User where
 data JDataPages = JDataPages
   { jDataPageHome :: Maybe JDataPageHome
   , jDataPageAdmin :: Maybe JDataPageAdmin
+  , jDataPageSubmissionList :: Maybe JDataPageSubmissionList
+  , jDataPageSubmissionDetail :: Maybe JDataPageSubmissionDetail
   }
 instance ToJSON JDataPages where
   toJSON o = object
     [ "home" .= jDataPageHome o
     , "admin" .= jDataPageAdmin o
+    , "submissionList" .= jDataPageSubmissionList o
+    , "submissionDetail" .= jDataPageSubmissionDetail o
     ]
 
 defaultDataPages :: JDataPages
 defaultDataPages = JDataPages
   { jDataPageHome = Nothing
   , jDataPageAdmin = Nothing
+  , jDataPageSubmissionList = Nothing
+  , jDataPageSubmissionDetail = Nothing
   }
 
 
@@ -213,6 +239,51 @@ instance ToJSON JDataConfig where
     , "editFormUrl" .= jDataConfigEditFormUrl o
     ]
 
+
+data JDataPageSubmissionList = JDataPageSubmissionList
+  { jDataPageSubmissionListSubmissions :: [JDataSubmission]
+  , jDataPageSubmissionListAddFormUrl :: Text
+  , jDataPageSubmissionListPaginationItems :: Maybe [JDataPaginationItem]
+  }
+instance ToJSON JDataPageSubmissionList where
+  toJSON o = object
+    [ "submissions" .= jDataPageSubmissionListSubmissions o
+    ]
+data JDataSubmission = JDataSubmission
+  { jDataSubmissionEnt :: Entity Submission
+  , jDataSubmissionDetailUrl :: Text
+  , jDataSubmissionDetailDataUrl :: Text
+  , jDataSubmissionDeleteFormUrl :: Text
+  }
+instance ToJSON JDataSubmission where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataSubmissionEnt o)
+    , "detailUrl" .= jDataSubmissionDetailUrl o
+    , "detailDataUrl" .= jDataSubmissionDetailDataUrl o
+    , "deleteFormUrl" .= jDataSubmissionDeleteFormUrl o
+    ]
+
+data JDataPageSubmissionDetail = JDataPageSubmissionDetail
+  { jDataPageSubmissionDetailSubmissionEnt :: Entity Submission
+  , jDataPageSubmissionDetailSubmissionEditFormUrl :: Text
+  }
+instance ToJSON JDataPageSubmissionDetail where
+  toJSON o = object
+    [ "submissionEnt" .= jDataPageSubmissionDetailSubmissionEnt o
+    , "submissionEditFormUrl" .= jDataPageSubmissionDetailSubmissionEditFormUrl o
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
 --------------------------------------------------------------------------------
 -- navigation helpers
 --------------------------------------------------------------------------------
@@ -220,6 +291,7 @@ instance ToJSON JDataConfig where
 data MainNav
   = MainNavHome
   | MainNavAdmin
+  | MainNavSubmission
   deriving (Eq)
 
 mainNavData :: User -> MainNav -> Handler [JDataNavItem]
@@ -227,12 +299,13 @@ mainNavData user mainNav = do
   urlRenderer <- getUrlRender
   msgHome <- localizedMsg MsgGlobalHome
   msgAdmin <- localizedMsg MsgGlobalAdmin
+  msgSubmissions <- localizedMsg MsgSubmissionSubmissions
   return $
     [ JDataNavItem
       { jDataNavItemLabel = msgHome
       , jDataNavItemIsActive = mainNav == MainNavHome
-      , jDataNavItemUrl = urlRenderer $ EcmsR EcmsHomeR
-      , jDataNavItemPageDataUrl = urlRenderer $ EcmsR HomePageDataJsonR
+      , jDataNavItemUrl = Just $ urlRenderer $ EcmsR EcmsHomeR
+      , jDataNavItemPageDataUrl = Just $ urlRenderer $ EcmsR HomePageDataJsonR
       , jDataNavItemBadge = Nothing
       , jDataNavItemDropdownItems = Nothing
       }
@@ -242,12 +315,160 @@ mainNavData user mainNav = do
       True -> [ JDataNavItem
                 { jDataNavItemLabel = msgAdmin
                 , jDataNavItemIsActive = mainNav == MainNavAdmin
-                , jDataNavItemUrl = urlRenderer $ AdminR AdminHomeR
-                , jDataNavItemPageDataUrl = urlRenderer $ AdminR AdminPageDataJsonR
+                , jDataNavItemUrl = Just $ urlRenderer $ AdminR AdminHomeR
+                , jDataNavItemPageDataUrl = Just $ urlRenderer $ AdminR AdminPageDataJsonR
                 , jDataNavItemBadge = Nothing
                 , jDataNavItemDropdownItems = Nothing
                 } ]
       False -> []
+    ++
+    [ JDataNavItem
+      { jDataNavItemLabel = msgSubmissions
+      , jDataNavItemIsActive = mainNav == MainNavSubmission
+      , jDataNavItemUrl = Just $ urlRenderer $ EcmsR SubmissionListR
+      , jDataNavItemPageDataUrl = Just $ urlRenderer $ EcmsR SubmissionListPageDataJsonR
+      , jDataNavItemBadge = Nothing
+      , jDataNavItemDropdownItems = Nothing
+      }
+    ]
+
+--------------------------------------------------------------------------------
+-- pagination helpers
+--------------------------------------------------------------------------------
+
+getPaginationJDatas :: Int -> Int -> Int -> Int -> (Int -> Route App) -> Handler (Maybe [JDataPaginationItem])
+getPaginationJDatas allCount pageSize curPageNum visibleNumsCount' routeFunc= do
+  urlRenderer <- getUrlRender
+  let visibleNumsCount = if mod visibleNumsCount' 2 == 0 then visibleNumsCount'+1 else visibleNumsCount'
+  let pageCount' = div allCount pageSize
+  let pageCount = if mod allCount pageSize == 0 then pageCount' else pageCount' + 1
+  (firstPageNum, lastPageNum) <-
+    if visibleNumsCount >= pageCount
+    then return (1,pageCount) -- show all
+    else do
+      let (firstNum,lastNum) = ( curPageNum - div visibleNumsCount 2
+                               , curPageNum + div visibleNumsCount 2)
+      let (firstNum',lastNum') = if firstNum < 1 then (1,visibleNumsCount) else (firstNum,lastNum)
+      let (firstNum'',lastNum'') =
+            if lastNum > pageCount
+            then (pageCount-visibleNumsCount+1, pageCount)
+            else (firstNum',lastNum')
+      return (firstNum'', lastNum'')
+
+  let pageNums = [firstPageNum..lastPageNum]
+  case pageCount of
+    1 -> return Nothing
+    _ -> return $
+      Just $
+        ( if curPageNum == 1
+          then []
+          else [ JDataPaginationItem
+                 { jDataPaginationItemLabel = Nothing
+                 , jDataPaginationItemDataUrl = Just $ urlRenderer $ routeFunc $ curPageNum - 1
+                 , jDataPaginationItemIsActive = False
+                 , jDataPaginationItemIsDisabled = False
+                 , jDataPaginationItemIsPrevious = True
+                 , jDataPaginationItemIsNext = False
+                 }
+               ]
+               ++ ( if firstPageNum == 1
+                    then []
+                    else [ JDataPaginationItem
+                           { jDataPaginationItemLabel = Just "1"
+                           , jDataPaginationItemDataUrl = Just $ urlRenderer $ routeFunc 1
+                           , jDataPaginationItemIsActive = False
+                           , jDataPaginationItemIsDisabled = False
+                           , jDataPaginationItemIsPrevious = False
+                           , jDataPaginationItemIsNext = False
+                           }
+                         ]
+                  )
+               ++ ( if firstPageNum <= 2
+                    then []
+                    else [ JDataPaginationItem
+                           { jDataPaginationItemLabel = Just "..."
+                           , jDataPaginationItemDataUrl = Nothing
+                           , jDataPaginationItemIsActive = False
+                           , jDataPaginationItemIsDisabled = True
+                           , jDataPaginationItemIsPrevious = False
+                           , jDataPaginationItemIsNext = False
+                           }
+                         ]
+                  )
+        )
+        ++ map (\i ->
+                  JDataPaginationItem
+                  { jDataPaginationItemLabel = Just $ formatInt i
+                  , jDataPaginationItemDataUrl = Just $ urlRenderer $ routeFunc $ fromIntegral i
+                  , jDataPaginationItemIsActive = i == curPageNum
+                  , jDataPaginationItemIsDisabled = False
+                  , jDataPaginationItemIsPrevious = False
+                  , jDataPaginationItemIsNext = False
+                  }
+               )
+           pageNums
+        ++ ( if lastPageNum >= pageCount-1
+             then []
+             else [ JDataPaginationItem
+                    { jDataPaginationItemLabel = Just "..."
+                    , jDataPaginationItemDataUrl = Nothing
+                    , jDataPaginationItemIsActive = False
+                    , jDataPaginationItemIsDisabled = True
+                    , jDataPaginationItemIsPrevious = False
+                    , jDataPaginationItemIsNext = False
+                    }
+                  ]
+           )
+        ++ ( if lastPageNum == pageCount
+             then []
+             else [ JDataPaginationItem
+                    { jDataPaginationItemLabel = Just $ formatInt pageCount
+                    , jDataPaginationItemDataUrl = Just $ urlRenderer $ routeFunc pageCount
+                    , jDataPaginationItemIsActive = False
+                    , jDataPaginationItemIsDisabled = False
+                    , jDataPaginationItemIsPrevious = False
+                    , jDataPaginationItemIsNext = False
+                    }
+                  ]
+           )
+        ++ if curPageNum == pageCount
+           then []
+           else [ JDataPaginationItem
+                  { jDataPaginationItemLabel = Nothing
+                  , jDataPaginationItemDataUrl = Just $ urlRenderer $ routeFunc $ curPageNum + 1
+                  , jDataPaginationItemIsActive = False
+                  , jDataPaginationItemIsDisabled = False
+                  , jDataPaginationItemIsPrevious = False
+                  , jDataPaginationItemIsNext = True
+                  }]
+
+--------------------------------------------------------------------------------
+-- form helpers
+--------------------------------------------------------------------------------
+
+verticalCheckboxesField :: (YesodPersist site, RenderMessage site FormMessage, YesodPersistBackend site ~ SqlBackend, Eq a)
+                 => HandlerT site IO (OptionList a)
+                 -> Field (HandlerT site IO) [a]
+verticalCheckboxesField ioptlist = (multiSelectField ioptlist)
+    { fieldView =
+        \theId name attrs val _isReq -> do
+            opts <- fmap olOptions $ handlerToWidget ioptlist
+            let optselected (Left _) _ = False
+                optselected (Right vals) opt = (optionInternalValue opt) `elem` vals
+            [whamlet|
+                <span ##{theId}>
+                    $forall opt <- opts
+                        <label style="display: block;">
+                            <input type=checkbox name=#{name} value=#{optionExternalValue opt} *{attrs} :optselected val opt:checked>
+                            #{optionDisplay opt}
+                |]
+    }
+
+
+--------------------------------------------------------------------------------
+-- app specific helpers
+--------------------------------------------------------------------------------
+
 
 --------------------------------------------------------------------------------
 -- generic helpers
@@ -325,9 +546,9 @@ fileBytes fileInfo = do
 
 humanReadableBytes :: Integer -> String
 humanReadableBytes size
-  | null pairs = printf "%.0fZiB" (size'/1024^(7::Integer))
-  | otherwise  = if unit == "" then printf "%dB" size
-                 else printf "%.1f%sB" n unit
+  | null pairs = PF.printf "%.0fZiB" (size'/1024^(7::Integer))
+  | otherwise  = if unit == "" then PF.printf "%dB" size
+                 else PF.printf "%.1f%sB" n unit
   where
     (n, unit):_ = pairs
     pairs = zip (L.iterate (/1024) size') units
@@ -371,7 +592,7 @@ formatLocalTimeDayPart :: TimeZone -> UTCTime -> String
 formatLocalTimeDayPart timeZone utcTime = formatTime defaultTimeLocale "%d.%m.%Y" $ utcToLocalTime timeZone utcTime
 
 formatDouble :: Double -> Text
-formatDouble x = T.replace "." "," (pack $ printf "%.2f" x)
+formatDouble x = T.replace "." "," (pack $ PF.printf "%.2f" x)
 
 formatMaybeDouble :: Maybe Double -> Text
 formatMaybeDouble (Just x) = formatDouble x
@@ -395,7 +616,7 @@ formatInt :: Int -> Text
 formatInt = pack . show
 
 formatInt4Digits :: Int -> String
-formatInt4Digits = printf "%04d"
+formatInt4Digits = PF.printf "%04d"
 
 formatMinuteValue :: Int -> Text
 formatMinuteValue minVal = pack $ h1:h2:':':m1:m2

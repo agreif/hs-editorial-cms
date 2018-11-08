@@ -607,7 +607,132 @@ context =
           , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
           ]
         }
+
+
+
+
+
+
+
+
+
+
+      , BCrudModel
+        { bCrudModelName = "submission"
+        , bCrudModelLabel = "Submission"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "EcmsR SubmissionListPageDataJsonR"
+        , bCrudModelEditFormDataJsonUrl = Just "EcmsR $ SubmissionDetailPageDataJsonR submissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "EcmsR $ SubmissionListPageDataJsonR"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgSubmissionAddSubmission"
+        , bCrudModelEditFormTitleMsg = Just "MsgSubmissionEditSubmission"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgSubmissionDeleteSubmission"
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "EcmsR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "headline"
+              , bCrudFieldLabelDe = Just "Headline"
+              , bCrudFieldLabelEn = Just "Headline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "subline"
+              , bCrudFieldLabelDe = Just "Subline"
+              , bCrudFieldLabelEn = Just "Subline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "submission", bTranslationDe = "Beitrag", bTranslationEn = "Submission" }
+          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beitraege", bTranslationEn = "Submissions" }
+          , BTranslation { bTranslationKey = "addSubmission", bTranslationDe = "Beitrag hinzufügen", bTranslationEn = "Add submission" }
+          , BTranslation { bTranslationKey = "editSubmission", bTranslationDe = "Beitrag bearbeiten", bTranslationEn = "Edit submission" }
+          , BTranslation { bTranslationKey = "deleteSubmission", bTranslationDe = "Beitrag löschen", bTranslationEn = "Delete submission" }
+          ]
+        }
+
+
+
+
+
+
+
+
+
+
+
       ]
+
+
+
+
+
+
+
+
 
 
   , bContextActionModels =
