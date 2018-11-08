@@ -32,7 +32,7 @@ data VAddUser = VAddUser
 -- gen get add form - start
 getAddUserFormR :: Handler Html
 getAddUserFormR = do
-  (formWidget, _) <- generateFormPost $ vAddUserForm (Nothing)
+  (formWidget, _) <- generateFormPost $ vAddUserForm Nothing
   formLayout $ do
     toWidget [whamlet|
       <h1>_{MsgUserAddUser}

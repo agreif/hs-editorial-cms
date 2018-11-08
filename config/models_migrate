@@ -62,4 +62,25 @@ ConfigHistory
     updatedBy Text
 
 
+Submission json
+    headline Text
+    subline Text
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+SubmissionHistory
+    Id sql=vid
+    id Int MigrationOnly
+    headline Text
+    subline Text
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
 -- gen models - end

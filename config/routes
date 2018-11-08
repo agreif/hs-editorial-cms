@@ -35,3 +35,15 @@
 
   editMyProfileForm EditMyprofileFormR GET
   editMyProfile EditMyprofileR POST
+
+  submissionList SubmissionListR GET
+  submissionListPageDataJsonR SubmissionListPageDataJsonR GET
+  submissionListPageDataJsonR/#Int SubmissionListPageNumPageDataJsonR GET POST
+  addSubmissionForm AddSubmissionFormR GET
+  addSubmission AddSubmissionR POST
+  submissionDetail/#SubmissionId SubmissionDetailR GET
+  submissionDetailPageDataJsonR/#SubmissionId SubmissionDetailPageDataJsonR GET
+  editSubmissionForm/#SubmissionId EditSubmissionFormR GET
+  editSubmission/#SubmissionId EditSubmissionR POST
+  deleteSubmissionForm/#SubmissionId DeleteSubmissionFormR GET
+  deleteSubmission/#SubmissionId DeleteSubmissionR POST

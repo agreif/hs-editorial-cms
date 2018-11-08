@@ -29,6 +29,8 @@ data AppMessage =
   | MsgConfigDoubleValue
   | MsgConfigBoolValue
   | MsgTestmailEmail
+  | MsgSubmissionHeadline
+  | MsgSubmissionSubline
   | MsgUserUsers
   | MsgUserAddUser
   | MsgUserEditUser
@@ -37,6 +39,11 @@ data AppMessage =
   | MsgConfigEditConfig
   | MsgTestmailTestMail
   | MsgTestmailSendTestMail
+  | MsgSubmissionSubmission
+  | MsgSubmissionSubmissions
+  | MsgSubmissionAddSubmission
+  | MsgSubmissionEditSubmission
+  | MsgSubmissionDeleteSubmission
 
 renderMessageGerman :: AppMessage -> Text
 renderMessageGerman MsgGlobalHome = "Home"
@@ -61,6 +68,8 @@ renderMessageGerman MsgConfigIntValue = "Integer-Wert"
 renderMessageGerman MsgConfigDoubleValue = "Double-Wert"
 renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
 renderMessageGerman MsgTestmailEmail = "Email"
+renderMessageGerman MsgSubmissionHeadline = "Headline"
+renderMessageGerman MsgSubmissionSubline = "Subline"
 renderMessageGerman MsgUserUsers = "Nutzer"
 renderMessageGerman MsgUserAddUser = "Nutzer hinzufügen"
 renderMessageGerman MsgUserEditUser = "Nutzer bearbeiten"
@@ -69,6 +78,11 @@ renderMessageGerman MsgConfigConfigurations = "Konfigurationen"
 renderMessageGerman MsgConfigEditConfig = "Konfiguration bearbeiten"
 renderMessageGerman MsgTestmailTestMail = "Test-Mail"
 renderMessageGerman MsgTestmailSendTestMail = "Test-Mail senden..."
+renderMessageGerman MsgSubmissionSubmission = "Beitrag"
+renderMessageGerman MsgSubmissionSubmissions = "Beitraege"
+renderMessageGerman MsgSubmissionAddSubmission = "Beitrag hinzufügen"
+renderMessageGerman MsgSubmissionEditSubmission = "Beitrag bearbeiten"
+renderMessageGerman MsgSubmissionDeleteSubmission = "Beitrag löschen"
 
 renderMessageEnglish :: AppMessage -> Text
 renderMessageEnglish MsgGlobalHome = "Home"
@@ -93,6 +107,8 @@ renderMessageEnglish MsgConfigIntValue = "Integer-Value"
 renderMessageEnglish MsgConfigDoubleValue = "Double-Value"
 renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
 renderMessageEnglish MsgTestmailEmail = "Email"
+renderMessageEnglish MsgSubmissionHeadline = "Headline"
+renderMessageEnglish MsgSubmissionSubline = "Subline"
 renderMessageEnglish MsgUserUsers = "Users"
 renderMessageEnglish MsgUserAddUser = "Add user"
 renderMessageEnglish MsgUserEditUser = "Edit user"
@@ -101,6 +117,11 @@ renderMessageEnglish MsgConfigConfigurations = "Configurations"
 renderMessageEnglish MsgConfigEditConfig = "Edit config"
 renderMessageEnglish MsgTestmailTestMail = "Test-Mail"
 renderMessageEnglish MsgTestmailSendTestMail = "Send Test-Mail..."
+renderMessageEnglish MsgSubmissionSubmission = "Submission"
+renderMessageEnglish MsgSubmissionSubmissions = "Submissions"
+renderMessageEnglish MsgSubmissionAddSubmission = "Add submission"
+renderMessageEnglish MsgSubmissionEditSubmission = "Edit submission"
+renderMessageEnglish MsgSubmissionDeleteSubmission = "Delete submission"
 
 data Translation = Translation
   { msgGlobalHome :: Text
@@ -125,6 +146,8 @@ data Translation = Translation
   , msgConfigDoubleValue :: Text
   , msgConfigBoolValue :: Text
   , msgTestmailEmail :: Text
+  , msgSubmissionHeadline :: Text
+  , msgSubmissionSubline :: Text
   , msgUserUsers :: Text
   , msgUserAddUser :: Text
   , msgUserEditUser :: Text
@@ -133,6 +156,11 @@ data Translation = Translation
   , msgConfigEditConfig :: Text
   , msgTestmailTestMail :: Text
   , msgTestmailSendTestMail :: Text
+  , msgSubmissionSubmission :: Text
+  , msgSubmissionSubmissions :: Text
+  , msgSubmissionAddSubmission :: Text
+  , msgSubmissionEditSubmission :: Text
+  , msgSubmissionDeleteSubmission :: Text
   } deriving Generic
 
 instance ToJSON Translation
@@ -161,6 +189,8 @@ translationDe = Translation
   , msgConfigDoubleValue = "Double-Wert"
   , msgConfigBoolValue = "Boolean-Wert"
   , msgTestmailEmail = "Email"
+  , msgSubmissionHeadline = "Headline"
+  , msgSubmissionSubline = "Subline"
   , msgUserUsers = "Nutzer"
   , msgUserAddUser = "Nutzer hinzufügen"
   , msgUserEditUser = "Nutzer bearbeiten"
@@ -168,7 +198,12 @@ translationDe = Translation
   , msgConfigConfigurations = "Konfigurationen"
   , msgConfigEditConfig = "Konfiguration bearbeiten"
   , msgTestmailTestMail = "Test-Mail"
-  , msgTestmailSendTestMail = "Test-Mail senden..."}
+  , msgTestmailSendTestMail = "Test-Mail senden..."
+  , msgSubmissionSubmission = "Beitrag"
+  , msgSubmissionSubmissions = "Beitraege"
+  , msgSubmissionAddSubmission = "Beitrag hinzufügen"
+  , msgSubmissionEditSubmission = "Beitrag bearbeiten"
+  , msgSubmissionDeleteSubmission = "Beitrag löschen"}
 
 translationEn :: Translation
 translationEn = Translation
@@ -194,6 +229,8 @@ translationEn = Translation
   , msgConfigDoubleValue = "Double-Value"
   , msgConfigBoolValue = "Boolean-Value"
   , msgTestmailEmail = "Email"
+  , msgSubmissionHeadline = "Headline"
+  , msgSubmissionSubline = "Subline"
   , msgUserUsers = "Users"
   , msgUserAddUser = "Add user"
   , msgUserEditUser = "Edit user"
@@ -201,6 +238,11 @@ translationEn = Translation
   , msgConfigConfigurations = "Configurations"
   , msgConfigEditConfig = "Edit config"
   , msgTestmailTestMail = "Test-Mail"
-  , msgTestmailSendTestMail = "Send Test-Mail..."}
+  , msgTestmailSendTestMail = "Send Test-Mail..."
+  , msgSubmissionSubmission = "Submission"
+  , msgSubmissionSubmissions = "Submissions"
+  , msgSubmissionAddSubmission = "Add submission"
+  , msgSubmissionEditSubmission = "Edit submission"
+  , msgSubmissionDeleteSubmission = "Delete submission"}
 
 -- gen i18n - end
