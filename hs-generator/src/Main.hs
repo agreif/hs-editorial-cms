@@ -222,7 +222,7 @@ context =
               }
             , BCrudField
               { bCrudFieldName = "isReviewer"
-              , bCrudFieldLabelDe = Just "Ist Reviewer?"
+              , bCrudFieldLabelDe = Just "Ist Gutachter?"
               , bCrudFieldLabelEn = Just "Is reviewer?"
               , bCrudFieldHsType = "Bool"
               , bCrudFieldDb =
@@ -629,9 +629,9 @@ context =
         , bCrudModelAddFormEntityLoader = Nothing
         , bCrudModelEditFormEntityLoader = Nothing
         , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Just "EcmsR SubmissionListDataR"
-        , bCrudModelEditFormDataJsonUrl = Just "EcmsR $ SubmissionDetailDataR submissionId"
-        , bCrudModelDeleteFormDataJsonUrl = Just "EcmsR $ SubmissionListDataR"
+        , bCrudModelAddFormDataJsonUrl = Just "AuthorR SubmissionListDataR"
+        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ SubmissionListDataR"
         , bCrudModelAddFormHasDefaultModel = False
         , bCrudModelEditPostLoadsModel = False
         , bCrudModelDeletePostLoadsModel = False
@@ -641,7 +641,7 @@ context =
         , bCrudModelEditFormTitleMsg = Just "MsgSubmissionEditSubmission"
         , bCrudModelDeleteFormTitleMsg = Just "MsgSubmissionDeleteSubmission"
         , bCrudModelParentHsType = Nothing
-        , bCrudModelFormRouteHsType = "EcmsR"
+        , bCrudModelFormRouteHsType = "AuthorR"
         , bCrudModelFields =
             [ BCrudField
               { bCrudFieldName = "headline"
@@ -707,7 +707,7 @@ context =
             ]
         , bCrudModelTranslations = Just
           [ BTranslation { bTranslationKey = "submission", bTranslationDe = "Beitrag", bTranslationEn = "Submission" }
-          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beitraege", bTranslationEn = "Submissions" }
+          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beiträge", bTranslationEn = "Submissions" }
           , BTranslation { bTranslationKey = "addSubmission", bTranslationDe = "Beitrag hinzufügen", bTranslationEn = "Add submission" }
           , BTranslation { bTranslationKey = "editSubmission", bTranslationDe = "Beitrag bearbeiten", bTranslationEn = "Edit submission" }
           , BTranslation { bTranslationKey = "deleteSubmission", bTranslationDe = "Beitrag löschen", bTranslationEn = "Delete submission" }
@@ -749,5 +749,9 @@ context =
     , BTranslation { bTranslationKey = "editMyProfile", bTranslationDe = "Mein Profil bearbeiten", bTranslationEn = "Edit my profile" }
     , BTranslation { bTranslationKey = "reallyDelete", bTranslationDe = "Möchten sie wirklich löschen?", bTranslationEn = "Are you sure to delete?" }
     , BTranslation { bTranslationKey = "cancel", bTranslationDe = "Abbrechen", bTranslationEn = "Cancel" }
+
+    , BTranslation { bTranslationKey = "editor", bTranslationDe = "Redakteur", bTranslationEn = "Editor" }
+    , BTranslation { bTranslationKey = "reviewer", bTranslationDe = "Gutachter", bTranslationEn = "Reviewer" }
+    , BTranslation { bTranslationKey = "author", bTranslationDe = "Autor", bTranslationEn = "Author" }
     ]
   }

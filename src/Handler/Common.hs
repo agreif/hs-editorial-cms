@@ -291,7 +291,9 @@ instance ToJSON JDataPageSubmissionDetail where
 data MainNav
   = MainNavHome
   | MainNavAdmin
-  | MainNavSubmission
+  | MainNavEditor
+  | MainNavReviewer
+  | MainNavAuthor
   deriving (Eq)
 
 mainNavData :: User -> MainNav -> Handler [JDataNavItem]
@@ -299,6 +301,9 @@ mainNavData user mainNav = do
   urlRenderer <- getUrlRender
   msgHome <- localizedMsg MsgGlobalHome
   msgAdmin <- localizedMsg MsgGlobalAdmin
+  msgEditor <- localizedMsg MsgGlobalEditor
+  msgReviewer <- localizedMsg MsgGlobalReviewer
+  msgAuthor <- localizedMsg MsgGlobalAuthor
   msgSubmissions <- localizedMsg MsgSubmissionSubmissions
   return $
     [ JDataNavItem
@@ -311,26 +316,65 @@ mainNavData user mainNav = do
       }
     ]
     ++
-    case userIsAdmin user of
-      True -> [ JDataNavItem
-                { jDataNavItemLabel = msgAdmin
-                , jDataNavItemIsActive = mainNav == MainNavAdmin
-                , jDataNavItemUrl = Just $ urlRenderer $ AdminR AdminHomeR
-                , jDataNavItemDataUrl = Just $ urlRenderer $ AdminR AdminDataR
-                , jDataNavItemBadge = Nothing
-                , jDataNavItemDropdownItems = Nothing
-                } ]
-      False -> []
+    ( if userIsAdmin user
+      then[ JDataNavItem
+            { jDataNavItemLabel = msgAdmin
+            , jDataNavItemIsActive = mainNav == MainNavAdmin
+            , jDataNavItemUrl = Just $ urlRenderer $ AdminR AdminHomeR
+            , jDataNavItemDataUrl = Just $ urlRenderer $ AdminR AdminDataR
+            , jDataNavItemBadge = Nothing
+            , jDataNavItemDropdownItems = Nothing
+            } ]
+      else []
+    )
     ++
-    [ JDataNavItem
-      { jDataNavItemLabel = msgSubmissions
-      , jDataNavItemIsActive = mainNav == MainNavSubmission
-      , jDataNavItemUrl = Just $ urlRenderer $ EcmsR SubmissionListR
-      , jDataNavItemDataUrl = Just $ urlRenderer $ EcmsR SubmissionListDataR
-      , jDataNavItemBadge = Nothing
-      , jDataNavItemDropdownItems = Nothing
-      }
-    ]
+    ( if userIsEditor user
+      then [ JDataNavItem
+             { jDataNavItemLabel = msgEditor
+             , jDataNavItemIsActive = mainNav == MainNavEditor
+             , jDataNavItemUrl = Nothing
+             , jDataNavItemDataUrl = Nothing
+             , jDataNavItemBadge = Nothing
+             , jDataNavItemDropdownItems = Nothing
+             }
+           ]
+      else []
+    )
+    ++
+    ( if userIsReviewer user
+      then [ JDataNavItem
+             { jDataNavItemLabel = msgReviewer
+             , jDataNavItemIsActive = mainNav == MainNavReviewer
+             , jDataNavItemUrl = Nothing
+             , jDataNavItemDataUrl = Nothing
+             , jDataNavItemBadge = Nothing
+             , jDataNavItemDropdownItems = Nothing
+             }
+           ]
+      else []
+    )
+    ++
+    ( if userIsAuthor user
+      then [ JDataNavItem
+             { jDataNavItemLabel = msgAuthor
+             , jDataNavItemIsActive = mainNav == MainNavAuthor
+             , jDataNavItemUrl = Nothing
+             , jDataNavItemDataUrl = Nothing
+             , jDataNavItemBadge = Nothing
+             , jDataNavItemDropdownItems = Just $
+               [ JDataNavItem
+                 { jDataNavItemLabel = msgSubmissions
+                 , jDataNavItemIsActive = False
+                 , jDataNavItemUrl = Just $ urlRenderer $ AuthorR SubmissionListR
+                 , jDataNavItemDataUrl = Just $ urlRenderer $ AuthorR SubmissionListDataR
+                 , jDataNavItemBadge = Nothing
+                 , jDataNavItemDropdownItems = Nothing
+                 }
+               ]
+             }
+           ]
+      else []
+    )
 
 --------------------------------------------------------------------------------
 -- pagination helpers

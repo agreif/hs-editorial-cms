@@ -24,18 +24,11 @@
   sendTestMailForm AddTestmailFormR GET
   sendTestMail AddTestmailR POST
 
-/ecms EcmsR:
-  home EcmsHomeR GET
-  riotTags RiotTagsR GET
+-- /ecms/editor EditorR:
 
-  homeData HomeDataR GET
+-- /ecms/reviewer ReviewerR:
 
-  language/de/#Text LanguageDeR POST
-  language/en/#Text LanguageEnR POST
-
-  editMyProfileForm EditMyprofileFormR GET
-  editMyProfile EditMyprofileR POST
-
+/ecms/author AuthorR:
   submissionList SubmissionListR GET
   submissionListDataR SubmissionListDataR GET
   submissionListDataR/#Int SubmissionListPageNumDataR GET POST
@@ -47,3 +40,15 @@
   editSubmission/#SubmissionId EditSubmissionR POST
   deleteSubmissionForm/#SubmissionId DeleteSubmissionFormR GET
   deleteSubmission/#SubmissionId DeleteSubmissionR POST
+
+/ecms EcmsR:
+  home EcmsHomeR GET
+  riotTags RiotTagsR GET
+
+  homeData HomeDataR GET
+
+  language/de/#Text LanguageDeR POST
+  language/en/#Text LanguageEnR POST
+
+  editMyProfileForm EditMyprofileFormR GET
+  editMyProfile EditMyprofileR POST
