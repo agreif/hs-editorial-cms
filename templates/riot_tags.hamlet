@@ -388,7 +388,7 @@
   <script>
     \ addSubmission(event) {
     \   event.preventDefault()
-    \   parent.tag.showModalForm("@{EcmsR AddSubmissionFormR}")
+    \   parent.tag.showModalForm("@{AuthorR AddSubmissionFormR}")
     \   event.currentTarget.blur()
     \ }
     \ detailSubmission(event) {

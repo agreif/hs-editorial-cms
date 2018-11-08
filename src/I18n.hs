@@ -15,6 +15,9 @@ data AppMessage =
   | MsgGlobalEditMyProfile
   | MsgGlobalReallyDelete
   | MsgGlobalCancel
+  | MsgGlobalEditor
+  | MsgGlobalReviewer
+  | MsgGlobalAuthor
   | MsgUserIdent
   | MsgUserPassword
   | MsgUserEmail
@@ -54,12 +57,15 @@ renderMessageGerman MsgGlobalMyProfile = "Mein Profil"
 renderMessageGerman MsgGlobalEditMyProfile = "Mein Profil bearbeiten"
 renderMessageGerman MsgGlobalReallyDelete = "Möchten sie wirklich löschen?"
 renderMessageGerman MsgGlobalCancel = "Abbrechen"
+renderMessageGerman MsgGlobalEditor = "Redakteur"
+renderMessageGerman MsgGlobalReviewer = "Gutachter"
+renderMessageGerman MsgGlobalAuthor = "Autor"
 renderMessageGerman MsgUserIdent = "Login"
 renderMessageGerman MsgUserPassword = "Passwort"
 renderMessageGerman MsgUserEmail = "Email"
 renderMessageGerman MsgUserIsAdmin = "Ist Admin?"
 renderMessageGerman MsgUserIsEditor = "Ist Redaktuer?"
-renderMessageGerman MsgUserIsReviewer = "Ist Reviewer?"
+renderMessageGerman MsgUserIsReviewer = "Ist Gutachter?"
 renderMessageGerman MsgUserIsAuthor = "Ist Autor?"
 renderMessageGerman MsgUserIsResetPassword = "Neues Passwort generieren? (Wird per Email zugesendet)"
 renderMessageGerman MsgConfigCode = "Code"
@@ -79,7 +85,7 @@ renderMessageGerman MsgConfigEditConfig = "Konfiguration bearbeiten"
 renderMessageGerman MsgTestmailTestMail = "Test-Mail"
 renderMessageGerman MsgTestmailSendTestMail = "Test-Mail senden..."
 renderMessageGerman MsgSubmissionSubmission = "Beitrag"
-renderMessageGerman MsgSubmissionSubmissions = "Beitraege"
+renderMessageGerman MsgSubmissionSubmissions = "Beiträge"
 renderMessageGerman MsgSubmissionAddSubmission = "Beitrag hinzufügen"
 renderMessageGerman MsgSubmissionEditSubmission = "Beitrag bearbeiten"
 renderMessageGerman MsgSubmissionDeleteSubmission = "Beitrag löschen"
@@ -93,6 +99,9 @@ renderMessageEnglish MsgGlobalMyProfile = "My Profile"
 renderMessageEnglish MsgGlobalEditMyProfile = "Edit my profile"
 renderMessageEnglish MsgGlobalReallyDelete = "Are you sure to delete?"
 renderMessageEnglish MsgGlobalCancel = "Cancel"
+renderMessageEnglish MsgGlobalEditor = "Editor"
+renderMessageEnglish MsgGlobalReviewer = "Reviewer"
+renderMessageEnglish MsgGlobalAuthor = "Author"
 renderMessageEnglish MsgUserIdent = "Login"
 renderMessageEnglish MsgUserPassword = "Password"
 renderMessageEnglish MsgUserEmail = "Email"
@@ -132,6 +141,9 @@ data Translation = Translation
   , msgGlobalEditMyProfile :: Text
   , msgGlobalReallyDelete :: Text
   , msgGlobalCancel :: Text
+  , msgGlobalEditor :: Text
+  , msgGlobalReviewer :: Text
+  , msgGlobalAuthor :: Text
   , msgUserIdent :: Text
   , msgUserPassword :: Text
   , msgUserEmail :: Text
@@ -175,12 +187,15 @@ translationDe = Translation
   , msgGlobalEditMyProfile = "Mein Profil bearbeiten"
   , msgGlobalReallyDelete = "Möchten sie wirklich löschen?"
   , msgGlobalCancel = "Abbrechen"
+  , msgGlobalEditor = "Redakteur"
+  , msgGlobalReviewer = "Gutachter"
+  , msgGlobalAuthor = "Autor"
   , msgUserIdent = "Login"
   , msgUserPassword = "Passwort"
   , msgUserEmail = "Email"
   , msgUserIsAdmin = "Ist Admin?"
   , msgUserIsEditor = "Ist Redaktuer?"
-  , msgUserIsReviewer = "Ist Reviewer?"
+  , msgUserIsReviewer = "Ist Gutachter?"
   , msgUserIsAuthor = "Ist Autor?"
   , msgUserIsResetPassword = "Neues Passwort generieren? (Wird per Email zugesendet)"
   , msgConfigCode = "Code"
@@ -200,7 +215,7 @@ translationDe = Translation
   , msgTestmailTestMail = "Test-Mail"
   , msgTestmailSendTestMail = "Test-Mail senden..."
   , msgSubmissionSubmission = "Beitrag"
-  , msgSubmissionSubmissions = "Beitraege"
+  , msgSubmissionSubmissions = "Beiträge"
   , msgSubmissionAddSubmission = "Beitrag hinzufügen"
   , msgSubmissionEditSubmission = "Beitrag bearbeiten"
   , msgSubmissionDeleteSubmission = "Beitrag löschen"}
@@ -215,6 +230,9 @@ translationEn = Translation
   , msgGlobalEditMyProfile = "Edit my profile"
   , msgGlobalReallyDelete = "Are you sure to delete?"
   , msgGlobalCancel = "Cancel"
+  , msgGlobalEditor = "Editor"
+  , msgGlobalReviewer = "Reviewer"
+  , msgGlobalAuthor = "Author"
   , msgUserIdent = "Login"
   , msgUserPassword = "Password"
   , msgUserEmail = "Email"

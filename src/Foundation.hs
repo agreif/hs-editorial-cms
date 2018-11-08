@@ -86,12 +86,12 @@ instance Yesod App where
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
     yesodMiddleware :: ToTypedContent res => Handler res -> Handler res
     yesodMiddleware app = do
-      maybeRoute <- getCurrentRoute
-      let dontCheckCsrf = case maybeRoute of
-                            Just (AuthR _) -> True  -- Don't check AuthR
-                            Nothing        -> True  -- Don't check for 404s
-                            _              -> False -- Check other routes
-      defaultYesodMiddleware $ defaultCsrfSetCookieMiddleware $ (if dontCheckCsrf then id else defaultCsrfCheckMiddleware) app
+        maybeRoute <- getCurrentRoute
+        let dontCheckCsrf = case maybeRoute of
+                              Just (AuthR _) -> True  -- Don't check AuthR
+                              Nothing        -> True  -- Don't check for 404s
+                              _              -> False -- Check other routes
+        defaultYesodMiddleware $ defaultCsrfSetCookieMiddleware $ (if dontCheckCsrf then id else defaultCsrfCheckMiddleware) app
 
     defaultLayout :: Widget -> Handler Html
     defaultLayout widget = do
@@ -110,6 +110,24 @@ instance Yesod App where
     isAuthorized (EcmsR _) _ = do
         _ <- requireAuthId
         return Authorized
+    -- isAuthorized (EditorR _) _ = do
+    --     userId <- requireAuthId
+    --     user <- runDB $ get404 userId
+    --     return $ case userIsEditor user of
+    --                True -> Authorized
+    --                False -> Unauthorized "Editors Only!"
+    -- isAuthorized (ReviewerR _) _ = do
+    --     userId <- requireAuthId
+    --     user <- runDB $ get404 userId
+    --     return $ case userIsReviewer user of
+    --                True -> Authorized
+    --                False -> Unauthorized "Reviewers Only!"
+    isAuthorized (AuthorR _) _ = do
+        userId <- requireAuthId
+        user <- runDB $ get404 userId
+        return $ case userIsAuthor user of
+                   True -> Authorized
+                   False -> Unauthorized "Authors Only!"
     isAuthorized (AdminR _) _ = do
         userId <- requireAuthId
         user <- runDB $ get404 userId
@@ -214,31 +232,19 @@ instance YesodAuth App where
     authPlugins :: App -> [AuthPlugin App]
     authPlugins _ = [authHashDBWithForm myLoginForm (Just . UniqueUser)]
 
-    -- authPlugins app = [authOpenId Claimed []] ++ extraAuthPlugins
-    --     -- Enable authDummy login if enabled.
-    --     where extraAuthPlugins = []
-
     authHttpManager = getHttpManager
 
     -- override, to avoid DB lookup on every request
     maybeAuthId = runMaybeT $ do
-      s   <- MaybeT $ lookupSession credsKey
-      aid <- MaybeT $ return $ fromPathPiece s
-      return aid
+        s   <- MaybeT $ lookupSession credsKey
+        aid <- MaybeT $ return $ fromPathPiece s
+        return aid
 
 myLoginForm :: Route App -> Widget
 myLoginForm loginRoute = do
-  request <- getRequest
-  let maybeToken = reqToken request
-  $(whamletFile "templates/login_form.hamlet")
-
--- | Access function to determine if a user is logged in.
-isAuthenticated :: Handler AuthResult
-isAuthenticated = do
-    muid <- maybeAuthId
-    return $ case muid of
-        Nothing -> Unauthorized "You must login to access this page"
-        Just _ -> Authorized
+    request <- getRequest
+    let maybeToken = reqToken request
+    $(whamletFile "templates/login_form.hamlet")
 
 instance HashDBUser User where
     userPasswordHash = userPassword
