@@ -27,25 +27,25 @@ getSubmissionListR = defaultLayout $ do
                    <script>
                      \ riot.compile(function() {
                      \   bodyTag = riot.mount('body-tag')[0]
-                     \   bodyTag.refreshData("@{EcmsR $ SubmissionListPageDataJsonR}")
+                     \   bodyTag.refreshData("@{EcmsR $ SubmissionListDataR}")
                      \ })
                    |]
 
-getSubmissionListPageDataJsonR :: Handler Value
-getSubmissionListPageDataJsonR = submissionListPageNumPageDataJsonR 1
+getSubmissionListDataR :: Handler Value
+getSubmissionListDataR = submissionListPageNumDataR 1
 
-postSubmissionListPageNumPageDataJsonR :: Int -> Handler Value
-postSubmissionListPageNumPageDataJsonR pageNum = do
+postSubmissionListPageNumDataR :: Int -> Handler Value
+postSubmissionListPageNumDataR pageNum = do
   urlRenderer <- getUrlRender
   returnJson $
     VFormSubmitSuccess
-    { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionListPageNumPageDataJsonR pageNum }
+    { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionListPageNumDataR pageNum }
 
-getSubmissionListPageNumPageDataJsonR :: Int -> Handler Value
-getSubmissionListPageNumPageDataJsonR = submissionListPageNumPageDataJsonR
+getSubmissionListPageNumDataR :: Int -> Handler Value
+getSubmissionListPageNumDataR = submissionListPageNumDataR
 
-submissionListPageNumPageDataJsonR :: Int -> Handler Value
-submissionListPageNumPageDataJsonR pageNum = do
+submissionListPageNumDataR :: Int -> Handler Value
+submissionListPageNumDataR pageNum = do
   Entity _ user <- requireAuth
   req <- getRequest
   appName <- runDB $ configAppName
@@ -65,7 +65,7 @@ submissionListPageNumPageDataJsonR pageNum = do
   msgSubmissions <- localizedMsg MsgSubmissionSubmissions
   currentLanguage <- getLanguage
   translation <- getTranslation
-  let currentPageDataJsonUrl = urlRenderer $ EcmsR SubmissionListPageDataJsonR
+  let currentDataUrl = urlRenderer $ EcmsR SubmissionListDataR
   returnJson JData
     { jDataAppName = appName
     , jDataUserIdent = userIdent user
@@ -80,29 +80,29 @@ submissionListPageNumPageDataJsonR pageNum = do
     , jDataCsrfToken = reqToken req
     , jDataBreadcrumbItems = [ JDataBreadcrumbItem
                                { jDataBreadcrumbItemLabel = msgHome
-                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR HomePageDataJsonR }
+                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR HomeDataR }
                              , JDataBreadcrumbItem
                                { jDataBreadcrumbItemLabel = msgSubmissions
-                               , jDataBreadcrumbItemDataUrl = currentPageDataJsonUrl }
+                               , jDataBreadcrumbItemDataUrl = currentDataUrl }
                              ]
     , jDataCurrentLanguage = currentLanguage
     , jDataTranslation = translation
-    , jDataLanguageDeUrl = urlRenderer $ EcmsR $ LanguageDeR currentPageDataJsonUrl
-    , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentPageDataJsonUrl
+    , jDataLanguageDeUrl = urlRenderer $ EcmsR $ LanguageDeR currentDataUrl
+    , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentDataUrl
     }
 
 submissionListJDatas :: Int -> Handler ([JDataSubmission], Maybe [JDataPaginationItem])
 submissionListJDatas pageNum = do
   urlRenderer <- getUrlRender
   rowCount <- runDB $ count ([] :: [Filter Submission])
-  paginationJDatas <- getPaginationJDatas rowCount submissionListPageSize pageNum 11 (EcmsR . SubmissionListPageNumPageDataJsonR)
+  paginationJDatas <- getPaginationJDatas rowCount submissionListPageSize pageNum 11 (EcmsR . SubmissionListPageNumDataR)
   submissionEnts <- runDB $ selectList [] [Asc SubmissionId]
   let submissionJDatas =
         map (\submissionEnt@(Entity submissionId _) ->
                JDataSubmission
                { jDataSubmissionEnt = submissionEnt
                , jDataSubmissionDetailUrl = urlRenderer $ EcmsR $ SubmissionDetailR submissionId
-               , jDataSubmissionDetailDataUrl = urlRenderer $ EcmsR $ SubmissionDetailPageDataJsonR submissionId
+               , jDataSubmissionDetailDataUrl = urlRenderer $ EcmsR $ SubmissionDetailDataR submissionId
                , jDataSubmissionDeleteFormUrl = urlRenderer $ EcmsR $ DeleteSubmissionFormR submissionId
                }
             ) submissionEnts
@@ -122,12 +122,12 @@ getSubmissionDetailR submissionId = defaultLayout $ do
                    <script>
                      \ riot.compile(function() {
                      \   bodyTag = riot.mount('body-tag')[0]
-                     \   bodyTag.refreshData("@{EcmsR $ SubmissionDetailPageDataJsonR submissionId}")
+                     \   bodyTag.refreshData("@{EcmsR $ SubmissionDetailDataR submissionId}")
                      \ })
                    |]
 
-getSubmissionDetailPageDataJsonR :: SubmissionId -> Handler Value
-getSubmissionDetailPageDataJsonR submissionId = do
+getSubmissionDetailDataR :: SubmissionId -> Handler Value
+getSubmissionDetailDataR submissionId = do
   Entity _ user <- requireAuth
   req <- getRequest
   appName <- runDB $ configAppName
@@ -147,7 +147,7 @@ getSubmissionDetailPageDataJsonR submissionId = do
   msgSubmission <- localizedMsg MsgSubmissionSubmission
   currentLanguage <- getLanguage
   translation <- getTranslation
-  let currentPageDataJsonUrl = urlRenderer $ EcmsR $ SubmissionDetailPageDataJsonR submissionId
+  let currentDataUrl = urlRenderer $ EcmsR $ SubmissionDetailDataR submissionId
   returnJson JData
     { jDataAppName = appName
     , jDataUserIdent = userIdent user
@@ -162,18 +162,18 @@ getSubmissionDetailPageDataJsonR submissionId = do
     , jDataCsrfToken = reqToken req
     , jDataBreadcrumbItems = [ JDataBreadcrumbItem
                                { jDataBreadcrumbItemLabel = msgHome
-                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR HomePageDataJsonR }
+                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR HomeDataR }
                              , JDataBreadcrumbItem
                                { jDataBreadcrumbItemLabel = msgSubmissions
-                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR SubmissionListPageDataJsonR }
+                               , jDataBreadcrumbItemDataUrl = urlRenderer $ EcmsR SubmissionListDataR }
                              , JDataBreadcrumbItem
                                { jDataBreadcrumbItemLabel = submissionHeadline submission
-                               , jDataBreadcrumbItemDataUrl = currentPageDataJsonUrl }
+                               , jDataBreadcrumbItemDataUrl = currentDataUrl }
                              ]
     , jDataCurrentLanguage = currentLanguage
     , jDataTranslation = translation
-    , jDataLanguageDeUrl = urlRenderer $ EcmsR $ LanguageDeR currentPageDataJsonUrl
-    , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentPageDataJsonUrl
+    , jDataLanguageDeUrl = urlRenderer $ EcmsR $ LanguageDeR currentDataUrl
+    , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentDataUrl
     }
 
 
@@ -226,7 +226,7 @@ postAddSubmissionR = do
       runDB $ do
         _ <- insert submission
         return ()
-      returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR SubmissionListPageDataJsonR }
+      returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR SubmissionListDataR }
     _ -> do
       resultHtml <- formLayout [whamlet|^{formWidget}|]
       returnJson $ VFormSubmitInvalid
@@ -326,8 +326,8 @@ postEditSubmissionR submissionId = do
                                ] persistFields
         return uc
       if updateCount == 1
-        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionDetailPageDataJsonR submissionId }
-        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ EcmsR $ SubmissionDetailPageDataJsonR submissionId }
+        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionDetailDataR submissionId }
+        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ EcmsR $ SubmissionDetailDataR submissionId }
     _ -> do
       resultHtml <- formLayout [whamlet|^{formWidget}|]
       returnJson $ VFormSubmitInvalid
@@ -414,7 +414,7 @@ postDeleteSubmissionR :: SubmissionId -> Handler Value
 postDeleteSubmissionR submissionId = do
   runDB $ delete submissionId
   urlRenderer <- getUrlRender
-  returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionListPageDataJsonR }
+  returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ EcmsR $ SubmissionListDataR }
 -- gen post delete form - end
 
 -- gen delete form - start
