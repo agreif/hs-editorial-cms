@@ -661,7 +661,13 @@ context =
                   BFieldView
                   { bFieldViewIsRequired = True
                   , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs = []
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
                   , bFieldViewDefault = Nothing
                   }
               , bCrudFieldEditView =
@@ -669,7 +675,13 @@ context =
                   BFieldView
                   { bFieldViewIsRequired = True
                   , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs = []
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
                   , bFieldViewDefault = Nothing
                   }
               }
@@ -691,7 +703,13 @@ context =
                   BFieldView
                   { bFieldViewIsRequired = True
                   , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs = []
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
                   , bFieldViewDefault = Nothing
                   }
               , bCrudFieldEditView =
@@ -699,7 +717,13 @@ context =
                   BFieldView
                   { bFieldViewIsRequired = True
                   , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs = []
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
                   , bFieldViewDefault = Nothing
                   }
               }

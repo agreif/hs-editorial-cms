@@ -15,6 +15,7 @@ import qualified Text.Blaze.Html.Renderer.Text as Blaze
 import Database.Persist.Sql (updateWhereCount)
 import qualified Data.Text.Encoding as TE
 import qualified Data.CaseInsensitive as CI
+import qualified Database.Esqueleto as E
 
 -------------------------------------------------------
 -- list
@@ -96,7 +97,7 @@ submissionListJDatas pageNum = do
   urlRenderer <- getUrlRender
   rowCount <- runDB $ count ([] :: [Filter Submission])
   paginationJDatas <- getPaginationJDatas rowCount submissionListPageSize pageNum 11 (AuthorR . SubmissionListPageNumDataR)
-  submissionEnts <- runDB $ selectList [] [Asc SubmissionId]
+  submissionEnts <- runDB loadSubmissionTuples
   let submissionJDatas =
         map (\submissionEnt@(Entity submissionId _) ->
                JDataSubmission
@@ -107,6 +108,15 @@ submissionListJDatas pageNum = do
                }
             ) submissionEnts
   return (submissionJDatas, paginationJDatas)
+  where
+    loadSubmissionTuples :: YesodDB App [(Entity Submission)]
+    loadSubmissionTuples = do
+      let pageSize = fromIntegral submissionListPageSize
+      E.select $ E.from $ \(da) -> do
+        E.orderBy [ E.desc (da E.^. SubmissionId) ]
+        E.offset ((fromIntegral pageNum - 1) * pageSize)
+        E.limit pageSize
+        return (da)
 
 submissionListPageSize :: Int
 submissionListPageSize = 50
@@ -266,7 +276,7 @@ vAddSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "headline"
       , fsName = Just "headline"
-      , fsAttrs = [  ]
+      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
       }
     sublineFs :: FieldSettings App
     sublineFs = FieldSettings
@@ -274,7 +284,7 @@ vAddSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "subline"
       , fsName = Just "subline"
-      , fsAttrs = [  ]
+      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
       }
 -- gen add form - end
 
@@ -372,7 +382,7 @@ vEditSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "headline"
       , fsName = Just "headline"
-      , fsAttrs = [  ]
+      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
       }
     sublineFs :: FieldSettings App
     sublineFs = FieldSettings
@@ -380,7 +390,7 @@ vEditSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "subline"
       , fsName = Just "subline"
-      , fsAttrs = [  ]
+      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
       }
     versionFs :: FieldSettings App
     versionFs = FieldSettings
