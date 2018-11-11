@@ -371,6 +371,8 @@
         <tr>
           <th>
             {parent.data.translation.msgSubmissionHeadline}
+          <th>
+            {parent.data.translation.msgSubmissionSubline}
           <th .uk-align-right>
             <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionAddSubmission}" uk-tooltip onclick="{addSubmission}">
               <span uk-icon="icon: plus">
@@ -379,6 +381,9 @@
           <td .uk-table-link>
             <a href="{detailUrl}" onclick="{detailSubmission}" .uk-link-reset>
               {entity.headline}
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailSubmission}" .uk-link-reset>
+              {entity.subline}
           <td .uk-width-small>
             <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionDeleteSubmission}" uk-tooltip onclick="{deleteSubmission}">
               <span uk-icon="icon: trash">
@@ -402,7 +407,6 @@
     \   event.currentTarget.blur()
     \ }
 
-
 <submission-detail-page-tag>
   <div if="{parent.data.pages.submissionDetail}">
     <h1>
@@ -414,12 +418,17 @@
         <tr>
           <th>
             {parent.data.translation.msgSubmissionHeadline}
+          <th>
+            {parent.data.translation.msgSubmissionSubline}
           <th .uk-align-right>
       <tbody>
         <tr>
           <td .uk-table-link>
             <a onclick="{editSubmission}" .uk-link-reset>
               {parent.data.pages.submissionDetail.submissionEnt.headline}
+          <td .uk-table-link>
+            <a onclick="{editSubmission}" .uk-link-reset>
+              {parent.data.pages.submissionDetail.submissionEnt.subline}
           <td .uk-width-small>
             <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionEditSubmission}" uk-tooltip onclick="{editSubmission}">
               <span uk-icon="icon: pencil">
