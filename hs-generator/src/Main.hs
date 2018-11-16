@@ -62,7 +62,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -76,7 +76,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -120,7 +120,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -134,7 +134,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -379,7 +379,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -407,7 +407,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -421,7 +421,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -449,7 +449,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-medium uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-medium"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -463,7 +463,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-medium uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-medium"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -491,7 +491,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-medium uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-medium"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -505,7 +505,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-medium uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-medium"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -594,7 +594,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -665,7 +665,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -679,7 +679,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -707,7 +707,7 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
                       ]
                   , bFieldViewDefault = Nothing
@@ -721,8 +721,54 @@ context =
                       [ BFieldAttr
                         { bFieldAttrKey = "class"
                         , bFieldAttrValue =
-                            "uk-form-width-large uk-input uk-form-small"
+                            "uk-input uk-form-small uk-form-width-large"
                         }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "text"
+              , bCrudFieldLabelDe = Just "Text"
+              , bCrudFieldLabelEn = Just "Text"
+              , bCrudFieldHsType = "Textarea"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "textareaField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
                       ]
                   , bFieldViewDefault = Nothing
                   }
@@ -739,10 +785,194 @@ context =
         }
 
 
+      , BCrudModel
+        { bCrudModelName = "Rawdata"
+        , bCrudModelLabel = "Rawdata"
+        , bCrudModelIsJson = False
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Nothing
+        , bCrudModelEditFormDataJsonUrl = Nothing
+        , bCrudModelDeleteFormDataJsonUrl = Nothing
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Nothing
+        , bCrudModelEditFormTitleMsg = Nothing
+        , bCrudModelDeleteFormTitleMsg = Nothing
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "EcmsR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "bytes"
+              , bCrudFieldLabelDe = Just "Bytes"
+              , bCrudFieldLabelEn = Just "Bytes"
+              , bCrudFieldHsType = "ByteString"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            ]
+        , bCrudModelTranslations = Nothing
+        }
 
 
 
 
+      , BCrudModel
+        { bCrudModelName = "submissionfile"
+        , bCrudModelLabel = "Submission File"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
+        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgSubmissionfileAddSubmissionfile"
+        , bCrudModelEditFormTitleMsg = Just "MsgSubmissionfileEditSubmissionfile"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgSubmissionfileDeleteSubmissionfile"
+        , bCrudModelParentHsType = Just "Submission"
+        , bCrudModelFormRouteHsType = "AuthorR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "submissionId"
+              , bCrudFieldLabelDe = Just "Kunde"
+              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldHsType = "SubmissionId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "rawdataId"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
+              , bCrudFieldHsType = "RawdataId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "filename"
+              , bCrudFieldLabelDe = Just "Dateiname"
+              , bCrudFieldLabelEn = Just "Filename"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "mimetype"
+              , bCrudFieldLabelDe = Just "MIME Type"
+              , bCrudFieldLabelEn = Just "MIME Type"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "size"
+              , bCrudFieldLabelDe = Just "Groesse"
+              , bCrudFieldLabelEn = Just "Size"
+              , bCrudFieldHsType = "Int"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "file"
+              , bCrudFieldLabelDe = Just "Datei"
+              , bCrudFieldLabelEn = Just "File"
+              , bCrudFieldHsType = "FileInfo"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "fileField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "submissionfiles", bTranslationDe = "Dateien", bTranslationEn = "Files" }
+          , BTranslation { bTranslationKey = "addSubmissionfile", bTranslationDe = "Datei hinzufügen", bTranslationEn = "Add file" }
+          , BTranslation { bTranslationKey = "editSubmissionfile", bTranslationDe = "Datei bearbeiten", bTranslationEn = "Edit file" }
+          , BTranslation { bTranslationKey = "deleteSubmissionfile", bTranslationDe = "Datei löschen", bTranslationEn = "Delete file" }
+          , BTranslation { bTranslationKey = "downloadSubmissionfile", bTranslationDe = "Datei runterladen", bTranslationEn = "Download file" }
+          ]
+        }
 
 
 

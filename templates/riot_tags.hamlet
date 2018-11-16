@@ -420,6 +420,8 @@
             {parent.data.translation.msgSubmissionHeadline}
           <th>
             {parent.data.translation.msgSubmissionSubline}
+          <th>
+            {parent.data.translation.msgSubmissionText}
           <th .uk-align-right>
       <tbody>
         <tr>
@@ -429,12 +431,63 @@
           <td .uk-table-link>
             <a onclick="{editSubmission}" .uk-link-reset>
               {parent.data.pages.submissionDetail.submissionEnt.subline}
+          <td .uk-table-link>
+            <a onclick="{editSubmission}" .uk-link-reset>
+              {parent.data.pages.submissionDetail.submissionEnt.text.substring(1,100)}
+              <span if="{parent.data.pages.submissionDetail.submissionEnt.text.length > 100}">
+                ...
           <td .uk-width-small>
             <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionEditSubmission}" uk-tooltip onclick="{editSubmission}">
               <span uk-icon="icon: pencil">
+
+    <h2>
+      {parent.data.translation.msgSubmissionfileSubmissionfiles}
+    <!-- file list -->
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgSubmissionfileFilename}
+          <th>
+            {parent.data.translation.msgSubmissionfileSize}
+          <th .uk-align-right>
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionfileAddSubmissionfile}" uk-tooltip onclick="{addSubmissionfile}">
+              <span uk-icon="icon: plus">
+      <tbody>
+        <tr each="{parent.data.pages.submissionDetail.submissionfiles}">
+          <td .uk-table-link>
+            <a href="{downloadUrl}" .uk-link-reset>
+              {entity.filename}
+          <td .uk-table-link>
+            <a href="{downloadUrl}" .uk-link-reset>
+              {fileSize(entity.size, parent.parent.data.currentLanguage)}
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionfileDeleteSubmissionfile}" uk-tooltip onclick="{deleteSubmissionfile}">
+              <span uk-icon="icon: trash">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionfileEditSubmissionfile}" uk-tooltip onclick="{editSubmissionfile}">
+              <span uk-icon="icon: pencil">
+            <a .uk-float-right title="{parent.parent.data.translation.msgSubmissionfileDownloadSubmissionfile}" uk-tooltip href="{downloadUrl}">
+              <span uk-icon="icon: download">
+
+
   <script>
     \ editSubmission(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(parent.tag.data.pages.submissionDetail.submissionEditFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ addSubmissionfile(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(parent.tag.data.pages.submissionDetail.submissionfileAddFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ editSubmissionfile(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.editFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ deleteSubmissionfile(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.deleteFormUrl)
     \   event.currentTarget.blur()
     \ }

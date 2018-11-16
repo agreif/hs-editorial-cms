@@ -144,12 +144,15 @@ getSubmissionDetailDataR submissionId = do
   mainNavItems <- mainNavData user MainNavAuthor
   submission <- runDB $ get404 submissionId
   urlRenderer <- getUrlRender
+  jDataSubmissionfiles <- submissionDetailFileJDatas submissionId
   let pages =
         defaultDataPages
         { jDataPageSubmissionDetail =
             Just $ JDataPageSubmissionDetail
             { jDataPageSubmissionDetailSubmissionEnt = Entity submissionId submission
             , jDataPageSubmissionDetailSubmissionEditFormUrl = urlRenderer $ AuthorR $ EditSubmissionFormR submissionId
+            , jDataPageSubmissionDetailSubmissionfiles = jDataSubmissionfiles
+            , jDataPageSubmissionDetailSubmissionfileAddFormUrl = urlRenderer $ AuthorR $ AddSubmissionfileFormR submissionId
             }
         }
   msgHome <- localizedMsg MsgGlobalHome
@@ -186,6 +189,26 @@ getSubmissionDetailDataR submissionId = do
     , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentDataUrl
     }
 
+submissionDetailFileJDatas :: SubmissionId -> Handler [JDataSubmissionfile]
+submissionDetailFileJDatas submissionId = do
+  urlRenderer <- getUrlRender
+  submissionfileTuples <- runDB loadSubmissionfileListTuples
+  return $ map (\(submissionfileEnt@(Entity submissionfileId _)) ->
+                            JDataSubmissionfile
+                            { jDataSubmissionfileEnt = submissionfileEnt
+                            , jDataSubmissionfileEditFormUrl = urlRenderer $ AuthorR $ EditSubmissionfileFormR submissionfileId
+                            , jDataSubmissionfileDeleteFormUrl = urlRenderer $ AuthorR $ DeleteSubmissionfileFormR submissionfileId
+                            , jDataSubmissionfileDownloadUrl = urlRenderer $ AuthorR $ DownloadSubmissionfileR submissionfileId
+                            }
+                         ) submissionfileTuples
+  where
+    loadSubmissionfileListTuples :: YesodDB App [(Entity Submissionfile)]
+    loadSubmissionfileListTuples = do
+      submissionfileTuples <- E.select $ E.from $ \cf -> do
+        E.orderBy [E.asc (cf E.^. SubmissionfileId)]
+        E.where_ (cf E.^. SubmissionfileSubmissionId E.==. E.val submissionId)
+        return (cf)
+      return submissionfileTuples
 
 
 
@@ -198,6 +221,7 @@ getSubmissionDetailDataR submissionId = do
 data VAddSubmission = VAddSubmission
   { vAddSubmissionHeadline :: Text
   , vAddSubmissionSubline :: Text
+  , vAddSubmissionText :: Textarea
   }
 -- gen data add - end
 
@@ -227,6 +251,7 @@ postAddSubmissionR = do
             {
             submissionHeadline = vAddSubmissionHeadline vAddSubmission
             , submissionSubline = vAddSubmissionSubline vAddSubmission
+            , submissionText = vAddSubmissionText vAddSubmission
             , submissionVersion = 1
             , submissionCreatedAt = curTime
             , submissionCreatedBy = userIdent authUser
@@ -252,7 +277,10 @@ vAddSubmissionForm maybeSubmission extra = do
   (sublineResult, sublineView) <- mreq textField
     sublineFs
     (submissionSubline <$> maybeSubmission)
-  let vAddSubmissionResult = VAddSubmission <$> headlineResult <*> sublineResult
+  (textResult, textView) <- mreq textareaField
+    textFs
+    (submissionText <$> maybeSubmission)
+  let vAddSubmissionResult = VAddSubmission <$> headlineResult <*> sublineResult <*> textResult
   let formWidget = toWidget [whamlet|
     #{extra}
     <div .uk-margin-small :not $ null $ fvErrors headlineView:.uk-form-danger>
@@ -267,6 +295,12 @@ vAddSubmissionForm maybeSubmission extra = do
         ^{fvInput sublineView}
         $maybe err <- fvErrors sublineView
           &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors textView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors textView:.uk-text-danger for=#{fvId textView}>#{fvLabel textView}
+      <div .uk-form-controls>
+        ^{fvInput textView}
+        $maybe err <- fvErrors textView
+          &nbsp;#{err}
     |]
   return (vAddSubmissionResult, formWidget)
   where
@@ -276,7 +310,7 @@ vAddSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "headline"
       , fsName = Just "headline"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     sublineFs :: FieldSettings App
     sublineFs = FieldSettings
@@ -284,7 +318,15 @@ vAddSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "subline"
       , fsName = Just "subline"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
+      }
+    textFs :: FieldSettings App
+    textFs = FieldSettings
+      { fsLabel = SomeMessage MsgSubmissionText
+      , fsTooltip = Nothing
+      , fsId = Just "text"
+      , fsName = Just "text"
+      , fsAttrs = [ ("class","uk-textarea uk-form-small uk-width-5-6"), ("rows","10") ]
       }
 -- gen add form - end
 
@@ -296,6 +338,7 @@ vAddSubmissionForm maybeSubmission extra = do
 data VEditSubmission = VEditSubmission
   { vEditSubmissionHeadline :: Text
   , vEditSubmissionSubline :: Text
+  , vEditSubmissionText :: Textarea
   , vEditSubmissionVersion :: Int
   }
 -- gen data edit - end
@@ -326,6 +369,7 @@ postEditSubmissionR submissionId = do
       let persistFields = [
             SubmissionHeadline =. vEditSubmissionHeadline vEditSubmission
             , SubmissionSubline =. vEditSubmissionSubline vEditSubmission
+            , SubmissionText =. vEditSubmissionText vEditSubmission
             , SubmissionVersion =. vEditSubmissionVersion vEditSubmission + 1
             , SubmissionUpdatedAt =. curTime
             , SubmissionUpdatedBy =. userIdent authUser
@@ -354,10 +398,13 @@ vEditSubmissionForm maybeSubmission extra = do
   (sublineResult, sublineView) <- mreq textField
     sublineFs
     (submissionSubline <$> maybeSubmission)
+  (textResult, textView) <- mreq textareaField
+    textFs
+    (submissionText <$> maybeSubmission)
   (versionResult, versionView) <- mreq hiddenField
     versionFs
     (submissionVersion <$> maybeSubmission)
-  let vEditSubmissionResult = VEditSubmission <$> headlineResult <*> sublineResult <*> versionResult
+  let vEditSubmissionResult = VEditSubmission <$> headlineResult <*> sublineResult <*> textResult <*> versionResult
   let formWidget = toWidget [whamlet|
     #{extra}
     ^{fvInput versionView}
@@ -373,6 +420,12 @@ vEditSubmissionForm maybeSubmission extra = do
         ^{fvInput sublineView}
         $maybe err <- fvErrors sublineView
           &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors textView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors textView:.uk-text-danger for=#{fvId textView}>#{fvLabel textView}
+      <div .uk-form-controls>
+        ^{fvInput textView}
+        $maybe err <- fvErrors textView
+          &nbsp;#{err}
     |]
   return (vEditSubmissionResult, formWidget)
   where
@@ -382,7 +435,7 @@ vEditSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "headline"
       , fsName = Just "headline"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     sublineFs :: FieldSettings App
     sublineFs = FieldSettings
@@ -390,7 +443,15 @@ vEditSubmissionForm maybeSubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "subline"
       , fsName = Just "subline"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
+      }
+    textFs :: FieldSettings App
+    textFs = FieldSettings
+      { fsLabel = SomeMessage MsgSubmissionText
+      , fsTooltip = Nothing
+      , fsId = Just "text"
+      , fsName = Just "text"
+      , fsAttrs = [ ("class","uk-textarea uk-form-small uk-width-5-6"), ("rows","10") ]
       }
     versionFs :: FieldSettings App
     versionFs = FieldSettings

@@ -1,6 +1,6 @@
 <div .uk-margin-xlarge-top .uk-flex .uk-flex-center>
   <h1>
-    My-Project
+    hs-editorial-cms
 <div .uk-margin-top .uk-flex .uk-flex-center>
   <form #login-form .uk-form-horizontal method=post action=@{loginRoute}>
     $maybe token <- maybeToken

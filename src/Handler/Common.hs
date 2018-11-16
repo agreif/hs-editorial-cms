@@ -266,13 +266,30 @@ instance ToJSON JDataSubmission where
 data JDataPageSubmissionDetail = JDataPageSubmissionDetail
   { jDataPageSubmissionDetailSubmissionEnt :: Entity Submission
   , jDataPageSubmissionDetailSubmissionEditFormUrl :: Text
+  , jDataPageSubmissionDetailSubmissionfiles :: [JDataSubmissionfile]
+  , jDataPageSubmissionDetailSubmissionfileAddFormUrl :: Text
   }
 instance ToJSON JDataPageSubmissionDetail where
   toJSON o = object
     [ "submissionEnt" .= jDataPageSubmissionDetailSubmissionEnt o
     , "submissionEditFormUrl" .= jDataPageSubmissionDetailSubmissionEditFormUrl o
+    , "submissionfiles" .= jDataPageSubmissionDetailSubmissionfiles o
+    , "submissionfileAddFormUrl" .= jDataPageSubmissionDetailSubmissionfileAddFormUrl o
     ]
 
+data JDataSubmissionfile = JDataSubmissionfile
+  { jDataSubmissionfileEnt :: Entity Submissionfile
+  , jDataSubmissionfileEditFormUrl :: Text
+  , jDataSubmissionfileDeleteFormUrl :: Text
+  , jDataSubmissionfileDownloadUrl :: Text
+  }
+instance ToJSON JDataSubmissionfile where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataSubmissionfileEnt o)
+    , "editFormUrl" .= jDataSubmissionfileEditFormUrl o
+    , "deleteFormUrl" .= jDataSubmissionfileDeleteFormUrl o
+    , "downloadUrl" .= jDataSubmissionfileDownloadUrl o
+    ]
 
 
 

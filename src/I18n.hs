@@ -34,6 +34,14 @@ data AppMessage =
   | MsgTestmailEmail
   | MsgSubmissionHeadline
   | MsgSubmissionSubline
+  | MsgSubmissionText
+  | MsgRawdataBytes
+  | MsgSubmissionfileSubmissionId
+  | MsgSubmissionfileRawdataId
+  | MsgSubmissionfileFilename
+  | MsgSubmissionfileMimetype
+  | MsgSubmissionfileSize
+  | MsgSubmissionfileFile
   | MsgUserUsers
   | MsgUserAddUser
   | MsgUserEditUser
@@ -47,6 +55,11 @@ data AppMessage =
   | MsgSubmissionAddSubmission
   | MsgSubmissionEditSubmission
   | MsgSubmissionDeleteSubmission
+  | MsgSubmissionfileSubmissionfiles
+  | MsgSubmissionfileAddSubmissionfile
+  | MsgSubmissionfileEditSubmissionfile
+  | MsgSubmissionfileDeleteSubmissionfile
+  | MsgSubmissionfileDownloadSubmissionfile
 
 renderMessageGerman :: AppMessage -> Text
 renderMessageGerman MsgGlobalHome = "Home"
@@ -76,6 +89,14 @@ renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
 renderMessageGerman MsgTestmailEmail = "Email"
 renderMessageGerman MsgSubmissionHeadline = "Headline"
 renderMessageGerman MsgSubmissionSubline = "Subline"
+renderMessageGerman MsgSubmissionText = "Text"
+renderMessageGerman MsgRawdataBytes = "Bytes"
+renderMessageGerman MsgSubmissionfileSubmissionId = "Kunde"
+renderMessageGerman MsgSubmissionfileRawdataId = ""
+renderMessageGerman MsgSubmissionfileFilename = "Dateiname"
+renderMessageGerman MsgSubmissionfileMimetype = "MIME Type"
+renderMessageGerman MsgSubmissionfileSize = "Groesse"
+renderMessageGerman MsgSubmissionfileFile = "Datei"
 renderMessageGerman MsgUserUsers = "Nutzer"
 renderMessageGerman MsgUserAddUser = "Nutzer hinzufügen"
 renderMessageGerman MsgUserEditUser = "Nutzer bearbeiten"
@@ -89,6 +110,11 @@ renderMessageGerman MsgSubmissionSubmissions = "Beiträge"
 renderMessageGerman MsgSubmissionAddSubmission = "Beitrag hinzufügen"
 renderMessageGerman MsgSubmissionEditSubmission = "Beitrag bearbeiten"
 renderMessageGerman MsgSubmissionDeleteSubmission = "Beitrag löschen"
+renderMessageGerman MsgSubmissionfileSubmissionfiles = "Dateien"
+renderMessageGerman MsgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
+renderMessageGerman MsgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
+renderMessageGerman MsgSubmissionfileDeleteSubmissionfile = "Datei löschen"
+renderMessageGerman MsgSubmissionfileDownloadSubmissionfile = "Datei runterladen"
 
 renderMessageEnglish :: AppMessage -> Text
 renderMessageEnglish MsgGlobalHome = "Home"
@@ -118,6 +144,14 @@ renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
 renderMessageEnglish MsgTestmailEmail = "Email"
 renderMessageEnglish MsgSubmissionHeadline = "Headline"
 renderMessageEnglish MsgSubmissionSubline = "Subline"
+renderMessageEnglish MsgSubmissionText = "Text"
+renderMessageEnglish MsgRawdataBytes = "Bytes"
+renderMessageEnglish MsgSubmissionfileSubmissionId = "Submission"
+renderMessageEnglish MsgSubmissionfileRawdataId = ""
+renderMessageEnglish MsgSubmissionfileFilename = "Filename"
+renderMessageEnglish MsgSubmissionfileMimetype = "MIME Type"
+renderMessageEnglish MsgSubmissionfileSize = "Size"
+renderMessageEnglish MsgSubmissionfileFile = "File"
 renderMessageEnglish MsgUserUsers = "Users"
 renderMessageEnglish MsgUserAddUser = "Add user"
 renderMessageEnglish MsgUserEditUser = "Edit user"
@@ -131,6 +165,11 @@ renderMessageEnglish MsgSubmissionSubmissions = "Submissions"
 renderMessageEnglish MsgSubmissionAddSubmission = "Add submission"
 renderMessageEnglish MsgSubmissionEditSubmission = "Edit submission"
 renderMessageEnglish MsgSubmissionDeleteSubmission = "Delete submission"
+renderMessageEnglish MsgSubmissionfileSubmissionfiles = "Files"
+renderMessageEnglish MsgSubmissionfileAddSubmissionfile = "Add file"
+renderMessageEnglish MsgSubmissionfileEditSubmissionfile = "Edit file"
+renderMessageEnglish MsgSubmissionfileDeleteSubmissionfile = "Delete file"
+renderMessageEnglish MsgSubmissionfileDownloadSubmissionfile = "Download file"
 
 data Translation = Translation
   { msgGlobalHome :: Text
@@ -160,6 +199,14 @@ data Translation = Translation
   , msgTestmailEmail :: Text
   , msgSubmissionHeadline :: Text
   , msgSubmissionSubline :: Text
+  , msgSubmissionText :: Text
+  , msgRawdataBytes :: Text
+  , msgSubmissionfileSubmissionId :: Text
+  , msgSubmissionfileRawdataId :: Text
+  , msgSubmissionfileFilename :: Text
+  , msgSubmissionfileMimetype :: Text
+  , msgSubmissionfileSize :: Text
+  , msgSubmissionfileFile :: Text
   , msgUserUsers :: Text
   , msgUserAddUser :: Text
   , msgUserEditUser :: Text
@@ -173,6 +220,11 @@ data Translation = Translation
   , msgSubmissionAddSubmission :: Text
   , msgSubmissionEditSubmission :: Text
   , msgSubmissionDeleteSubmission :: Text
+  , msgSubmissionfileSubmissionfiles :: Text
+  , msgSubmissionfileAddSubmissionfile :: Text
+  , msgSubmissionfileEditSubmissionfile :: Text
+  , msgSubmissionfileDeleteSubmissionfile :: Text
+  , msgSubmissionfileDownloadSubmissionfile :: Text
   } deriving Generic
 
 instance ToJSON Translation
@@ -206,6 +258,14 @@ translationDe = Translation
   , msgTestmailEmail = "Email"
   , msgSubmissionHeadline = "Headline"
   , msgSubmissionSubline = "Subline"
+  , msgSubmissionText = "Text"
+  , msgRawdataBytes = "Bytes"
+  , msgSubmissionfileSubmissionId = "Kunde"
+  , msgSubmissionfileRawdataId = ""
+  , msgSubmissionfileFilename = "Dateiname"
+  , msgSubmissionfileMimetype = "MIME Type"
+  , msgSubmissionfileSize = "Groesse"
+  , msgSubmissionfileFile = "Datei"
   , msgUserUsers = "Nutzer"
   , msgUserAddUser = "Nutzer hinzufügen"
   , msgUserEditUser = "Nutzer bearbeiten"
@@ -218,7 +278,12 @@ translationDe = Translation
   , msgSubmissionSubmissions = "Beiträge"
   , msgSubmissionAddSubmission = "Beitrag hinzufügen"
   , msgSubmissionEditSubmission = "Beitrag bearbeiten"
-  , msgSubmissionDeleteSubmission = "Beitrag löschen"}
+  , msgSubmissionDeleteSubmission = "Beitrag löschen"
+  , msgSubmissionfileSubmissionfiles = "Dateien"
+  , msgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
+  , msgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
+  , msgSubmissionfileDeleteSubmissionfile = "Datei löschen"
+  , msgSubmissionfileDownloadSubmissionfile = "Datei runterladen"}
 
 translationEn :: Translation
 translationEn = Translation
@@ -249,6 +314,14 @@ translationEn = Translation
   , msgTestmailEmail = "Email"
   , msgSubmissionHeadline = "Headline"
   , msgSubmissionSubline = "Subline"
+  , msgSubmissionText = "Text"
+  , msgRawdataBytes = "Bytes"
+  , msgSubmissionfileSubmissionId = "Submission"
+  , msgSubmissionfileRawdataId = ""
+  , msgSubmissionfileFilename = "Filename"
+  , msgSubmissionfileMimetype = "MIME Type"
+  , msgSubmissionfileSize = "Size"
+  , msgSubmissionfileFile = "File"
   , msgUserUsers = "Users"
   , msgUserAddUser = "Add user"
   , msgUserEditUser = "Edit user"
@@ -261,6 +334,11 @@ translationEn = Translation
   , msgSubmissionSubmissions = "Submissions"
   , msgSubmissionAddSubmission = "Add submission"
   , msgSubmissionEditSubmission = "Edit submission"
-  , msgSubmissionDeleteSubmission = "Delete submission"}
+  , msgSubmissionDeleteSubmission = "Delete submission"
+  , msgSubmissionfileSubmissionfiles = "Files"
+  , msgSubmissionfileAddSubmissionfile = "Add file"
+  , msgSubmissionfileEditSubmissionfile = "Edit file"
+  , msgSubmissionfileDeleteSubmissionfile = "Delete file"
+  , msgSubmissionfileDownloadSubmissionfile = "Download file"}
 
 -- gen i18n - end
