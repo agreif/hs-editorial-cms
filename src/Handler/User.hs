@@ -142,7 +142,7 @@ vAddUserForm maybeUser extra = do
       , fsTooltip = Nothing
       , fsId = Just "ident"
       , fsName = Just "ident"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     emailFs :: FieldSettings App
     emailFs = FieldSettings
@@ -150,7 +150,7 @@ vAddUserForm maybeUser extra = do
       , fsTooltip = Nothing
       , fsId = Just "email"
       , fsName = Just "email"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     isAdminFs :: FieldSettings App
     isAdminFs = FieldSettings
@@ -338,7 +338,7 @@ vEditUserForm maybeUser extra = do
       , fsTooltip = Nothing
       , fsId = Just "ident"
       , fsName = Just "ident"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     emailFs :: FieldSettings App
     emailFs = FieldSettings
@@ -346,7 +346,7 @@ vEditUserForm maybeUser extra = do
       , fsTooltip = Nothing
       , fsId = Just "email"
       , fsName = Just "email"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
     isAdminFs :: FieldSettings App
     isAdminFs = FieldSettings

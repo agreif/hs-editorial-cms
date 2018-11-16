@@ -59,9 +59,9 @@ as $function$
        if to_regclass('submission_history') is not null then
            if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
                 insert into submission_history
-                       (id, headline, subline, version, created_at, created_by, updated_at, updated_by)
+                       (id, headline, subline, text, version, created_at, created_by, updated_at, updated_by)
                        values
-                       (new.id, new.headline, new.subline, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                       (new.id, new.headline, new.subline, new.text, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
                 return new;
             end if;
        end if;
@@ -70,5 +70,51 @@ as $function$
 $function$;
 
 create trigger audit_submission after insert or update on public.submission for each row execute procedure public.process_audit_submission();
+
+
+
+drop function public.process_audit_rawdata() cascade;
+create or replace function public.process_audit_rawdata()
+ returns trigger
+ language plpgsql
+as $function$
+   begin
+       if to_regclass('rawdata_history') is not null then
+           if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
+                insert into rawdata_history
+                       (id, bytes, version, created_at, created_by, updated_at, updated_by)
+                       values
+                       (new.id, new.bytes, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                return new;
+            end if;
+       end if;
+       return null; -- result is ignored since this is an after trigger
+    end;
+$function$;
+
+create trigger audit_rawdata after insert or update on public.rawdata for each row execute procedure public.process_audit_rawdata();
+
+
+
+drop function public.process_audit_submissionfile() cascade;
+create or replace function public.process_audit_submissionfile()
+ returns trigger
+ language plpgsql
+as $function$
+   begin
+       if to_regclass('submissionfile_history') is not null then
+           if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
+                insert into submissionfile_history
+                       (id, submission_id, rawdata_id, filename, mimetype, size, version, created_at, created_by, updated_at, updated_by)
+                       values
+                       (new.id, new.submission_id, new.rawdata_id, new.filename, new.mimetype, new.size, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                return new;
+            end if;
+       end if;
+       return null; -- result is ignored since this is an after trigger
+    end;
+$function$;
+
+create trigger audit_submissionfile after insert or update on public.submissionfile for each row execute procedure public.process_audit_submissionfile();
 
 -- gen triggers - end

@@ -65,6 +65,7 @@ ConfigHistory
 Submission json
     headline Text
     subline Text
+    text Textarea
     version Int
     createdAt UTCTime
     createdBy Text
@@ -77,6 +78,53 @@ SubmissionHistory
     id Int MigrationOnly
     headline Text
     subline Text
+    text Textarea
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+Rawdata
+    bytes ByteString
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+RawdataHistory
+    Id sql=vid
+    id Int MigrationOnly
+    bytes ByteString
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+Submissionfile json
+    submissionId SubmissionId
+    rawdataId RawdataId
+    filename Text
+    mimetype Text
+    size Int
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+SubmissionfileHistory
+    Id sql=vid
+    id Int MigrationOnly
+    submissionId Int
+    rawdataId Int
+    filename Text
+    mimetype Text
+    size Int
     version Int
     createdAt UTCTime
     createdBy Text

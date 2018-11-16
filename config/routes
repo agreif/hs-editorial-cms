@@ -41,6 +41,14 @@
   deleteSubmissionForm/#SubmissionId DeleteSubmissionFormR GET
   deleteSubmission/#SubmissionId DeleteSubmissionR POST
 
+  addSubmissionfileForm/#SubmissionId AddSubmissionfileFormR GET
+  addSubmissionfile/#SubmissionId AddSubmissionfileR POST
+  editSubmissionfileForm/#SubmissionfileId EditSubmissionfileFormR GET
+  editSubmissionfile/#SubmissionfileId EditSubmissionfileR POST
+  deleteSubmissionfileForm/#SubmissionfileId DeleteSubmissionfileFormR GET
+  deleteSubmissionfile/#SubmissionfileId DeleteSubmissionfileR POST
+  downloadSubmissionfile/#SubmissionfileId DownloadSubmissionfileR GET
+
 /ecms EcmsR:
   home EcmsHomeR GET
   riotTags RiotTagsR GET

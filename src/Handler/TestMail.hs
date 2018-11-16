@@ -73,6 +73,6 @@ vAddTestmailForm maybeTestmail extra = do
       , fsTooltip = Nothing
       , fsId = Just "email"
       , fsName = Just "email"
-      , fsAttrs = [ ("class","uk-form-width-large uk-input uk-form-small") ]
+      , fsAttrs = [ ("class","uk-input uk-form-small uk-form-width-large") ]
       }
 -- gen add form - end
