@@ -167,7 +167,7 @@ getAuthorsubmissionDetailDataR authorsubmissionId = do
             { jDataPageAuthorsubmissionDetailAuthorsubmissionEnt = Entity authorsubmissionId authorsubmission
             , jDataPageAuthorsubmissionDetailAuthorsubmissionEditFormUrl = urlRenderer $ AuthorR $ EditAuthorsubmissionFormR authorsubmissionId
             , jDataPageAuthorsubmissionDetailAuthorsubmissionfiles = jDataAuthorsubmissionfiles
-            , jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl = urlRenderer $ AuthorR $ AddSubmissionfileFormR authorsubmissionId
+            , jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl = urlRenderer $ AuthorR $ AddAuthorsubmissionfileFormR authorsubmissionId
             }
         }
   msgHome <- localizedMsg MsgGlobalHome
@@ -204,16 +204,16 @@ getAuthorsubmissionDetailDataR authorsubmissionId = do
     , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentDataUrl
     }
 
-authorsubmissionDetailFileJDatas :: AuthorsubmissionId -> Handler [JDataSubmissionfile]
+authorsubmissionDetailFileJDatas :: AuthorsubmissionId -> Handler [JDataAuthorsubmissionfile]
 authorsubmissionDetailFileJDatas authorsubmissionId = do
   urlRenderer <- getUrlRender
   submissionfileTuples <- runDB loadSubmissionfileListTuples
   return $ map (\(submissionfileEnt@(Entity submissionfileId _)) ->
-                            JDataSubmissionfile
-                            { jDataSubmissionfileEnt = submissionfileEnt
-                            , jDataSubmissionfileEditFormUrl = urlRenderer $ AuthorR $ EditSubmissionfileFormR submissionfileId
-                            , jDataSubmissionfileDeleteFormUrl = urlRenderer $ AuthorR $ DeleteSubmissionfileFormR submissionfileId
-                            , jDataSubmissionfileDownloadUrl = urlRenderer $ AuthorR $ DownloadSubmissionfileR submissionfileId
+                            JDataAuthorsubmissionfile
+                            { jDataAuthorsubmissionfileEnt = submissionfileEnt
+                            , jDataAuthorsubmissionfileEditFormUrl = urlRenderer $ AuthorR $ EditAuthorsubmissionfileFormR submissionfileId
+                            , jDataAuthorsubmissionfileDeleteFormUrl = urlRenderer $ AuthorR $ DeleteAuthorsubmissionfileFormR submissionfileId
+                            , jDataAuthorsubmissionfileDownloadUrl = urlRenderer $ AuthorR $ DownloadAuthorsubmissionfileR submissionfileId
                             }
                          ) submissionfileTuples
   where

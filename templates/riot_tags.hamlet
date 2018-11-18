@@ -440,17 +440,17 @@
             <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgAuthorsubmissionEditSubmission}" uk-tooltip onclick="{editAuthorsubmission}">
               <span uk-icon="icon: pencil">
     <h2>
-      {parent.data.translation.msgSubmissionfileSubmissionfiles}
+      {parent.data.translation.msgAuthorsubmissionfileSubmissionfiles}
     <!-- file list -->
     <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
       <thead>
         <tr>
           <th>
-            {parent.data.translation.msgSubmissionfileFilename}
+            {parent.data.translation.msgAuthorsubmissionfileFilename}
           <th>
-            {parent.data.translation.msgSubmissionfileSize}
+            {parent.data.translation.msgAuthorsubmissionfileSize}
           <th .uk-align-right>
-            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionfileAddSubmissionfile}" uk-tooltip onclick="{addSubmissionfile}">
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgAuthorsubmissionfileAddSubmissionfile}" uk-tooltip onclick="{addAuthorsubmissionfile}">
               <span uk-icon="icon: plus">
       <tbody>
         <tr each="{parent.data.pages.authorsubmissionDetail.authorsubmissionfiles}">
@@ -461,11 +461,11 @@
             <a href="{downloadUrl}" .uk-link-reset>
               {fileSize(entity.size, parent.parent.data.currentLanguage)}
           <td .uk-width-small>
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionfileDeleteSubmissionfile}" uk-tooltip onclick="{deleteSubmissionfile}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgAuthorsubmissionfileDeleteSubmissionfile}" uk-tooltip onclick="{deleteAuthorsubmissionfile}">
               <span uk-icon="icon: trash">
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionfileEditSubmissionfile}" uk-tooltip onclick="{editSubmissionfile}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgAuthorsubmissionfileEditSubmissionfile}" uk-tooltip onclick="{editAuthorsubmissionfile}">
               <span uk-icon="icon: pencil">
-            <a .uk-float-right title="{parent.parent.data.translation.msgSubmissionfileDownloadSubmissionfile}" uk-tooltip href="{downloadUrl}">
+            <a .uk-float-right title="{parent.parent.data.translation.msgAuthorsubmissionfileDownloadSubmissionfile}" uk-tooltip href="{downloadUrl}">
               <span uk-icon="icon: download">
 
 
@@ -475,17 +475,17 @@
     \   parent.tag.showModalForm(parent.tag.data.pages.authorsubmissionDetail.authorsubmissionEditFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ addSubmissionfile(event) {
+    \ addAuthorsubmissionfile(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(parent.tag.data.pages.authorsubmissionDetail.authorsubmissionfileAddFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ editSubmissionfile(event) {
+    \ editAuthorsubmissionfile(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.editFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ deleteSubmissionfile(event) {
+    \ deleteAuthorsubmissionfile(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.deleteFormUrl)
     \   event.currentTarget.blur()

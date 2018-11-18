@@ -135,8 +135,8 @@ if test -z "$1" -o "$1" = $m; then
     exec_ginger2 $m handler_delete_form.gtmpl $f '-- gen delete form'
 fi
 
-f=src/Handler/Submissionfile.hs
-m=submissionfile
+f=src/Handler/Authorsubmissionfile.hs
+m=authorsubmissionfile
 if test -z "$1" -o "$1" = $m; then
     exec_ginger2 $m handler_data_add.gtmpl $f '-- gen data add'
     exec_ginger2 $m handler_get_add_form.gtmpl $f '-- gen get add form'

@@ -44,7 +44,12 @@ data AppMessage =
   | MsgSubmissionfileFilename
   | MsgSubmissionfileMimetype
   | MsgSubmissionfileSize
-  | MsgSubmissionfileFile
+  | MsgAuthorsubmissionfileSubmissionId
+  | MsgAuthorsubmissionfileRawdataId
+  | MsgAuthorsubmissionfileFilename
+  | MsgAuthorsubmissionfileMimetype
+  | MsgAuthorsubmissionfileSize
+  | MsgAuthorsubmissionfileFile
   | MsgUserUsers
   | MsgUserAddUser
   | MsgUserEditUser
@@ -58,11 +63,11 @@ data AppMessage =
   | MsgAuthorsubmissionAddSubmission
   | MsgAuthorsubmissionEditSubmission
   | MsgAuthorsubmissionDeleteSubmission
-  | MsgSubmissionfileSubmissionfiles
-  | MsgSubmissionfileAddSubmissionfile
-  | MsgSubmissionfileEditSubmissionfile
-  | MsgSubmissionfileDeleteSubmissionfile
-  | MsgSubmissionfileDownloadSubmissionfile
+  | MsgAuthorsubmissionfileSubmissionfiles
+  | MsgAuthorsubmissionfileAddSubmissionfile
+  | MsgAuthorsubmissionfileEditSubmissionfile
+  | MsgAuthorsubmissionfileDeleteSubmissionfile
+  | MsgAuthorsubmissionfileDownloadSubmissionfile
 
 renderMessageGerman :: AppMessage -> Text
 renderMessageGerman MsgGlobalHome = "Home"
@@ -102,7 +107,12 @@ renderMessageGerman MsgSubmissionfileRawdataId = ""
 renderMessageGerman MsgSubmissionfileFilename = "Dateiname"
 renderMessageGerman MsgSubmissionfileMimetype = "MIME Type"
 renderMessageGerman MsgSubmissionfileSize = "Groesse"
-renderMessageGerman MsgSubmissionfileFile = "Datei"
+renderMessageGerman MsgAuthorsubmissionfileSubmissionId = "Kunde"
+renderMessageGerman MsgAuthorsubmissionfileRawdataId = ""
+renderMessageGerman MsgAuthorsubmissionfileFilename = "Dateiname"
+renderMessageGerman MsgAuthorsubmissionfileMimetype = "MIME Type"
+renderMessageGerman MsgAuthorsubmissionfileSize = "Groesse"
+renderMessageGerman MsgAuthorsubmissionfileFile = "Datei"
 renderMessageGerman MsgUserUsers = "Nutzer"
 renderMessageGerman MsgUserAddUser = "Nutzer hinzufügen"
 renderMessageGerman MsgUserEditUser = "Nutzer bearbeiten"
@@ -116,11 +126,11 @@ renderMessageGerman MsgAuthorsubmissionSubmissions = "Beiträge"
 renderMessageGerman MsgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
 renderMessageGerman MsgAuthorsubmissionEditSubmission = "Beitrag bearbeiten"
 renderMessageGerman MsgAuthorsubmissionDeleteSubmission = "Beitrag löschen"
-renderMessageGerman MsgSubmissionfileSubmissionfiles = "Dateien"
-renderMessageGerman MsgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
-renderMessageGerman MsgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
-renderMessageGerman MsgSubmissionfileDeleteSubmissionfile = "Datei löschen"
-renderMessageGerman MsgSubmissionfileDownloadSubmissionfile = "Datei runterladen"
+renderMessageGerman MsgAuthorsubmissionfileSubmissionfiles = "Dateien"
+renderMessageGerman MsgAuthorsubmissionfileAddSubmissionfile = "Datei hinzufügen"
+renderMessageGerman MsgAuthorsubmissionfileEditSubmissionfile = "Datei bearbeiten"
+renderMessageGerman MsgAuthorsubmissionfileDeleteSubmissionfile = "Datei löschen"
+renderMessageGerman MsgAuthorsubmissionfileDownloadSubmissionfile = "Datei runterladen"
 
 renderMessageEnglish :: AppMessage -> Text
 renderMessageEnglish MsgGlobalHome = "Home"
@@ -160,7 +170,12 @@ renderMessageEnglish MsgSubmissionfileRawdataId = ""
 renderMessageEnglish MsgSubmissionfileFilename = "Filename"
 renderMessageEnglish MsgSubmissionfileMimetype = "MIME Type"
 renderMessageEnglish MsgSubmissionfileSize = "Size"
-renderMessageEnglish MsgSubmissionfileFile = "File"
+renderMessageEnglish MsgAuthorsubmissionfileSubmissionId = "Submission"
+renderMessageEnglish MsgAuthorsubmissionfileRawdataId = ""
+renderMessageEnglish MsgAuthorsubmissionfileFilename = "Filename"
+renderMessageEnglish MsgAuthorsubmissionfileMimetype = "MIME Type"
+renderMessageEnglish MsgAuthorsubmissionfileSize = "Size"
+renderMessageEnglish MsgAuthorsubmissionfileFile = "File"
 renderMessageEnglish MsgUserUsers = "Users"
 renderMessageEnglish MsgUserAddUser = "Add user"
 renderMessageEnglish MsgUserEditUser = "Edit user"
@@ -174,11 +189,11 @@ renderMessageEnglish MsgAuthorsubmissionSubmissions = "Submissions"
 renderMessageEnglish MsgAuthorsubmissionAddSubmission = "Add submission"
 renderMessageEnglish MsgAuthorsubmissionEditSubmission = "Edit submission"
 renderMessageEnglish MsgAuthorsubmissionDeleteSubmission = "Delete submission"
-renderMessageEnglish MsgSubmissionfileSubmissionfiles = "Files"
-renderMessageEnglish MsgSubmissionfileAddSubmissionfile = "Add file"
-renderMessageEnglish MsgSubmissionfileEditSubmissionfile = "Edit file"
-renderMessageEnglish MsgSubmissionfileDeleteSubmissionfile = "Delete file"
-renderMessageEnglish MsgSubmissionfileDownloadSubmissionfile = "Download file"
+renderMessageEnglish MsgAuthorsubmissionfileSubmissionfiles = "Files"
+renderMessageEnglish MsgAuthorsubmissionfileAddSubmissionfile = "Add file"
+renderMessageEnglish MsgAuthorsubmissionfileEditSubmissionfile = "Edit file"
+renderMessageEnglish MsgAuthorsubmissionfileDeleteSubmissionfile = "Delete file"
+renderMessageEnglish MsgAuthorsubmissionfileDownloadSubmissionfile = "Download file"
 
 data Translation = Translation
   { msgGlobalHome :: Text
@@ -218,7 +233,12 @@ data Translation = Translation
   , msgSubmissionfileFilename :: Text
   , msgSubmissionfileMimetype :: Text
   , msgSubmissionfileSize :: Text
-  , msgSubmissionfileFile :: Text
+  , msgAuthorsubmissionfileSubmissionId :: Text
+  , msgAuthorsubmissionfileRawdataId :: Text
+  , msgAuthorsubmissionfileFilename :: Text
+  , msgAuthorsubmissionfileMimetype :: Text
+  , msgAuthorsubmissionfileSize :: Text
+  , msgAuthorsubmissionfileFile :: Text
   , msgUserUsers :: Text
   , msgUserAddUser :: Text
   , msgUserEditUser :: Text
@@ -232,11 +252,11 @@ data Translation = Translation
   , msgAuthorsubmissionAddSubmission :: Text
   , msgAuthorsubmissionEditSubmission :: Text
   , msgAuthorsubmissionDeleteSubmission :: Text
-  , msgSubmissionfileSubmissionfiles :: Text
-  , msgSubmissionfileAddSubmissionfile :: Text
-  , msgSubmissionfileEditSubmissionfile :: Text
-  , msgSubmissionfileDeleteSubmissionfile :: Text
-  , msgSubmissionfileDownloadSubmissionfile :: Text
+  , msgAuthorsubmissionfileSubmissionfiles :: Text
+  , msgAuthorsubmissionfileAddSubmissionfile :: Text
+  , msgAuthorsubmissionfileEditSubmissionfile :: Text
+  , msgAuthorsubmissionfileDeleteSubmissionfile :: Text
+  , msgAuthorsubmissionfileDownloadSubmissionfile :: Text
   } deriving Generic
 
 instance ToJSON Translation
@@ -280,7 +300,12 @@ translationDe = Translation
   , msgSubmissionfileFilename = "Dateiname"
   , msgSubmissionfileMimetype = "MIME Type"
   , msgSubmissionfileSize = "Groesse"
-  , msgSubmissionfileFile = "Datei"
+  , msgAuthorsubmissionfileSubmissionId = "Kunde"
+  , msgAuthorsubmissionfileRawdataId = ""
+  , msgAuthorsubmissionfileFilename = "Dateiname"
+  , msgAuthorsubmissionfileMimetype = "MIME Type"
+  , msgAuthorsubmissionfileSize = "Groesse"
+  , msgAuthorsubmissionfileFile = "Datei"
   , msgUserUsers = "Nutzer"
   , msgUserAddUser = "Nutzer hinzufügen"
   , msgUserEditUser = "Nutzer bearbeiten"
@@ -294,11 +319,11 @@ translationDe = Translation
   , msgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
   , msgAuthorsubmissionEditSubmission = "Beitrag bearbeiten"
   , msgAuthorsubmissionDeleteSubmission = "Beitrag löschen"
-  , msgSubmissionfileSubmissionfiles = "Dateien"
-  , msgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
-  , msgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
-  , msgSubmissionfileDeleteSubmissionfile = "Datei löschen"
-  , msgSubmissionfileDownloadSubmissionfile = "Datei runterladen"}
+  , msgAuthorsubmissionfileSubmissionfiles = "Dateien"
+  , msgAuthorsubmissionfileAddSubmissionfile = "Datei hinzufügen"
+  , msgAuthorsubmissionfileEditSubmissionfile = "Datei bearbeiten"
+  , msgAuthorsubmissionfileDeleteSubmissionfile = "Datei löschen"
+  , msgAuthorsubmissionfileDownloadSubmissionfile = "Datei runterladen"}
 
 translationEn :: Translation
 translationEn = Translation
@@ -339,7 +364,12 @@ translationEn = Translation
   , msgSubmissionfileFilename = "Filename"
   , msgSubmissionfileMimetype = "MIME Type"
   , msgSubmissionfileSize = "Size"
-  , msgSubmissionfileFile = "File"
+  , msgAuthorsubmissionfileSubmissionId = "Submission"
+  , msgAuthorsubmissionfileRawdataId = ""
+  , msgAuthorsubmissionfileFilename = "Filename"
+  , msgAuthorsubmissionfileMimetype = "MIME Type"
+  , msgAuthorsubmissionfileSize = "Size"
+  , msgAuthorsubmissionfileFile = "File"
   , msgUserUsers = "Users"
   , msgUserAddUser = "Add user"
   , msgUserEditUser = "Edit user"
@@ -353,10 +383,10 @@ translationEn = Translation
   , msgAuthorsubmissionAddSubmission = "Add submission"
   , msgAuthorsubmissionEditSubmission = "Edit submission"
   , msgAuthorsubmissionDeleteSubmission = "Delete submission"
-  , msgSubmissionfileSubmissionfiles = "Files"
-  , msgSubmissionfileAddSubmissionfile = "Add file"
-  , msgSubmissionfileEditSubmissionfile = "Edit file"
-  , msgSubmissionfileDeleteSubmissionfile = "Delete file"
-  , msgSubmissionfileDownloadSubmissionfile = "Download file"}
+  , msgAuthorsubmissionfileSubmissionfiles = "Files"
+  , msgAuthorsubmissionfileAddSubmissionfile = "Add file"
+  , msgAuthorsubmissionfileEditSubmissionfile = "Edit file"
+  , msgAuthorsubmissionfileDeleteSubmissionfile = "Delete file"
+  , msgAuthorsubmissionfileDownloadSubmissionfile = "Download file"}
 
 -- gen i18n - end
