@@ -62,6 +62,25 @@ ConfigHistory
     updatedBy Text
 
 
+Rawdata
+    bytes ByteString
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+RawdataHistory
+    Id sql=vid
+    id Int MigrationOnly
+    bytes ByteString
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
 Submission json
     headline Text
     subline Text
@@ -85,24 +104,6 @@ SubmissionHistory
     updatedAt UTCTime
     updatedBy Text
 
-Rawdata
-    bytes ByteString
-    version Int
-    createdAt UTCTime
-    createdBy Text
-    updatedAt UTCTime
-    updatedBy Text
-
-
-RawdataHistory
-    Id sql=vid
-    id Int MigrationOnly
-    bytes ByteString
-    version Int
-    createdAt UTCTime
-    createdBy Text
-    updatedAt UTCTime
-    updatedBy Text
 
 Submissionfile json
     submissionId SubmissionId

@@ -68,7 +68,7 @@ postAddSubmissionfileR submissionId = do
           , submissionfileUpdatedAt = curTime
           , submissionfileUpdatedBy = userIdent authUser
           }
-      returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ SubmissionDetailDataR submissionId}
+      returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR submissionId}
     _ -> do
       resultHtml <- formLayout [whamlet|^{formWidget}|]
       returnJson $ VFormSubmitInvalid
@@ -170,8 +170,8 @@ postEditSubmissionfileR submissionfileId = do
                          , SubmissionfileVersion ==. version
                          ] persistFieldsSubmissionfile
       if updateCount == 1
-        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ SubmissionDetailDataR $ submissionfileSubmissionId submissionfile}
-        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ AuthorR $ SubmissionDetailDataR $ submissionfileSubmissionId submissionfile }
+        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId submissionfile}
+        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId submissionfile }
     _ -> do
       resultHtml <- formLayout [whamlet|^{formWidget}|]
       returnJson $ VFormSubmitInvalid
@@ -240,7 +240,7 @@ postDeleteSubmissionfileR submissionfileId = do
     delete $ submissionfileRawdataId submissionfile
     return $ submissionfileSubmissionId submissionfile
   urlRenderer <- getUrlRender
-  returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ SubmissionDetailDataR submissionId }
+  returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR submissionId }
 
 -- gen delete form - start
 vDeleteSubmissionfileForm :: Html -> MForm Handler (FormResult (), Widget)
