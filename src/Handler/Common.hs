@@ -266,7 +266,7 @@ instance ToJSON JDataAuthorsubmission where
 data JDataPageAuthorsubmissionDetail = JDataPageAuthorsubmissionDetail
   { jDataPageAuthorsubmissionDetailAuthorsubmissionEnt :: Entity Submission
   , jDataPageAuthorsubmissionDetailAuthorsubmissionEditFormUrl :: Text
-  , jDataPageAuthorsubmissionDetailAuthorsubmissionfiles :: [JDataSubmissionfile]
+  , jDataPageAuthorsubmissionDetailAuthorsubmissionfiles :: [JDataAuthorsubmissionfile]
   , jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl :: Text
   }
 instance ToJSON JDataPageAuthorsubmissionDetail where
@@ -277,18 +277,18 @@ instance ToJSON JDataPageAuthorsubmissionDetail where
     , "authorsubmissionfileAddFormUrl" .= jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl o
     ]
 
-data JDataSubmissionfile = JDataSubmissionfile
-  { jDataSubmissionfileEnt :: Entity Submissionfile
-  , jDataSubmissionfileEditFormUrl :: Text
-  , jDataSubmissionfileDeleteFormUrl :: Text
-  , jDataSubmissionfileDownloadUrl :: Text
+data JDataAuthorsubmissionfile = JDataAuthorsubmissionfile
+  { jDataAuthorsubmissionfileEnt :: Entity Submissionfile
+  , jDataAuthorsubmissionfileEditFormUrl :: Text
+  , jDataAuthorsubmissionfileDeleteFormUrl :: Text
+  , jDataAuthorsubmissionfileDownloadUrl :: Text
   }
-instance ToJSON JDataSubmissionfile where
+instance ToJSON JDataAuthorsubmissionfile where
   toJSON o = object
-    [ "entity" .= entityIdToJSON (jDataSubmissionfileEnt o)
-    , "editFormUrl" .= jDataSubmissionfileEditFormUrl o
-    , "deleteFormUrl" .= jDataSubmissionfileDeleteFormUrl o
-    , "downloadUrl" .= jDataSubmissionfileDownloadUrl o
+    [ "entity" .= entityIdToJSON (jDataAuthorsubmissionfileEnt o)
+    , "editFormUrl" .= jDataAuthorsubmissionfileEditFormUrl o
+    , "deleteFormUrl" .= jDataAuthorsubmissionfileDeleteFormUrl o
+    , "downloadUrl" .= jDataAuthorsubmissionfileDownloadUrl o
     ]
 
 

@@ -5,7 +5,7 @@
 {-# LANGUAGE TemplateHaskell       #-}
 {-# LANGUAGE TypeFamilies          #-}
 
-module Handler.Submissionfile where
+module Handler.Authorsubmissionfile where
 
 import Handler.Common
 import Import
@@ -14,35 +14,38 @@ import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
 import Database.Persist.Sql (updateWhereCount)
 
+type Authorsubmissionfile = Submissionfile
+type AuthorsubmissionfileId = SubmissionfileId
+
 -------------------------------------------------------
 -- add
 -------------------------------------------------------
 
 -- gen data add - start
-data VAddSubmissionfile = VAddSubmissionfile
-  { vAddSubmissionfileFile :: FileInfo
+data VAddAuthorsubmissionfile = VAddAuthorsubmissionfile
+  { vAddAuthorsubmissionfileFile :: FileInfo
   }
 -- gen data add - end
 
 -- gen get add form - start
-getAddSubmissionfileFormR :: SubmissionId -> Handler Html
-getAddSubmissionfileFormR submissionId = do
-  (formWidget, _) <- generateFormPost $ vAddSubmissionfileForm Nothing
+getAddAuthorsubmissionfileFormR :: SubmissionId -> Handler Html
+getAddAuthorsubmissionfileFormR submissionId = do
+  (formWidget, _) <- generateFormPost $ vAddAuthorsubmissionfileForm Nothing
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgSubmissionfileAddSubmissionfile}
-      <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AuthorR $ AddSubmissionfileR submissionId}>
+      <h1>_{MsgAuthorsubmissionfileAddSubmissionfile}
+      <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AuthorR $ AddAuthorsubmissionfileR submissionId}>
         <div #modal-form-widget>
           ^{formWidget}
       <progress id="modal-form-progressbar" class="uk-progress" value="0" max="0">
       |]
 -- gen get add form - end
 
-postAddSubmissionfileR :: SubmissionId -> Handler Value
-postAddSubmissionfileR submissionId = do
-  ((result, formWidget), _) <- runFormPost $ vAddSubmissionfileForm Nothing
+postAddAuthorsubmissionfileR :: SubmissionId -> Handler Value
+postAddAuthorsubmissionfileR submissionId = do
+  ((result, formWidget), _) <- runFormPost $ vAddAuthorsubmissionfileForm Nothing
   case result of
-    FormSuccess (VAddSubmissionfile { vAddSubmissionfileFile = fileInfo }) -> do
+    FormSuccess (VAddAuthorsubmissionfile { vAddAuthorsubmissionfileFile = fileInfo }) -> do
       curTime <- liftIO getCurrentTime
       Entity _ authUser <- requireAuth
       urlRenderer <- getUrlRender
@@ -56,7 +59,8 @@ postAddSubmissionfileR submissionId = do
                      , rawdataUpdatedAt = curTime
                      , rawdataUpdatedBy = userIdent authUser
                      }
-        insert $ Submissionfile
+        insert $
+          Submissionfile
           { submissionfileSubmissionId = submissionId
           , submissionfileRawdataId = rawdataId
           , submissionfileFilename = fileName fileInfo
@@ -74,13 +78,14 @@ postAddSubmissionfileR submissionId = do
       returnJson $ VFormSubmitInvalid
         { fsInvalidModalWidgetHtml = toStrict $ Blaze.renderHtml resultHtml }
 
-getDownloadSubmissionfileR :: SubmissionfileId -> Handler TypedContent
-getDownloadSubmissionfileR submissionfileId = do
-  Submissionfile { submissionfileFilename = filename
-               , submissionfileMimetype = mimetype
-               , submissionfileSize = size
-               , submissionfileRawdataId = rawdataId
-               } <- runDB $ get404 submissionfileId
+getDownloadAuthorsubmissionfileR :: AuthorsubmissionfileId -> Handler TypedContent
+getDownloadAuthorsubmissionfileR authorsubmissionfileId = do
+  Submissionfile
+    { submissionfileFilename = filename
+    , submissionfileMimetype = mimetype
+    , submissionfileSize = size
+    , submissionfileRawdataId = rawdataId
+    } <- runDB $ get404 authorsubmissionfileId
   rawdata <- runDB $ get404 rawdataId
   let bytes = rawdataBytes rawdata
   addHeader "Content-Disposition" $
@@ -88,12 +93,12 @@ getDownloadSubmissionfileR submissionfileId = do
   addHeader "Content-Length" (pack $ show size)
   sendResponse (TE.encodeUtf8 mimetype, toContent bytes)
 
-vAddSubmissionfileForm :: Maybe VAddSubmissionfile -> Html -> MForm Handler (FormResult VAddSubmissionfile, Widget)
-vAddSubmissionfileForm maybeVAddSubmissionfile extra = do
+vAddAuthorsubmissionfileForm :: Maybe VAddAuthorsubmissionfile -> Html -> MForm Handler (FormResult VAddAuthorsubmissionfile, Widget)
+vAddAuthorsubmissionfileForm maybeVAddAuthorsubmissionfile extra = do
   (fileResult, fileView) <- mreq fileField
     fileFs
-    (vAddSubmissionfileFile <$> maybeVAddSubmissionfile)
-  let vAddSubmissionfileResult = VAddSubmissionfile <$> fileResult
+    (vAddAuthorsubmissionfileFile <$> maybeVAddAuthorsubmissionfile)
+  let vAddAuthorsubmissionfileResult = VAddAuthorsubmissionfile <$> fileResult
   let formWidget = toWidget [whamlet|
     #{extra}
     <div .uk-margin-small :not $ null $ fvErrors fileView:.uk-form-danger>
@@ -103,7 +108,7 @@ vAddSubmissionfileForm maybeVAddSubmissionfile extra = do
         $maybe err <- fvErrors fileView
           &nbsp;#{err}
     |]
-  return (vAddSubmissionfileResult, formWidget)
+  return (vAddAuthorsubmissionfileResult, formWidget)
   where
     fileFs :: FieldSettings App
     fileFs = FieldSettings
@@ -119,33 +124,33 @@ vAddSubmissionfileForm maybeVAddSubmissionfile extra = do
 -------------------------------------------------------
 
 -- gen data edit - start
-data VEditSubmissionfile = VEditSubmissionfile
-  { vEditSubmissionfileFile :: FileInfo
-  , vEditSubmissionfileVersion :: Int
+data VEditAuthorsubmissionfile = VEditAuthorsubmissionfile
+  { vEditAuthorsubmissionfileFile :: FileInfo
+  , vEditAuthorsubmissionfileVersion :: Int
   }
 -- gen data edit - end
 
-getEditSubmissionfileFormR :: SubmissionfileId -> Handler Html
-getEditSubmissionfileFormR submissionfileId = do
-  submissionfile <- runDB $ get404 submissionfileId
-  (formWidget, _) <- generateFormPost $ vEditSubmissionfileForm submissionfile Nothing
+getEditAuthorsubmissionfileFormR :: AuthorsubmissionfileId -> Handler Html
+getEditAuthorsubmissionfileFormR authorsubmissionfileId = do
+  authorsubmissionfile <- runDB $ get404 authorsubmissionfileId
+  (formWidget, _) <- generateFormPost $ vEditAuthorsubmissionfileForm authorsubmissionfile Nothing
   formLayout $ do
     toWidget [whamlet|
       <h1>Edit Submission File
-      <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AuthorR $ EditSubmissionfileR submissionfileId}>
+      <form #modal-form .uk-form-horizontal method=post onsubmit="return false;" action=@{AuthorR $ EditAuthorsubmissionfileR authorsubmissionfileId}>
         <div #modal-form-widget>
           ^{formWidget}
       <progress id="modal-form-progressbar" class="uk-progress" value="0" max="0">
 |]
 
-postEditSubmissionfileR :: SubmissionfileId -> Handler Value
-postEditSubmissionfileR submissionfileId = do
-  submissionfile <- runDB $ get404 submissionfileId
-  ((result, formWidget), _) <- runFormPost $ vEditSubmissionfileForm submissionfile Nothing
+postEditAuthorsubmissionfileR :: AuthorsubmissionfileId -> Handler Value
+postEditAuthorsubmissionfileR authorsubmissionfileId = do
+  authorsubmissionfile <- runDB $ get404 authorsubmissionfileId
+  ((result, formWidget), _) <- runFormPost $ vEditAuthorsubmissionfileForm authorsubmissionfile Nothing
   case result of
-    FormSuccess (VEditSubmissionfile
-                 { vEditSubmissionfileFile = fileInfo
-                 , vEditSubmissionfileVersion = version }) -> do
+    FormSuccess (VEditAuthorsubmissionfile
+                 { vEditAuthorsubmissionfileFile = fileInfo
+                 , vEditAuthorsubmissionfileVersion = version }) -> do
       curTime <- liftIO getCurrentTime
       Entity _ authUser <- requireAuth
       urlRenderer <- getUrlRender
@@ -156,7 +161,7 @@ postEditSubmissionfileR submissionfileId = do
             , RawdataUpdatedAt =. curTime
             , RawdataUpdatedBy =. userIdent authUser
             ]
-      let persistFieldsSubmissionfile =
+      let persistFieldsAuthorsubmissionfile =
             [ SubmissionfileFilename =. fileName fileInfo
             , SubmissionfileMimetype =. fileContentType fileInfo
             , SubmissionfileSize =. length bytes
@@ -165,27 +170,27 @@ postEditSubmissionfileR submissionfileId = do
             , SubmissionfileUpdatedBy =. userIdent authUser
             ]
       updateCount <- runDB $ do
-        update (submissionfileRawdataId submissionfile) persistFieldsRawdata
-        updateWhereCount [ SubmissionfileId ==. submissionfileId
+        update (submissionfileRawdataId authorsubmissionfile) persistFieldsRawdata
+        updateWhereCount [ SubmissionfileId ==. authorsubmissionfileId
                          , SubmissionfileVersion ==. version
-                         ] persistFieldsSubmissionfile
+                         ] persistFieldsAuthorsubmissionfile
       if updateCount == 1
-        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId submissionfile}
-        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId submissionfile }
+        then returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId authorsubmissionfile}
+        else returnJson $ VFormSubmitStale { fsStaleDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR $ submissionfileSubmissionId authorsubmissionfile }
     _ -> do
       resultHtml <- formLayout [whamlet|^{formWidget}|]
       returnJson $ VFormSubmitInvalid
         { fsInvalidModalWidgetHtml = toStrict $ Blaze.renderHtml resultHtml }
 
-vEditSubmissionfileForm :: Submissionfile -> Maybe VEditSubmissionfile -> Html -> MForm Handler (FormResult VEditSubmissionfile, Widget)
-vEditSubmissionfileForm submissionfile maybeVEditSubmissionfile extra = do
+vEditAuthorsubmissionfileForm :: Authorsubmissionfile -> Maybe VEditAuthorsubmissionfile -> Html -> MForm Handler (FormResult VEditAuthorsubmissionfile, Widget)
+vEditAuthorsubmissionfileForm authorsubmissionfile maybeVEditAuthorsubmissionfile extra = do
   (fileResult, fileView) <- mreq fileField
     fileFs
-    (vEditSubmissionfileFile <$> maybeVEditSubmissionfile)
+    (vEditAuthorsubmissionfileFile <$> maybeVEditAuthorsubmissionfile)
   (versionResult, versionView) <- mreq hiddenField
     versionFs
-    (Just $ submissionfileVersion submissionfile)
-  let vEditSubmissionfileResult = VEditSubmissionfile <$> fileResult <*> versionResult
+    (Just $ submissionfileVersion authorsubmissionfile)
+  let vEditAuthorsubmissionfileResult = VEditAuthorsubmissionfile <$> fileResult <*> versionResult
   let formWidget = toWidget [whamlet|
     #{extra}
     ^{fvInput versionView}
@@ -196,7 +201,7 @@ vEditSubmissionfileForm submissionfile maybeVEditSubmissionfile extra = do
         $maybe err <- fvErrors fileView
           &nbsp;#{err}
     |]
-  return (vEditSubmissionfileResult, formWidget)
+  return (vEditAuthorsubmissionfileResult, formWidget)
   where
     fileFs :: FieldSettings App
     fileFs = FieldSettings
@@ -220,31 +225,31 @@ vEditSubmissionfileForm submissionfile maybeVEditSubmissionfile extra = do
 -------------------------------------------------------
 
 -- gen get delete form - start
-getDeleteSubmissionfileFormR :: SubmissionfileId -> Handler Html
-getDeleteSubmissionfileFormR submissionfileId = do
-  (formWidget, _) <- generateFormPost $ vDeleteSubmissionfileForm
+getDeleteAuthorsubmissionfileFormR :: AuthorsubmissionfileId -> Handler Html
+getDeleteAuthorsubmissionfileFormR authorsubmissionfileId = do
+  (formWidget, _) <- generateFormPost $ vDeleteAuthorsubmissionfileForm
   formLayout $ do
     toWidget [whamlet|
-      <h1>_{MsgSubmissionfileDeleteSubmissionfile}
-      <form #modal-form .uk-form-horizontal method=post action=@{AuthorR $ DeleteSubmissionfileR submissionfileId}>
+      <h1>_{MsgAuthorsubmissionfileDeleteSubmissionfile}
+      <form #modal-form .uk-form-horizontal method=post action=@{AuthorR $ DeleteAuthorsubmissionfileR authorsubmissionfileId}>
         <div #modal-form-widget>
           ^{formWidget}
       |]
 -- gen get delete form - end
 
-postDeleteSubmissionfileR :: SubmissionfileId -> Handler Value
-postDeleteSubmissionfileR submissionfileId = do
+postDeleteAuthorsubmissionfileR :: AuthorsubmissionfileId -> Handler Value
+postDeleteAuthorsubmissionfileR authorsubmissionfileId = do
   submissionId <- runDB $ do
-    submissionfile <- get404 submissionfileId
-    delete submissionfileId
-    delete $ submissionfileRawdataId submissionfile
-    return $ submissionfileSubmissionId submissionfile
+    authorsubmissionfile <- get404 authorsubmissionfileId
+    delete authorsubmissionfileId
+    delete $ submissionfileRawdataId authorsubmissionfile
+    return $ submissionfileSubmissionId authorsubmissionfile
   urlRenderer <- getUrlRender
   returnJson $ VFormSubmitSuccess { fsSuccessDataJsonUrl = urlRenderer $ AuthorR $ AuthorsubmissionDetailDataR submissionId }
 
 -- gen delete form - start
-vDeleteSubmissionfileForm :: Html -> MForm Handler (FormResult (), Widget)
-vDeleteSubmissionfileForm extra = do
+vDeleteAuthorsubmissionfileForm :: Html -> MForm Handler (FormResult (), Widget)
+vDeleteAuthorsubmissionfileForm extra = do
   let formResult = mempty
   let formWidget = [whamlet|#{extra} _{MsgGlobalReallyDelete}|]
   return (formResult, formWidget)

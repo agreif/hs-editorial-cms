@@ -118,4 +118,5 @@ $function$;
 
 create trigger audit_submissionfile after insert or update on public.submissionfile for each row execute procedure public.process_audit_submissionfile();
 
+
 -- gen triggers - end

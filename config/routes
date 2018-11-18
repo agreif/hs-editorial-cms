@@ -41,13 +41,13 @@
   deleteAuthorsubmissionForm/#SubmissionId DeleteAuthorsubmissionFormR GET
   deleteAuthorsubmission/#SubmissionId DeleteAuthorsubmissionR POST
 
-  addSubmissionfileForm/#SubmissionId AddSubmissionfileFormR GET
-  addSubmissionfile/#SubmissionId AddSubmissionfileR POST
-  editSubmissionfileForm/#SubmissionfileId EditSubmissionfileFormR GET
-  editSubmissionfile/#SubmissionfileId EditSubmissionfileR POST
-  deleteSubmissionfileForm/#SubmissionfileId DeleteSubmissionfileFormR GET
-  deleteSubmissionfile/#SubmissionfileId DeleteSubmissionfileR POST
-  downloadSubmissionfile/#SubmissionfileId DownloadSubmissionfileR GET
+  addAuthorsubmissionfileForm/#SubmissionId AddAuthorsubmissionfileFormR GET
+  addAuthorsubmissionfile/#SubmissionId AddAuthorsubmissionfileR POST
+  editAuthorsubmissionfileForm/#SubmissionfileId EditAuthorsubmissionfileFormR GET
+  editAuthorsubmissionfile/#SubmissionfileId EditAuthorsubmissionfileR POST
+  deleteAuthorsubmissionfileForm/#SubmissionfileId DeleteAuthorsubmissionfileFormR GET
+  deleteAuthorsubmissionfile/#SubmissionfileId DeleteAuthorsubmissionfileR POST
+  downloadAuthorsubmissionfile/#SubmissionfileId DownloadAuthorsubmissionfileR GET
 
 /ecms EcmsR:
   home EcmsHomeR GET
