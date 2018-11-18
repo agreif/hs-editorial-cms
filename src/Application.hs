@@ -47,7 +47,7 @@ import Handler.Config
 import Handler.InitDb
 import Handler.MyProfile
 import Handler.TestMail
-import Handler.Submission
+import Handler.Authorsubmission
 import Handler.Submissionfile
 
 -- This line actually creates our YesodDispatch instance. It is the second half

@@ -3,8 +3,8 @@
     <nav-tag>
     <home-page-tag>
     <admin-page-tag>
-    <submission-list-page-tag>
-    <submission-detail-page-tag>
+    <authorsubmission-list-page-tag>
+    <authorsubmission-detail-page-tag>
   <script>
     \ tag = this
     \ tag.data = null
@@ -361,85 +361,84 @@
 
 
 
-<submission-list-page-tag>
-  <div if="{parent.data.pages.submissionList}">
+<authorsubmission-list-page-tag>
+  <div if="{parent.data.pages.authorsubmissionList}">
     <h1>
-      {parent.data.translation.msgSubmissionSubmissions}
-    <pagination-tag items="{parent.data.pages.submissionList.paginationItems}">
+      {parent.data.translation.msgAuthorsubmissionSubmissions}
+    <pagination-tag items="{parent.data.pages.authorsubmissionList.paginationItems}">
     <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
       <thead>
         <tr>
           <th>
-            {parent.data.translation.msgSubmissionHeadline}
+            {parent.data.translation.msgAuthorsubmissionHeadline}
           <th>
-            {parent.data.translation.msgSubmissionSubline}
+            {parent.data.translation.msgAuthorsubmissionSubline}
           <th .uk-align-right>
-            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionAddSubmission}" uk-tooltip onclick="{addSubmission}">
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgAuthorsubmissionAddSubmission}" uk-tooltip onclick="{addAuthorsubmission}">
               <span uk-icon="icon: plus">
       <tbody>
-        <tr each="{parent.data.pages.submissionList.submissions}">
+        <tr each="{parent.data.pages.authorsubmissionList.authorsubmissions}">
           <td .uk-table-link>
-            <a href="{detailUrl}" onclick="{detailSubmission}" .uk-link-reset>
+            <a href="{detailUrl}" onclick="{detailAuthorsubmission}" .uk-link-reset>
               {entity.headline}
           <td .uk-table-link>
-            <a href="{detailUrl}" onclick="{detailSubmission}" .uk-link-reset>
+            <a href="{detailUrl}" onclick="{detailAuthorsubmission}" .uk-link-reset>
               {entity.subline}
           <td .uk-width-small>
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionDeleteSubmission}" uk-tooltip onclick="{deleteSubmission}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgAuthorsubmissionDeleteSubmission}" uk-tooltip onclick="{deleteAuthorsubmission}">
               <span uk-icon="icon: trash">
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgSubmissionEditSubmission}" uk-tooltip onclick="{detailSubmission}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgAuthorsubmissionEditSubmission}" uk-tooltip onclick="{detailAuthorsubmission}">
               <span uk-icon="icon: file-edit">
     <button .uk-button .scrollToTop uk-totop onclick="{parent.scrollToTop}">
   <script>
-    \ addSubmission(event) {
+    \ addAuthorsubmission(event) {
     \   event.preventDefault()
-    \   parent.tag.showModalForm("@{AuthorR AddSubmissionFormR}")
+    \   parent.tag.showModalForm("@{AuthorR AddAuthorsubmissionFormR}")
     \   event.currentTarget.blur()
     \ }
-    \ detailSubmission(event) {
+    \ detailAuthorsubmission(event) {
     \   event.preventDefault()
     \   parent.tag.refreshData(event.item.detailDataUrl, true, true)
     \   event.currentTarget.blur()
     \ }
-    \ deleteSubmission(event) {
+    \ deleteAuthorsubmission(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.deleteFormUrl)
     \   event.currentTarget.blur()
     \ }
 
-<submission-detail-page-tag>
-  <div if="{parent.data.pages.submissionDetail}">
+<authorsubmission-detail-page-tag>
+  <div if="{parent.data.pages.authorsubmissionDetail}">
     <h1>
-      {parent.data.translation.msgSubmissionSubmission}:
-      {parent.data.pages.submissionDetail.submissionEnt.headline}
+      {parent.data.translation.msgAuthorsubmissionSubmission}:
+      {parent.data.pages.authorsubmissionDetail.authorsubmissionEnt.headline}
     <!-- master data -->
     <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
       <thead>
         <tr>
           <th>
-            {parent.data.translation.msgSubmissionHeadline}
+            {parent.data.translation.msgAuthorsubmissionHeadline}
           <th>
-            {parent.data.translation.msgSubmissionSubline}
+            {parent.data.translation.msgAuthorsubmissionSubline}
           <th>
-            {parent.data.translation.msgSubmissionText}
+            {parent.data.translation.msgAuthorsubmissionText}
           <th .uk-align-right>
       <tbody>
         <tr>
           <td .uk-table-link>
-            <a onclick="{editSubmission}" .uk-link-reset>
-              {parent.data.pages.submissionDetail.submissionEnt.headline}
+            <a onclick="{editAuthorsubmission}" .uk-link-reset>
+              {parent.data.pages.authorsubmissionDetail.authorsubmissionEnt.headline}
           <td .uk-table-link>
-            <a onclick="{editSubmission}" .uk-link-reset>
-              {parent.data.pages.submissionDetail.submissionEnt.subline}
+            <a onclick="{editAuthorsubmission}" .uk-link-reset>
+              {parent.data.pages.authorsubmissionDetail.authorsubmissionEnt.subline}
           <td .uk-table-link>
-            <a onclick="{editSubmission}" .uk-link-reset>
-              {parent.data.pages.submissionDetail.submissionEnt.text.substring(1,100)}
-              <span if="{parent.data.pages.submissionDetail.submissionEnt.text.length > 100}">
+            <a onclick="{editAuthorsubmission}" .uk-link-reset>
+              {parent.data.pages.authorsubmissionDetail.authorsubmissionEnt.text.substring(1,100)}
+              <span if="{parent.data.pages.authorsubmissionDetail.authorsubmissionEnt.text.length > 100}">
                 ...
           <td .uk-width-small>
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionEditSubmission}" uk-tooltip onclick="{editSubmission}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgAuthorsubmissionEditSubmission}" uk-tooltip onclick="{editAuthorsubmission}">
               <span uk-icon="icon: pencil">
-
     <h2>
       {parent.data.translation.msgSubmissionfileSubmissionfiles}
     <!-- file list -->
@@ -454,7 +453,7 @@
             <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgSubmissionfileAddSubmissionfile}" uk-tooltip onclick="{addSubmissionfile}">
               <span uk-icon="icon: plus">
       <tbody>
-        <tr each="{parent.data.pages.submissionDetail.submissionfiles}">
+        <tr each="{parent.data.pages.authorsubmissionDetail.authorsubmissionfiles}">
           <td .uk-table-link>
             <a href="{downloadUrl}" .uk-link-reset>
               {entity.filename}
@@ -471,14 +470,14 @@
 
 
   <script>
-    \ editSubmission(event) {
+    \ editAuthorsubmission(event) {
     \   event.preventDefault()
-    \   parent.tag.showModalForm(parent.tag.data.pages.submissionDetail.submissionEditFormUrl)
+    \   parent.tag.showModalForm(parent.tag.data.pages.authorsubmissionDetail.authorsubmissionEditFormUrl)
     \   event.currentTarget.blur()
     \ }
     \ addSubmissionfile(event) {
     \   event.preventDefault()
-    \   parent.tag.showModalForm(parent.tag.data.pages.submissionDetail.submissionfileAddFormUrl)
+    \   parent.tag.showModalForm(parent.tag.data.pages.authorsubmissionDetail.authorsubmissionfileAddFormUrl)
     \   event.currentTarget.blur()
     \ }
     \ editSubmissionfile(event) {

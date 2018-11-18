@@ -611,180 +611,6 @@ context =
 
 
 
-
-
-
-
-
-
-      , BCrudModel
-        { bCrudModelName = "submission"
-        , bCrudModelLabel = "Submission"
-        , bCrudModelIsJson = True
-        , bCrudModelDbUniquenesses = []
-        , bCrudModelDbHasHistoryTable = True
-        , bCrudModelHsDerivings = []
-        , bCrudModelAddFormArgs = Nothing
-        , bCrudModelEditFormArgs = Nothing
-        , bCrudModelAddFormEntityLoader = Nothing
-        , bCrudModelEditFormEntityLoader = Nothing
-        , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Just "AuthorR SubmissionListDataR"
-        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
-        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ SubmissionListDataR"
-        , bCrudModelAddFormHasDefaultModel = False
-        , bCrudModelEditPostLoadsModel = False
-        , bCrudModelDeletePostLoadsModel = False
-        , bCrudModelAddPostExtraStoreFunc = Nothing
-        , bCrudModelEditPostExtraStoreFunc = Nothing
-        , bCrudModelAddFormTitleMsg = Just "MsgSubmissionAddSubmission"
-        , bCrudModelEditFormTitleMsg = Just "MsgSubmissionEditSubmission"
-        , bCrudModelDeleteFormTitleMsg = Just "MsgSubmissionDeleteSubmission"
-        , bCrudModelParentHsType = Nothing
-        , bCrudModelFormRouteHsType = "AuthorR"
-        , bCrudModelFields =
-            [ BCrudField
-              { bCrudFieldName = "headline"
-              , bCrudFieldLabelDe = Just "Headline"
-              , bCrudFieldLabelEn = Just "Headline"
-              , bCrudFieldHsType = "Text"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = True
-                  }
-              , bCrudFieldFormFieldType = Just "textField"
-              , bCrudFieldAddView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-input uk-form-small uk-form-width-large"
-                        }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              , bCrudFieldEditView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-input uk-form-small uk-form-width-large"
-                        }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              }
-            , BCrudField
-              { bCrudFieldName = "subline"
-              , bCrudFieldLabelDe = Just "Subline"
-              , bCrudFieldLabelEn = Just "Subline"
-              , bCrudFieldHsType = "Text"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = True
-                  }
-              , bCrudFieldFormFieldType = Just "textField"
-              , bCrudFieldAddView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-input uk-form-small uk-form-width-large"
-                        }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              , bCrudFieldEditView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-input uk-form-small uk-form-width-large"
-                        }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              }
-            , BCrudField
-              { bCrudFieldName = "text"
-              , bCrudFieldLabelDe = Just "Text"
-              , bCrudFieldLabelEn = Just "Text"
-              , bCrudFieldHsType = "Textarea"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = True
-                  }
-              , bCrudFieldFormFieldType = Just "textareaField"
-              , bCrudFieldAddView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-textarea uk-form-small uk-width-5-6"
-                        }
-                      , BFieldAttr
-                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              , bCrudFieldEditView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-textarea uk-form-small uk-width-5-6"
-                        }
-                      , BFieldAttr
-                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              }
-
-            ]
-        , bCrudModelTranslations = Just
-          [ BTranslation { bTranslationKey = "submission", bTranslationDe = "Beitrag", bTranslationEn = "Submission" }
-          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beiträge", bTranslationEn = "Submissions" }
-          , BTranslation { bTranslationKey = "addSubmission", bTranslationDe = "Beitrag hinzufügen", bTranslationEn = "Add submission" }
-          , BTranslation { bTranslationKey = "editSubmission", bTranslationDe = "Beitrag bearbeiten", bTranslationEn = "Edit submission" }
-          , BTranslation { bTranslationKey = "deleteSubmission", bTranslationDe = "Beitrag löschen", bTranslationEn = "Delete submission" }
-          ]
-        }
-
-
       , BCrudModel
         { bCrudModelName = "Rawdata"
         , bCrudModelLabel = "Rawdata"
@@ -833,6 +659,239 @@ context =
 
 
 
+      , BCrudModel
+        { bCrudModelName = "submission"
+        , bCrudModelLabel = "Submission"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Nothing
+        , bCrudModelEditFormDataJsonUrl = Nothing
+        , bCrudModelDeleteFormDataJsonUrl = Nothing
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Nothing
+        , bCrudModelEditFormTitleMsg = Nothing
+        , bCrudModelDeleteFormTitleMsg = Nothing
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = ""
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "headline"
+              , bCrudFieldLabelDe = Just "Headline"
+              , bCrudFieldLabelEn = Just "Headline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "subline"
+              , bCrudFieldLabelDe = Just "Subline"
+              , bCrudFieldLabelEn = Just "Subline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "text"
+              , bCrudFieldLabelDe = Just "Text"
+              , bCrudFieldLabelEn = Just "Text"
+              , bCrudFieldHsType = "Textarea"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            ]
+        , bCrudModelTranslations = Nothing
+        }
+
+
+
+
+
+
+
+      , BCrudModel
+        { bCrudModelName = "authorsubmission"
+        , bCrudModelLabel = "Author Submission"
+        , bCrudModelIsJson = False
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "AuthorR AuthorsubmissionListDataR"
+        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ AuthorsubmissionDetailDataR authorsubmissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ AuthorsubmissionListDataR"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgAuthorsubmissionAddSubmission"
+        , bCrudModelEditFormTitleMsg = Just "MsgAuthorsubmissionEditSubmission"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgAuthorsubmissionDeleteSubmission"
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "AuthorR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "headline"
+              , bCrudFieldLabelDe = Just "Headline"
+              , bCrudFieldLabelEn = Just "Headline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "subline"
+              , bCrudFieldLabelDe = Just "Subline"
+              , bCrudFieldLabelEn = Just "Subline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "text"
+              , bCrudFieldLabelDe = Just "Text"
+              , bCrudFieldLabelEn = Just "Text"
+              , bCrudFieldHsType = "Textarea"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textareaField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "submission", bTranslationDe = "Beitrag", bTranslationEn = "Submission" }
+          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beiträge", bTranslationEn = "Submissions" }
+          , BTranslation { bTranslationKey = "addSubmission", bTranslationDe = "Beitrag hinzufügen", bTranslationEn = "Add submission" }
+          , BTranslation { bTranslationKey = "editSubmission", bTranslationDe = "Beitrag bearbeiten", bTranslationEn = "Edit submission" }
+          , BTranslation { bTranslationKey = "deleteSubmission", bTranslationDe = "Beitrag löschen", bTranslationEn = "Delete submission" }
+          ]
+        }
+
 
       , BCrudModel
         { bCrudModelName = "submissionfile"
@@ -846,9 +905,9 @@ context =
         , bCrudModelAddFormEntityLoader = Nothing
         , bCrudModelEditFormEntityLoader = Nothing
         , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
-        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
-        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ SubmissionDetailDataR submissionId"
+        , bCrudModelAddFormDataJsonUrl = Just "AuthorR $ AuthorsubmissionDetailDataR submissionId"
+        , bCrudModelEditFormDataJsonUrl = Just "AuthorR $ AuthorsubmissionDetailDataR submissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "AuthorR $ AuthorsubmissionDetailDataR submissionId"
         , bCrudModelAddFormHasDefaultModel = False
         , bCrudModelEditPostLoadsModel = False
         , bCrudModelDeletePostLoadsModel = False

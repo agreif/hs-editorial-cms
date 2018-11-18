@@ -32,10 +32,13 @@ data AppMessage =
   | MsgConfigDoubleValue
   | MsgConfigBoolValue
   | MsgTestmailEmail
+  | MsgRawdataBytes
   | MsgSubmissionHeadline
   | MsgSubmissionSubline
   | MsgSubmissionText
-  | MsgRawdataBytes
+  | MsgAuthorsubmissionHeadline
+  | MsgAuthorsubmissionSubline
+  | MsgAuthorsubmissionText
   | MsgSubmissionfileSubmissionId
   | MsgSubmissionfileRawdataId
   | MsgSubmissionfileFilename
@@ -50,11 +53,11 @@ data AppMessage =
   | MsgConfigEditConfig
   | MsgTestmailTestMail
   | MsgTestmailSendTestMail
-  | MsgSubmissionSubmission
-  | MsgSubmissionSubmissions
-  | MsgSubmissionAddSubmission
-  | MsgSubmissionEditSubmission
-  | MsgSubmissionDeleteSubmission
+  | MsgAuthorsubmissionSubmission
+  | MsgAuthorsubmissionSubmissions
+  | MsgAuthorsubmissionAddSubmission
+  | MsgAuthorsubmissionEditSubmission
+  | MsgAuthorsubmissionDeleteSubmission
   | MsgSubmissionfileSubmissionfiles
   | MsgSubmissionfileAddSubmissionfile
   | MsgSubmissionfileEditSubmissionfile
@@ -87,10 +90,13 @@ renderMessageGerman MsgConfigIntValue = "Integer-Wert"
 renderMessageGerman MsgConfigDoubleValue = "Double-Wert"
 renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
 renderMessageGerman MsgTestmailEmail = "Email"
+renderMessageGerman MsgRawdataBytes = "Bytes"
 renderMessageGerman MsgSubmissionHeadline = "Headline"
 renderMessageGerman MsgSubmissionSubline = "Subline"
 renderMessageGerman MsgSubmissionText = "Text"
-renderMessageGerman MsgRawdataBytes = "Bytes"
+renderMessageGerman MsgAuthorsubmissionHeadline = "Headline"
+renderMessageGerman MsgAuthorsubmissionSubline = "Subline"
+renderMessageGerman MsgAuthorsubmissionText = "Text"
 renderMessageGerman MsgSubmissionfileSubmissionId = "Kunde"
 renderMessageGerman MsgSubmissionfileRawdataId = ""
 renderMessageGerman MsgSubmissionfileFilename = "Dateiname"
@@ -105,11 +111,11 @@ renderMessageGerman MsgConfigConfigurations = "Konfigurationen"
 renderMessageGerman MsgConfigEditConfig = "Konfiguration bearbeiten"
 renderMessageGerman MsgTestmailTestMail = "Test-Mail"
 renderMessageGerman MsgTestmailSendTestMail = "Test-Mail senden..."
-renderMessageGerman MsgSubmissionSubmission = "Beitrag"
-renderMessageGerman MsgSubmissionSubmissions = "Beiträge"
-renderMessageGerman MsgSubmissionAddSubmission = "Beitrag hinzufügen"
-renderMessageGerman MsgSubmissionEditSubmission = "Beitrag bearbeiten"
-renderMessageGerman MsgSubmissionDeleteSubmission = "Beitrag löschen"
+renderMessageGerman MsgAuthorsubmissionSubmission = "Beitrag"
+renderMessageGerman MsgAuthorsubmissionSubmissions = "Beiträge"
+renderMessageGerman MsgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
+renderMessageGerman MsgAuthorsubmissionEditSubmission = "Beitrag bearbeiten"
+renderMessageGerman MsgAuthorsubmissionDeleteSubmission = "Beitrag löschen"
 renderMessageGerman MsgSubmissionfileSubmissionfiles = "Dateien"
 renderMessageGerman MsgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
 renderMessageGerman MsgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
@@ -142,10 +148,13 @@ renderMessageEnglish MsgConfigIntValue = "Integer-Value"
 renderMessageEnglish MsgConfigDoubleValue = "Double-Value"
 renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
 renderMessageEnglish MsgTestmailEmail = "Email"
+renderMessageEnglish MsgRawdataBytes = "Bytes"
 renderMessageEnglish MsgSubmissionHeadline = "Headline"
 renderMessageEnglish MsgSubmissionSubline = "Subline"
 renderMessageEnglish MsgSubmissionText = "Text"
-renderMessageEnglish MsgRawdataBytes = "Bytes"
+renderMessageEnglish MsgAuthorsubmissionHeadline = "Headline"
+renderMessageEnglish MsgAuthorsubmissionSubline = "Subline"
+renderMessageEnglish MsgAuthorsubmissionText = "Text"
 renderMessageEnglish MsgSubmissionfileSubmissionId = "Submission"
 renderMessageEnglish MsgSubmissionfileRawdataId = ""
 renderMessageEnglish MsgSubmissionfileFilename = "Filename"
@@ -160,11 +169,11 @@ renderMessageEnglish MsgConfigConfigurations = "Configurations"
 renderMessageEnglish MsgConfigEditConfig = "Edit config"
 renderMessageEnglish MsgTestmailTestMail = "Test-Mail"
 renderMessageEnglish MsgTestmailSendTestMail = "Send Test-Mail..."
-renderMessageEnglish MsgSubmissionSubmission = "Submission"
-renderMessageEnglish MsgSubmissionSubmissions = "Submissions"
-renderMessageEnglish MsgSubmissionAddSubmission = "Add submission"
-renderMessageEnglish MsgSubmissionEditSubmission = "Edit submission"
-renderMessageEnglish MsgSubmissionDeleteSubmission = "Delete submission"
+renderMessageEnglish MsgAuthorsubmissionSubmission = "Submission"
+renderMessageEnglish MsgAuthorsubmissionSubmissions = "Submissions"
+renderMessageEnglish MsgAuthorsubmissionAddSubmission = "Add submission"
+renderMessageEnglish MsgAuthorsubmissionEditSubmission = "Edit submission"
+renderMessageEnglish MsgAuthorsubmissionDeleteSubmission = "Delete submission"
 renderMessageEnglish MsgSubmissionfileSubmissionfiles = "Files"
 renderMessageEnglish MsgSubmissionfileAddSubmissionfile = "Add file"
 renderMessageEnglish MsgSubmissionfileEditSubmissionfile = "Edit file"
@@ -197,10 +206,13 @@ data Translation = Translation
   , msgConfigDoubleValue :: Text
   , msgConfigBoolValue :: Text
   , msgTestmailEmail :: Text
+  , msgRawdataBytes :: Text
   , msgSubmissionHeadline :: Text
   , msgSubmissionSubline :: Text
   , msgSubmissionText :: Text
-  , msgRawdataBytes :: Text
+  , msgAuthorsubmissionHeadline :: Text
+  , msgAuthorsubmissionSubline :: Text
+  , msgAuthorsubmissionText :: Text
   , msgSubmissionfileSubmissionId :: Text
   , msgSubmissionfileRawdataId :: Text
   , msgSubmissionfileFilename :: Text
@@ -215,11 +227,11 @@ data Translation = Translation
   , msgConfigEditConfig :: Text
   , msgTestmailTestMail :: Text
   , msgTestmailSendTestMail :: Text
-  , msgSubmissionSubmission :: Text
-  , msgSubmissionSubmissions :: Text
-  , msgSubmissionAddSubmission :: Text
-  , msgSubmissionEditSubmission :: Text
-  , msgSubmissionDeleteSubmission :: Text
+  , msgAuthorsubmissionSubmission :: Text
+  , msgAuthorsubmissionSubmissions :: Text
+  , msgAuthorsubmissionAddSubmission :: Text
+  , msgAuthorsubmissionEditSubmission :: Text
+  , msgAuthorsubmissionDeleteSubmission :: Text
   , msgSubmissionfileSubmissionfiles :: Text
   , msgSubmissionfileAddSubmissionfile :: Text
   , msgSubmissionfileEditSubmissionfile :: Text
@@ -256,10 +268,13 @@ translationDe = Translation
   , msgConfigDoubleValue = "Double-Wert"
   , msgConfigBoolValue = "Boolean-Wert"
   , msgTestmailEmail = "Email"
+  , msgRawdataBytes = "Bytes"
   , msgSubmissionHeadline = "Headline"
   , msgSubmissionSubline = "Subline"
   , msgSubmissionText = "Text"
-  , msgRawdataBytes = "Bytes"
+  , msgAuthorsubmissionHeadline = "Headline"
+  , msgAuthorsubmissionSubline = "Subline"
+  , msgAuthorsubmissionText = "Text"
   , msgSubmissionfileSubmissionId = "Kunde"
   , msgSubmissionfileRawdataId = ""
   , msgSubmissionfileFilename = "Dateiname"
@@ -274,11 +289,11 @@ translationDe = Translation
   , msgConfigEditConfig = "Konfiguration bearbeiten"
   , msgTestmailTestMail = "Test-Mail"
   , msgTestmailSendTestMail = "Test-Mail senden..."
-  , msgSubmissionSubmission = "Beitrag"
-  , msgSubmissionSubmissions = "Beiträge"
-  , msgSubmissionAddSubmission = "Beitrag hinzufügen"
-  , msgSubmissionEditSubmission = "Beitrag bearbeiten"
-  , msgSubmissionDeleteSubmission = "Beitrag löschen"
+  , msgAuthorsubmissionSubmission = "Beitrag"
+  , msgAuthorsubmissionSubmissions = "Beiträge"
+  , msgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
+  , msgAuthorsubmissionEditSubmission = "Beitrag bearbeiten"
+  , msgAuthorsubmissionDeleteSubmission = "Beitrag löschen"
   , msgSubmissionfileSubmissionfiles = "Dateien"
   , msgSubmissionfileAddSubmissionfile = "Datei hinzufügen"
   , msgSubmissionfileEditSubmissionfile = "Datei bearbeiten"
@@ -312,10 +327,13 @@ translationEn = Translation
   , msgConfigDoubleValue = "Double-Value"
   , msgConfigBoolValue = "Boolean-Value"
   , msgTestmailEmail = "Email"
+  , msgRawdataBytes = "Bytes"
   , msgSubmissionHeadline = "Headline"
   , msgSubmissionSubline = "Subline"
   , msgSubmissionText = "Text"
-  , msgRawdataBytes = "Bytes"
+  , msgAuthorsubmissionHeadline = "Headline"
+  , msgAuthorsubmissionSubline = "Subline"
+  , msgAuthorsubmissionText = "Text"
   , msgSubmissionfileSubmissionId = "Submission"
   , msgSubmissionfileRawdataId = ""
   , msgSubmissionfileFilename = "Filename"
@@ -330,11 +348,11 @@ translationEn = Translation
   , msgConfigEditConfig = "Edit config"
   , msgTestmailTestMail = "Test-Mail"
   , msgTestmailSendTestMail = "Send Test-Mail..."
-  , msgSubmissionSubmission = "Submission"
-  , msgSubmissionSubmissions = "Submissions"
-  , msgSubmissionAddSubmission = "Add submission"
-  , msgSubmissionEditSubmission = "Edit submission"
-  , msgSubmissionDeleteSubmission = "Delete submission"
+  , msgAuthorsubmissionSubmission = "Submission"
+  , msgAuthorsubmissionSubmissions = "Submissions"
+  , msgAuthorsubmissionAddSubmission = "Add submission"
+  , msgAuthorsubmissionEditSubmission = "Edit submission"
+  , msgAuthorsubmissionDeleteSubmission = "Delete submission"
   , msgSubmissionfileSubmissionfiles = "Files"
   , msgSubmissionfileAddSubmissionfile = "Add file"
   , msgSubmissionfileEditSubmissionfile = "Edit file"

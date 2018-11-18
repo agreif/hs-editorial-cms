@@ -176,23 +176,23 @@ instance ToJSON User where
 data JDataPages = JDataPages
   { jDataPageHome :: Maybe JDataPageHome
   , jDataPageAdmin :: Maybe JDataPageAdmin
-  , jDataPageSubmissionList :: Maybe JDataPageSubmissionList
-  , jDataPageSubmissionDetail :: Maybe JDataPageSubmissionDetail
+  , jDataPageAuthorsubmissionList :: Maybe JDataPageAuthorsubmissionList
+  , jDataPageAuthorsubmissionDetail :: Maybe JDataPageAuthorsubmissionDetail
   }
 instance ToJSON JDataPages where
   toJSON o = object
     [ "home" .= jDataPageHome o
     , "admin" .= jDataPageAdmin o
-    , "submissionList" .= jDataPageSubmissionList o
-    , "submissionDetail" .= jDataPageSubmissionDetail o
+    , "authorsubmissionList" .= jDataPageAuthorsubmissionList o
+    , "authorsubmissionDetail" .= jDataPageAuthorsubmissionDetail o
     ]
 
 defaultDataPages :: JDataPages
 defaultDataPages = JDataPages
   { jDataPageHome = Nothing
   , jDataPageAdmin = Nothing
-  , jDataPageSubmissionList = Nothing
-  , jDataPageSubmissionDetail = Nothing
+  , jDataPageAuthorsubmissionList = Nothing
+  , jDataPageAuthorsubmissionDetail = Nothing
   }
 
 
@@ -240,41 +240,41 @@ instance ToJSON JDataConfig where
     ]
 
 
-data JDataPageSubmissionList = JDataPageSubmissionList
-  { jDataPageSubmissionListSubmissions :: [JDataSubmission]
-  , jDataPageSubmissionListAddFormUrl :: Text
-  , jDataPageSubmissionListPaginationItems :: Maybe [JDataPaginationItem]
+data JDataPageAuthorsubmissionList = JDataPageAuthorsubmissionList
+  { jDataPageAuthorsubmissionListAuthorsubmissions :: [JDataAuthorsubmission]
+  , jDataPageAuthorsubmissionListAddFormUrl :: Text
+  , jDataPageAuthorsubmissionListPaginationItems :: Maybe [JDataPaginationItem]
   }
-instance ToJSON JDataPageSubmissionList where
+instance ToJSON JDataPageAuthorsubmissionList where
   toJSON o = object
-    [ "submissions" .= jDataPageSubmissionListSubmissions o
+    [ "authorsubmissions" .= jDataPageAuthorsubmissionListAuthorsubmissions o
     ]
-data JDataSubmission = JDataSubmission
-  { jDataSubmissionEnt :: Entity Submission
-  , jDataSubmissionDetailUrl :: Text
-  , jDataSubmissionDetailDataUrl :: Text
-  , jDataSubmissionDeleteFormUrl :: Text
+data JDataAuthorsubmission = JDataAuthorsubmission
+  { jDataAuthorsubmissionEnt :: Entity Submission
+  , jDataAuthorsubmissionDetailUrl :: Text
+  , jDataAuthorsubmissionDetailDataUrl :: Text
+  , jDataAuthorsubmissionDeleteFormUrl :: Text
   }
-instance ToJSON JDataSubmission where
+instance ToJSON JDataAuthorsubmission where
   toJSON o = object
-    [ "entity" .= entityIdToJSON (jDataSubmissionEnt o)
-    , "detailUrl" .= jDataSubmissionDetailUrl o
-    , "detailDataUrl" .= jDataSubmissionDetailDataUrl o
-    , "deleteFormUrl" .= jDataSubmissionDeleteFormUrl o
+    [ "entity" .= entityIdToJSON (jDataAuthorsubmissionEnt o)
+    , "detailUrl" .= jDataAuthorsubmissionDetailUrl o
+    , "detailDataUrl" .= jDataAuthorsubmissionDetailDataUrl o
+    , "deleteFormUrl" .= jDataAuthorsubmissionDeleteFormUrl o
     ]
 
-data JDataPageSubmissionDetail = JDataPageSubmissionDetail
-  { jDataPageSubmissionDetailSubmissionEnt :: Entity Submission
-  , jDataPageSubmissionDetailSubmissionEditFormUrl :: Text
-  , jDataPageSubmissionDetailSubmissionfiles :: [JDataSubmissionfile]
-  , jDataPageSubmissionDetailSubmissionfileAddFormUrl :: Text
+data JDataPageAuthorsubmissionDetail = JDataPageAuthorsubmissionDetail
+  { jDataPageAuthorsubmissionDetailAuthorsubmissionEnt :: Entity Submission
+  , jDataPageAuthorsubmissionDetailAuthorsubmissionEditFormUrl :: Text
+  , jDataPageAuthorsubmissionDetailAuthorsubmissionfiles :: [JDataSubmissionfile]
+  , jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl :: Text
   }
-instance ToJSON JDataPageSubmissionDetail where
+instance ToJSON JDataPageAuthorsubmissionDetail where
   toJSON o = object
-    [ "submissionEnt" .= jDataPageSubmissionDetailSubmissionEnt o
-    , "submissionEditFormUrl" .= jDataPageSubmissionDetailSubmissionEditFormUrl o
-    , "submissionfiles" .= jDataPageSubmissionDetailSubmissionfiles o
-    , "submissionfileAddFormUrl" .= jDataPageSubmissionDetailSubmissionfileAddFormUrl o
+    [ "authorsubmissionEnt" .= jDataPageAuthorsubmissionDetailAuthorsubmissionEnt o
+    , "authorsubmissionEditFormUrl" .= jDataPageAuthorsubmissionDetailAuthorsubmissionEditFormUrl o
+    , "authorsubmissionfiles" .= jDataPageAuthorsubmissionDetailAuthorsubmissionfiles o
+    , "authorsubmissionfileAddFormUrl" .= jDataPageAuthorsubmissionDetailAuthorsubmissionfileAddFormUrl o
     ]
 
 data JDataSubmissionfile = JDataSubmissionfile
@@ -321,7 +321,7 @@ mainNavData user mainNav = do
   msgEditor <- localizedMsg MsgGlobalEditor
   msgReviewer <- localizedMsg MsgGlobalReviewer
   msgAuthor <- localizedMsg MsgGlobalAuthor
-  msgSubmissions <- localizedMsg MsgSubmissionSubmissions
+  msgSubmissions <- localizedMsg MsgAuthorsubmissionSubmissions
   return $
     [ JDataNavItem
       { jDataNavItemLabel = msgHome
@@ -382,8 +382,8 @@ mainNavData user mainNav = do
                [ JDataNavItem
                  { jDataNavItemLabel = msgSubmissions
                  , jDataNavItemIsActive = False
-                 , jDataNavItemUrl = Just $ urlRenderer $ AuthorR SubmissionListR
-                 , jDataNavItemDataUrl = Just $ urlRenderer $ AuthorR SubmissionListDataR
+                 , jDataNavItemUrl = Just $ urlRenderer $ AuthorR AuthorsubmissionListR
+                 , jDataNavItemDataUrl = Just $ urlRenderer $ AuthorR AuthorsubmissionListDataR
                  , jDataNavItemBadge = Nothing
                  , jDataNavItemDropdownItems = Nothing
                  }

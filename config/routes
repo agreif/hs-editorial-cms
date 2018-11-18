@@ -29,17 +29,17 @@
 -- /ecms/reviewer ReviewerR:
 
 /ecms/author AuthorR:
-  submissionList SubmissionListR GET
-  submissionListDataR SubmissionListDataR GET
-  submissionListDataR/#Int SubmissionListPageNumDataR GET POST
-  addSubmissionForm AddSubmissionFormR GET
-  addSubmission AddSubmissionR POST
-  submissionDetail/#SubmissionId SubmissionDetailR GET
-  submissionDetailDataR/#SubmissionId SubmissionDetailDataR GET
-  editSubmissionForm/#SubmissionId EditSubmissionFormR GET
-  editSubmission/#SubmissionId EditSubmissionR POST
-  deleteSubmissionForm/#SubmissionId DeleteSubmissionFormR GET
-  deleteSubmission/#SubmissionId DeleteSubmissionR POST
+  authorsubmissionList AuthorsubmissionListR GET
+  authorsubmissionListDataR AuthorsubmissionListDataR GET
+  authorsubmissionListDataR/#Int AuthorsubmissionListPageNumDataR GET POST
+  addAuthorsubmissionForm AddAuthorsubmissionFormR GET
+  addAuthorsubmission AddAuthorsubmissionR POST
+  authorsubmissionDetail/#SubmissionId AuthorsubmissionDetailR GET
+  authorsubmissionDetailDataR/#SubmissionId AuthorsubmissionDetailDataR GET
+  editAuthorsubmissionForm/#SubmissionId EditAuthorsubmissionFormR GET
+  editAuthorsubmission/#SubmissionId EditAuthorsubmissionR POST
+  deleteAuthorsubmissionForm/#SubmissionId DeleteAuthorsubmissionFormR GET
+  deleteAuthorsubmission/#SubmissionId DeleteAuthorsubmissionR POST
 
   addSubmissionfileForm/#SubmissionId AddSubmissionfileFormR GET
   addSubmissionfile/#SubmissionId AddSubmissionfileR POST
