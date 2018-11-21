@@ -82,6 +82,7 @@ RawdataHistory
     updatedBy Text
 
 Submission json
+    issueId IssueId
     headline Text
     subline Text
     text Textarea
@@ -95,6 +96,7 @@ Submission json
 SubmissionHistory
     Id sql=vid
     id Int MigrationOnly
+    issueId Int
     headline Text
     subline Text
     text Textarea

@@ -33,6 +33,7 @@ data AppMessage =
   | MsgConfigBoolValue
   | MsgTestmailEmail
   | MsgRawdataBytes
+  | MsgSubmissionIssueId
   | MsgSubmissionHeadline
   | MsgSubmissionSubline
   | MsgSubmissionText
@@ -41,6 +42,7 @@ data AppMessage =
   | MsgSubmissionfileFilename
   | MsgSubmissionfileMimetype
   | MsgSubmissionfileSize
+  | MsgAuthorsubmissionIssueId
   | MsgAuthorsubmissionHeadline
   | MsgAuthorsubmissionSubline
   | MsgAuthorsubmissionText
@@ -121,18 +123,20 @@ renderMessageGerman MsgConfigDoubleValue = "Double-Wert"
 renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
 renderMessageGerman MsgTestmailEmail = "Email"
 renderMessageGerman MsgRawdataBytes = "Bytes"
-renderMessageGerman MsgSubmissionHeadline = "Headline"
-renderMessageGerman MsgSubmissionSubline = "Subline"
-renderMessageGerman MsgSubmissionText = "Text"
-renderMessageGerman MsgSubmissionfileSubmissionId = "Kunde"
+renderMessageGerman MsgSubmissionIssueId = ""
+renderMessageGerman MsgSubmissionHeadline = ""
+renderMessageGerman MsgSubmissionSubline = ""
+renderMessageGerman MsgSubmissionText = ""
+renderMessageGerman MsgSubmissionfileSubmissionId = ""
 renderMessageGerman MsgSubmissionfileRawdataId = ""
 renderMessageGerman MsgSubmissionfileFilename = "Dateiname"
 renderMessageGerman MsgSubmissionfileMimetype = "MIME Type"
 renderMessageGerman MsgSubmissionfileSize = "Groesse"
+renderMessageGerman MsgAuthorsubmissionIssueId = "Ausgabe"
 renderMessageGerman MsgAuthorsubmissionHeadline = "Headline"
 renderMessageGerman MsgAuthorsubmissionSubline = "Subline"
 renderMessageGerman MsgAuthorsubmissionText = "Text"
-renderMessageGerman MsgAuthorsubmissionfileSubmissionId = "Kunde"
+renderMessageGerman MsgAuthorsubmissionfileSubmissionId = ""
 renderMessageGerman MsgAuthorsubmissionfileRawdataId = ""
 renderMessageGerman MsgAuthorsubmissionfileFilename = "Dateiname"
 renderMessageGerman MsgAuthorsubmissionfileMimetype = "MIME Type"
@@ -142,7 +146,7 @@ renderMessageGerman MsgIssueName = "Name"
 renderMessageGerman MsgEditorsubmissionHeadline = "Headline"
 renderMessageGerman MsgEditorsubmissionSubline = "Subline"
 renderMessageGerman MsgEditorsubmissionText = "Text"
-renderMessageGerman MsgEditorsubmissionfileSubmissionId = "Kunde"
+renderMessageGerman MsgEditorsubmissionfileSubmissionId = ""
 renderMessageGerman MsgEditorsubmissionfileRawdataId = ""
 renderMessageGerman MsgEditorsubmissionfileFilename = "Dateiname"
 renderMessageGerman MsgEditorsubmissionfileMimetype = "MIME Type"
@@ -209,18 +213,20 @@ renderMessageEnglish MsgConfigDoubleValue = "Double-Value"
 renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
 renderMessageEnglish MsgTestmailEmail = "Email"
 renderMessageEnglish MsgRawdataBytes = "Bytes"
-renderMessageEnglish MsgSubmissionHeadline = "Headline"
-renderMessageEnglish MsgSubmissionSubline = "Subline"
-renderMessageEnglish MsgSubmissionText = "Text"
-renderMessageEnglish MsgSubmissionfileSubmissionId = "Submission"
+renderMessageEnglish MsgSubmissionIssueId = ""
+renderMessageEnglish MsgSubmissionHeadline = ""
+renderMessageEnglish MsgSubmissionSubline = ""
+renderMessageEnglish MsgSubmissionText = ""
+renderMessageEnglish MsgSubmissionfileSubmissionId = ""
 renderMessageEnglish MsgSubmissionfileRawdataId = ""
 renderMessageEnglish MsgSubmissionfileFilename = "Filename"
 renderMessageEnglish MsgSubmissionfileMimetype = "MIME Type"
 renderMessageEnglish MsgSubmissionfileSize = "Size"
+renderMessageEnglish MsgAuthorsubmissionIssueId = "Issue"
 renderMessageEnglish MsgAuthorsubmissionHeadline = "Headline"
 renderMessageEnglish MsgAuthorsubmissionSubline = "Subline"
 renderMessageEnglish MsgAuthorsubmissionText = "Text"
-renderMessageEnglish MsgAuthorsubmissionfileSubmissionId = "Submission"
+renderMessageEnglish MsgAuthorsubmissionfileSubmissionId = ""
 renderMessageEnglish MsgAuthorsubmissionfileRawdataId = ""
 renderMessageEnglish MsgAuthorsubmissionfileFilename = "Filename"
 renderMessageEnglish MsgAuthorsubmissionfileMimetype = "MIME Type"
@@ -230,7 +236,7 @@ renderMessageEnglish MsgIssueName = "Name"
 renderMessageEnglish MsgEditorsubmissionHeadline = "Headline"
 renderMessageEnglish MsgEditorsubmissionSubline = "Subline"
 renderMessageEnglish MsgEditorsubmissionText = "Text"
-renderMessageEnglish MsgEditorsubmissionfileSubmissionId = "Submission"
+renderMessageEnglish MsgEditorsubmissionfileSubmissionId = ""
 renderMessageEnglish MsgEditorsubmissionfileRawdataId = ""
 renderMessageEnglish MsgEditorsubmissionfileFilename = "Filename"
 renderMessageEnglish MsgEditorsubmissionfileMimetype = "MIME Type"
@@ -297,6 +303,7 @@ data Translation = Translation
   , msgConfigBoolValue :: Text
   , msgTestmailEmail :: Text
   , msgRawdataBytes :: Text
+  , msgSubmissionIssueId :: Text
   , msgSubmissionHeadline :: Text
   , msgSubmissionSubline :: Text
   , msgSubmissionText :: Text
@@ -305,6 +312,7 @@ data Translation = Translation
   , msgSubmissionfileFilename :: Text
   , msgSubmissionfileMimetype :: Text
   , msgSubmissionfileSize :: Text
+  , msgAuthorsubmissionIssueId :: Text
   , msgAuthorsubmissionHeadline :: Text
   , msgAuthorsubmissionSubline :: Text
   , msgAuthorsubmissionText :: Text
@@ -389,18 +397,20 @@ translationDe = Translation
   , msgConfigBoolValue = "Boolean-Wert"
   , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
-  , msgSubmissionHeadline = "Headline"
-  , msgSubmissionSubline = "Subline"
-  , msgSubmissionText = "Text"
-  , msgSubmissionfileSubmissionId = "Kunde"
+  , msgSubmissionIssueId = ""
+  , msgSubmissionHeadline = ""
+  , msgSubmissionSubline = ""
+  , msgSubmissionText = ""
+  , msgSubmissionfileSubmissionId = ""
   , msgSubmissionfileRawdataId = ""
   , msgSubmissionfileFilename = "Dateiname"
   , msgSubmissionfileMimetype = "MIME Type"
   , msgSubmissionfileSize = "Groesse"
+  , msgAuthorsubmissionIssueId = "Ausgabe"
   , msgAuthorsubmissionHeadline = "Headline"
   , msgAuthorsubmissionSubline = "Subline"
   , msgAuthorsubmissionText = "Text"
-  , msgAuthorsubmissionfileSubmissionId = "Kunde"
+  , msgAuthorsubmissionfileSubmissionId = ""
   , msgAuthorsubmissionfileRawdataId = ""
   , msgAuthorsubmissionfileFilename = "Dateiname"
   , msgAuthorsubmissionfileMimetype = "MIME Type"
@@ -410,7 +420,7 @@ translationDe = Translation
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"
-  , msgEditorsubmissionfileSubmissionId = "Kunde"
+  , msgEditorsubmissionfileSubmissionId = ""
   , msgEditorsubmissionfileRawdataId = ""
   , msgEditorsubmissionfileFilename = "Dateiname"
   , msgEditorsubmissionfileMimetype = "MIME Type"
@@ -478,18 +488,20 @@ translationEn = Translation
   , msgConfigBoolValue = "Boolean-Value"
   , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
-  , msgSubmissionHeadline = "Headline"
-  , msgSubmissionSubline = "Subline"
-  , msgSubmissionText = "Text"
-  , msgSubmissionfileSubmissionId = "Submission"
+  , msgSubmissionIssueId = ""
+  , msgSubmissionHeadline = ""
+  , msgSubmissionSubline = ""
+  , msgSubmissionText = ""
+  , msgSubmissionfileSubmissionId = ""
   , msgSubmissionfileRawdataId = ""
   , msgSubmissionfileFilename = "Filename"
   , msgSubmissionfileMimetype = "MIME Type"
   , msgSubmissionfileSize = "Size"
+  , msgAuthorsubmissionIssueId = "Issue"
   , msgAuthorsubmissionHeadline = "Headline"
   , msgAuthorsubmissionSubline = "Subline"
   , msgAuthorsubmissionText = "Text"
-  , msgAuthorsubmissionfileSubmissionId = "Submission"
+  , msgAuthorsubmissionfileSubmissionId = ""
   , msgAuthorsubmissionfileRawdataId = ""
   , msgAuthorsubmissionfileFilename = "Filename"
   , msgAuthorsubmissionfileMimetype = "MIME Type"
@@ -499,7 +511,7 @@ translationEn = Translation
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"
-  , msgEditorsubmissionfileSubmissionId = "Submission"
+  , msgEditorsubmissionfileSubmissionId = ""
   , msgEditorsubmissionfileRawdataId = ""
   , msgEditorsubmissionfileFilename = "Filename"
   , msgEditorsubmissionfileMimetype = "MIME Type"

@@ -681,9 +681,25 @@ context =
         , bCrudModelFormRouteHsType = ""
         , bCrudModelFields =
             [ BCrudField
+              { bCrudFieldName = "issueId"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
+              , bCrudFieldHsType = "IssueId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
               { bCrudFieldName = "headline"
-              , bCrudFieldLabelDe = Just "Headline"
-              , bCrudFieldLabelEn = Just "Headline"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "Text"
               , bCrudFieldDb =
                   Just $
@@ -698,8 +714,8 @@ context =
               }
             , BCrudField
               { bCrudFieldName = "subline"
-              , bCrudFieldLabelDe = Just "Subline"
-              , bCrudFieldLabelEn = Just "Subline"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "Text"
               , bCrudFieldDb =
                   Just $
@@ -714,8 +730,8 @@ context =
               }
             , BCrudField
               { bCrudFieldName = "text"
-              , bCrudFieldLabelDe = Just "Text"
-              , bCrudFieldLabelEn = Just "Text"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "Textarea"
               , bCrudFieldDb =
                   Just $
@@ -761,8 +777,8 @@ context =
         , bCrudModelFields =
             [ BCrudField
               { bCrudFieldName = "submissionId"
-              , bCrudFieldLabelDe = Just "Kunde"
-              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "SubmissionId"
               , bCrudFieldDb =
                   Just $
@@ -872,6 +888,30 @@ context =
         , bCrudModelFormRouteHsType = "AuthorR"
         , bCrudModelFields =
             [ BCrudField
+              { bCrudFieldName = "issueId"
+              , bCrudFieldLabelDe = Just "Ausgabe"
+              , bCrudFieldLabelEn = Just "Issue"
+              , bCrudFieldHsType = "IssueId"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "issueSelectField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
               { bCrudFieldName = "headline"
               , bCrudFieldLabelDe = Just "Headline"
               , bCrudFieldLabelEn = Just "Headline"
@@ -1023,8 +1063,8 @@ context =
         , bCrudModelFields =
             [ BCrudField
               { bCrudFieldName = "submissionId"
-              , bCrudFieldLabelDe = Just "Kunde"
-              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "SubmissionId"
               , bCrudFieldDb = Nothing
               , bCrudFieldFormFieldType = Nothing
@@ -1132,7 +1172,7 @@ context =
         , bCrudModelEditFormTitleMsg = Just "MsgIssueEditIssue"
         , bCrudModelDeleteFormTitleMsg = Just "MsgIssueDeleteIssue"
         , bCrudModelParentHsType = Nothing
-        , bCrudModelFormRouteHsType = "MyprojectR"
+        , bCrudModelFormRouteHsType = "EditorR"
         , bCrudModelFields =
             [ BCrudField
               { bCrudFieldName = "name"
@@ -1365,8 +1405,8 @@ context =
         , bCrudModelFields =
             [ BCrudField
               { bCrudFieldName = "submissionId"
-              , bCrudFieldLabelDe = Just "Kunde"
-              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
               , bCrudFieldHsType = "SubmissionId"
               , bCrudFieldDb = Nothing
               , bCrudFieldFormFieldType = Nothing
