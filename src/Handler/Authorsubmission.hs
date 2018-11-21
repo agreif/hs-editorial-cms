@@ -20,6 +20,9 @@ import qualified Database.Esqueleto as E
 type Authorsubmission = Submission
 type AuthorsubmissionId = SubmissionId
 
+authorsubmissionIssueId :: Submission -> IssueId
+authorsubmissionIssueId = submissionIssueId
+
 authorsubmissionHeadline :: Submission -> Text
 authorsubmissionHeadline = submissionHeadline
 
@@ -31,6 +34,10 @@ authorsubmissionText = submissionText
 
 authorsubmissionVersion :: Submission -> Int
 authorsubmissionVersion = submissionVersion
+
+issueSelectField :: Field Handler (Key Issue)
+issueSelectField = do
+  selectField $ optionsPersistKey [] [Asc IssueId] issueName
 
 -------------------------------------------------------
 -- list
@@ -234,7 +241,8 @@ authorsubmissionDetailFileJDatas authorsubmissionId = do
 
 -- gen data add - start
 data VAddAuthorsubmission = VAddAuthorsubmission
-  { vAddAuthorsubmissionHeadline :: Text
+  { vAddAuthorsubmissionIssueId :: IssueId
+  , vAddAuthorsubmissionHeadline :: Text
   , vAddAuthorsubmissionSubline :: Text
   , vAddAuthorsubmissionText :: Textarea
   }
@@ -264,7 +272,8 @@ postAddAuthorsubmissionR = do
 
       let submission =
             Submission
-            { submissionHeadline = vAddAuthorsubmissionHeadline vAddAuthorsubmission
+            { submissionIssueId = vAddAuthorsubmissionIssueId vAddAuthorsubmission
+            , submissionHeadline = vAddAuthorsubmissionHeadline vAddAuthorsubmission
             , submissionSubline = vAddAuthorsubmissionSubline vAddAuthorsubmission
             , submissionText = vAddAuthorsubmissionText vAddAuthorsubmission
             , submissionVersion = 1
@@ -285,6 +294,9 @@ postAddAuthorsubmissionR = do
 -- gen add form - start
 vAddAuthorsubmissionForm :: Maybe Authorsubmission -> Html -> MForm Handler (FormResult VAddAuthorsubmission, Widget)
 vAddAuthorsubmissionForm maybeAuthorsubmission extra = do
+  (issueIdResult, issueIdView) <- mreq issueSelectField
+    issueIdFs
+    (authorsubmissionIssueId <$> maybeAuthorsubmission)
   (headlineResult, headlineView) <- mreq textField
     headlineFs
     (authorsubmissionHeadline <$> maybeAuthorsubmission)
@@ -294,9 +306,15 @@ vAddAuthorsubmissionForm maybeAuthorsubmission extra = do
   (textResult, textView) <- mreq textareaField
     textFs
     (authorsubmissionText <$> maybeAuthorsubmission)
-  let vAddAuthorsubmissionResult = VAddAuthorsubmission <$> headlineResult <*> sublineResult <*> textResult
+  let vAddAuthorsubmissionResult = VAddAuthorsubmission <$> issueIdResult <*> headlineResult <*> sublineResult <*> textResult
   let formWidget = toWidget [whamlet|
     #{extra}
+    <div .uk-margin-small :not $ null $ fvErrors issueIdView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors issueIdView:.uk-text-danger for=#{fvId issueIdView}>#{fvLabel issueIdView}
+      <div .uk-form-controls>
+        ^{fvInput issueIdView}
+        $maybe err <- fvErrors issueIdView
+          &nbsp;#{err}
     <div .uk-margin-small :not $ null $ fvErrors headlineView:.uk-form-danger>
       <label .uk-form-label :not $ null $ fvErrors headlineView:.uk-text-danger for=#{fvId headlineView}>#{fvLabel headlineView}
       <div .uk-form-controls>
@@ -318,6 +336,14 @@ vAddAuthorsubmissionForm maybeAuthorsubmission extra = do
     |]
   return (vAddAuthorsubmissionResult, formWidget)
   where
+    issueIdFs :: FieldSettings App
+    issueIdFs = FieldSettings
+      { fsLabel = SomeMessage MsgAuthorsubmissionIssueId
+      , fsTooltip = Nothing
+      , fsId = Just "issueId"
+      , fsName = Just "issueId"
+      , fsAttrs = [  ]
+      }
     headlineFs :: FieldSettings App
     headlineFs = FieldSettings
       { fsLabel = SomeMessage MsgAuthorsubmissionHeadline
@@ -350,7 +376,8 @@ vAddAuthorsubmissionForm maybeAuthorsubmission extra = do
 
 -- gen data edit - start
 data VEditAuthorsubmission = VEditAuthorsubmission
-  { vEditAuthorsubmissionHeadline :: Text
+  { vEditAuthorsubmissionIssueId :: IssueId
+  , vEditAuthorsubmissionHeadline :: Text
   , vEditAuthorsubmissionSubline :: Text
   , vEditAuthorsubmissionText :: Textarea
   , vEditAuthorsubmissionVersion :: Int
@@ -403,6 +430,9 @@ postEditAuthorsubmissionR authorsubmissionId = do
 -- gen edit form - start
 vEditAuthorsubmissionForm :: Maybe Authorsubmission -> Html -> MForm Handler (FormResult VEditAuthorsubmission, Widget)
 vEditAuthorsubmissionForm maybeAuthorsubmission extra = do
+  (issueIdResult, issueIdView) <- mreq issueSelectField
+    issueIdFs
+    (authorsubmissionIssueId <$> maybeAuthorsubmission)
   (headlineResult, headlineView) <- mreq textField
     headlineFs
     (authorsubmissionHeadline <$> maybeAuthorsubmission)
@@ -415,10 +445,16 @@ vEditAuthorsubmissionForm maybeAuthorsubmission extra = do
   (versionResult, versionView) <- mreq hiddenField
     versionFs
     (authorsubmissionVersion <$> maybeAuthorsubmission)
-  let vEditAuthorsubmissionResult = VEditAuthorsubmission <$> headlineResult <*> sublineResult <*> textResult <*> versionResult
+  let vEditAuthorsubmissionResult = VEditAuthorsubmission <$> issueIdResult <*> headlineResult <*> sublineResult <*> textResult <*> versionResult
   let formWidget = toWidget [whamlet|
     #{extra}
     ^{fvInput versionView}
+    <div .uk-margin-small :not $ null $ fvErrors issueIdView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors issueIdView:.uk-text-danger for=#{fvId issueIdView}>#{fvLabel issueIdView}
+      <div .uk-form-controls>
+        ^{fvInput issueIdView}
+        $maybe err <- fvErrors issueIdView
+          &nbsp;#{err}
     <div .uk-margin-small :not $ null $ fvErrors headlineView:.uk-form-danger>
       <label .uk-form-label :not $ null $ fvErrors headlineView:.uk-text-danger for=#{fvId headlineView}>#{fvLabel headlineView}
       <div .uk-form-controls>
@@ -440,6 +476,14 @@ vEditAuthorsubmissionForm maybeAuthorsubmission extra = do
     |]
   return (vEditAuthorsubmissionResult, formWidget)
   where
+    issueIdFs :: FieldSettings App
+    issueIdFs = FieldSettings
+      { fsLabel = SomeMessage MsgAuthorsubmissionIssueId
+      , fsTooltip = Nothing
+      , fsId = Just "issueId"
+      , fsName = Just "issueId"
+      , fsAttrs = [  ]
+      }
     headlineFs :: FieldSettings App
     headlineFs = FieldSettings
       { fsLabel = SomeMessage MsgAuthorsubmissionHeadline
