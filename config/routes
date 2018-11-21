@@ -24,7 +24,39 @@
   sendTestMailForm AddTestmailFormR GET
   sendTestMail AddTestmailR POST
 
--- /ecms/editor EditorR:
+/ecms/editor EditorR:
+  issueList IssueListR GET
+  issueListDataR IssueListDataR GET
+  issueListDataR/#Int IssueListPageNumDataR GET POST
+  addIssueForm AddIssueFormR GET
+  addIssue AddIssueR POST
+  issueDetail/#IssueId IssueDetailR GET
+  issueDetailDataR/#IssueId IssueDetailDataR GET
+  editIssueForm/#IssueId EditIssueFormR GET
+  editIssue/#IssueId EditIssueR POST
+  deleteIssueForm/#IssueId DeleteIssueFormR GET
+  deleteIssue/#IssueId DeleteIssueR POST
+
+  -- editorsubmissionList EditorsubmissionListR GET
+  -- editorsubmissionListDataR EditorsubmissionListDataR GET
+  -- editorsubmissionListDataR/#Int EditorsubmissionListPageNumDataR GET POST
+  -- addEditorsubmissionForm AddEditorsubmissionFormR GET
+  -- addEditorsubmission AddEditorsubmissionR POST
+  -- editorsubmissionDetail/#SubmissionId EditorsubmissionDetailR GET
+  -- editorsubmissionDetailDataR/#SubmissionId EditorsubmissionDetailDataR GET
+  -- editEditorsubmissionForm/#SubmissionId EditEditorsubmissionFormR GET
+  -- editEditorsubmission/#SubmissionId EditEditorsubmissionR POST
+  -- deleteEditorsubmissionForm/#SubmissionId DeleteEditorsubmissionFormR GET
+  -- deleteEditorsubmission/#SubmissionId DeleteEditorsubmissionR POST
+
+  -- addEditorsubmissionfileForm/#SubmissionId AddEditorsubmissionfileFormR GET
+  -- addEditorsubmissionfile/#SubmissionId AddEditorsubmissionfileR POST
+  -- editEditorsubmissionfileForm/#SubmissionfileId EditEditorsubmissionfileFormR GET
+  -- editEditorsubmissionfile/#SubmissionfileId EditEditorsubmissionfileR POST
+  -- deleteEditorsubmissionfileForm/#SubmissionfileId DeleteEditorsubmissionfileFormR GET
+  -- deleteEditorsubmissionfile/#SubmissionfileId DeleteEditorsubmissionfileR POST
+  -- downloadEditorsubmissionfile/#SubmissionfileId DownloadEditorsubmissionfileR GET
+
 
 -- /ecms/reviewer ReviewerR:
 

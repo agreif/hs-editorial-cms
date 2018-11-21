@@ -734,6 +734,114 @@ context =
 
 
 
+      , BCrudModel
+        { bCrudModelName = "submissionfile"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Nothing
+        , bCrudModelEditFormDataJsonUrl = Nothing
+        , bCrudModelDeleteFormDataJsonUrl = Nothing
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Nothing
+        , bCrudModelEditFormTitleMsg = Nothing
+        , bCrudModelDeleteFormTitleMsg = Nothing
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = ""
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "submissionId"
+              , bCrudFieldLabelDe = Just "Kunde"
+              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldHsType = "SubmissionId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "rawdataId"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
+              , bCrudFieldHsType = "RawdataId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "filename"
+              , bCrudFieldLabelDe = Just "Dateiname"
+              , bCrudFieldLabelEn = Just "Filename"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "mimetype"
+              , bCrudFieldLabelDe = Just "MIME Type"
+              , bCrudFieldLabelEn = Just "MIME Type"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "size"
+              , bCrudFieldLabelDe = Just "Groesse"
+              , bCrudFieldLabelEn = Just "Size"
+              , bCrudFieldHsType = "Int"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = False
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            ]
+        , bCrudModelTranslations = Nothing
+        }
 
 
 
@@ -887,114 +995,6 @@ context =
         }
 
 
-      , BCrudModel
-        { bCrudModelName = "submissionfile"
-        , bCrudModelIsJson = True
-        , bCrudModelDbUniquenesses = []
-        , bCrudModelDbHasHistoryTable = True
-        , bCrudModelHsDerivings = []
-        , bCrudModelAddFormArgs = Nothing
-        , bCrudModelEditFormArgs = Nothing
-        , bCrudModelAddFormEntityLoader = Nothing
-        , bCrudModelEditFormEntityLoader = Nothing
-        , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Nothing
-        , bCrudModelEditFormDataJsonUrl = Nothing
-        , bCrudModelDeleteFormDataJsonUrl = Nothing
-        , bCrudModelAddFormHasDefaultModel = False
-        , bCrudModelEditPostLoadsModel = False
-        , bCrudModelDeletePostLoadsModel = False
-        , bCrudModelAddPostExtraStoreFunc = Nothing
-        , bCrudModelEditPostExtraStoreFunc = Nothing
-        , bCrudModelAddFormTitleMsg = Nothing
-        , bCrudModelEditFormTitleMsg = Nothing
-        , bCrudModelDeleteFormTitleMsg = Nothing
-        , bCrudModelParentHsType = Nothing
-        , bCrudModelFormRouteHsType = ""
-        , bCrudModelFields =
-            [ BCrudField
-              { bCrudFieldName = "submissionId"
-              , bCrudFieldLabelDe = Just "Kunde"
-              , bCrudFieldLabelEn = Just "Submission"
-              , bCrudFieldHsType = "SubmissionId"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = False
-                  }
-              , bCrudFieldFormFieldType = Nothing
-              , bCrudFieldAddView = Nothing
-              , bCrudFieldEditView = Nothing
-              }
-            , BCrudField
-              { bCrudFieldName = "rawdataId"
-              , bCrudFieldLabelDe = Nothing
-              , bCrudFieldLabelEn = Nothing
-              , bCrudFieldHsType = "RawdataId"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = False
-                  }
-              , bCrudFieldFormFieldType = Nothing
-              , bCrudFieldAddView = Nothing
-              , bCrudFieldEditView = Nothing
-              }
-            , BCrudField
-              { bCrudFieldName = "filename"
-              , bCrudFieldLabelDe = Just "Dateiname"
-              , bCrudFieldLabelEn = Just "Filename"
-              , bCrudFieldHsType = "Text"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = False
-                  }
-              , bCrudFieldFormFieldType = Nothing
-              , bCrudFieldAddView = Nothing
-              , bCrudFieldEditView = Nothing
-              }
-            , BCrudField
-              { bCrudFieldName = "mimetype"
-              , bCrudFieldLabelDe = Just "MIME Type"
-              , bCrudFieldLabelEn = Just "MIME Type"
-              , bCrudFieldHsType = "Text"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = False
-                  }
-              , bCrudFieldFormFieldType = Nothing
-              , bCrudFieldAddView = Nothing
-              , bCrudFieldEditView = Nothing
-              }
-            , BCrudField
-              { bCrudFieldName = "size"
-              , bCrudFieldLabelDe = Just "Groesse"
-              , bCrudFieldLabelEn = Just "Size"
-              , bCrudFieldHsType = "Int"
-              , bCrudFieldDb =
-                  Just $
-                  BCrudFieldDb
-                  { bCrudFieldDbIsNullable = False
-                  , bCrudFieldDbDefault = Nothing
-                  , bCrudFieldDbCanUpdate = False
-                  }
-              , bCrudFieldFormFieldType = Nothing
-              , bCrudFieldAddView = Nothing
-              , bCrudFieldEditView = Nothing
-              }
-            ]
-        , bCrudModelTranslations = Nothing
-        }
 
       , BCrudModel
         { bCrudModelName = "authorsubmissionfile"
@@ -1109,6 +1109,347 @@ context =
 
 
 
+      , BCrudModel
+        { bCrudModelName = "issue"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "EditorR IssueListDataR"
+        , bCrudModelEditFormDataJsonUrl = Just "EditorR $ IssueDetailDataR issueId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "EditorR $ IssueListDataR"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgIssueAddIssue"
+        , bCrudModelEditFormTitleMsg = Just "MsgIssueEditIssue"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgIssueDeleteIssue"
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "MyprojectR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "name"
+              , bCrudFieldLabelDe = Just "Name"
+              , bCrudFieldLabelEn = Just "Name"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-form-width-large uk-input uk-form-small"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "issue", bTranslationDe = "Ausgabe", bTranslationEn = "Issue" }
+          , BTranslation { bTranslationKey = "issues", bTranslationDe = "Ausgaben", bTranslationEn = "Issues" }
+          , BTranslation { bTranslationKey = "addIssue", bTranslationDe = "Ausgabe hinzufügen", bTranslationEn = "Add issue" }
+          , BTranslation { bTranslationKey = "editIssue", bTranslationDe = "Ausgabe bearbeiten", bTranslationEn = "Edit issue" }
+          , BTranslation { bTranslationKey = "deleteIssue", bTranslationDe = "Ausgabe löschen", bTranslationEn = "Delete issue" }
+          ]
+        }
+
+
+      , BCrudModel
+        { bCrudModelName = "editorsubmission"
+        , bCrudModelIsJson = False
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = False
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "EditorR EditorsubmissionListDataR"
+        , bCrudModelEditFormDataJsonUrl = Just "EditorR $ EditorsubmissionDetailDataR editorsubmissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "EditorR $ EditorsubmissionListDataR"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgEditorsubmissionAddSubmission"
+        , bCrudModelEditFormTitleMsg = Just "MsgEditorsubmissionEditSubmission"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgEditorsubmissionDeleteSubmission"
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "EditorR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "headline"
+              , bCrudFieldLabelDe = Just "Headline"
+              , bCrudFieldLabelEn = Just "Headline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "subline"
+              , bCrudFieldLabelDe = Just "Subline"
+              , bCrudFieldLabelEn = Just "Subline"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "text"
+              , bCrudFieldLabelDe = Just "Text"
+              , bCrudFieldLabelEn = Just "Text"
+              , bCrudFieldHsType = "Textarea"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "textareaField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-textarea uk-form-small uk-width-5-6"
+                        }
+                      , BFieldAttr
+                        { bFieldAttrKey = "rows", bFieldAttrValue = "10" }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "submission", bTranslationDe = "Beitrag", bTranslationEn = "Submission" }
+          , BTranslation { bTranslationKey = "submissions", bTranslationDe = "Beiträge", bTranslationEn = "Submissions" }
+          , BTranslation { bTranslationKey = "addSubmission", bTranslationDe = "Beitrag hinzufügen", bTranslationEn = "Add submission" }
+          , BTranslation { bTranslationKey = "editSubmission", bTranslationDe = "Beitrag bearbeiten", bTranslationEn = "Edit submission" }
+          , BTranslation { bTranslationKey = "deleteSubmission", bTranslationDe = "Beitrag löschen", bTranslationEn = "Delete submission" }
+          ]
+        }
+
+
+
+      , BCrudModel
+        { bCrudModelName = "editorsubmissionfile"
+        , bCrudModelIsJson = False
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = False
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "EditorR $ EditorsubmissionDetailDataR submissionId"
+        , bCrudModelEditFormDataJsonUrl = Just "EditorR $ EditorsubmissionDetailDataR submissionId"
+        , bCrudModelDeleteFormDataJsonUrl = Just "EditorR $ EditorsubmissionDetailDataR submissionId"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgEditorsubmissionfileAddSubmissionfile"
+        , bCrudModelEditFormTitleMsg = Just "MsgEditorsubmissionfileEditSubmissionfile"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgEditorsubmissionfileDeleteSubmissionfile"
+        , bCrudModelParentHsType = Just "Submission"
+        , bCrudModelFormRouteHsType = "EditorR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "submissionId"
+              , bCrudFieldLabelDe = Just "Kunde"
+              , bCrudFieldLabelEn = Just "Submission"
+              , bCrudFieldHsType = "SubmissionId"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "rawdataId"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
+              , bCrudFieldHsType = "RawdataId"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "filename"
+              , bCrudFieldLabelDe = Just "Dateiname"
+              , bCrudFieldLabelEn = Just "Filename"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "mimetype"
+              , bCrudFieldLabelDe = Just "MIME Type"
+              , bCrudFieldLabelEn = Just "MIME Type"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "size"
+              , bCrudFieldLabelDe = Just "Groesse"
+              , bCrudFieldLabelEn = Just "Size"
+              , bCrudFieldHsType = "Int"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
+              { bCrudFieldName = "file"
+              , bCrudFieldLabelDe = Just "Datei"
+              , bCrudFieldLabelEn = Just "File"
+              , bCrudFieldHsType = "FileInfo"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "fileField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "submissionfiles", bTranslationDe = "Dateien", bTranslationEn = "Files" }
+          , BTranslation { bTranslationKey = "addSubmissionfile", bTranslationDe = "Datei hinzufügen", bTranslationEn = "Add file" }
+          , BTranslation { bTranslationKey = "editSubmissionfile", bTranslationDe = "Datei bearbeiten", bTranslationEn = "Edit file" }
+          , BTranslation { bTranslationKey = "deleteSubmissionfile", bTranslationDe = "Datei löschen", bTranslationEn = "Delete file" }
+          , BTranslation { bTranslationKey = "downloadSubmissionfile", bTranslationDe = "Datei runterladen", bTranslationEn = "Download file" }
+          ]
+        }
+
+
+
+
       ]
 
 
@@ -1136,7 +1477,7 @@ context =
     , BTranslation { bTranslationKey = "cancel", bTranslationDe = "Abbrechen", bTranslationEn = "Cancel" }
 
     , BTranslation { bTranslationKey = "editor", bTranslationDe = "Redakteur", bTranslationEn = "Editor" }
-    , BTranslation { bTranslationKey = "reviewer", bTranslationDe = "Gutachter", bTranslationEn = "Reviewer" }
+    , BTranslation { bTranslationKey = "reviewer", bTranslationDe = "Reviewer", bTranslationEn = "Reviewer" }
     , BTranslation { bTranslationKey = "author", bTranslationDe = "Autor", bTranslationEn = "Author" }
     ]
   }

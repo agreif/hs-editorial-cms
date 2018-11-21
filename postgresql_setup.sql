@@ -96,7 +96,6 @@ create trigger audit_submission after insert or update on public.submission for 
 
 
 
-
 drop function public.process_audit_submissionfile() cascade;
 create or replace function public.process_audit_submissionfile()
  returns trigger
@@ -117,6 +116,32 @@ as $function$
 $function$;
 
 create trigger audit_submissionfile after insert or update on public.submissionfile for each row execute procedure public.process_audit_submissionfile();
+
+
+
+
+
+drop function public.process_audit_issue() cascade;
+create or replace function public.process_audit_issue()
+ returns trigger
+ language plpgsql
+as $function$
+   begin
+       if to_regclass('issue_history') is not null then
+           if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
+                insert into issue_history
+                       (id, name, version, created_at, created_by, updated_at, updated_by)
+                       values
+                       (new.id, new.name, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                return new;
+            end if;
+       end if;
+       return null; -- result is ignored since this is an after trigger
+    end;
+$function$;
+
+create trigger audit_issue after insert or update on public.issue for each row execute procedure public.process_audit_issue();
+
 
 
 -- gen triggers - end

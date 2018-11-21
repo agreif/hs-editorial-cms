@@ -104,7 +104,6 @@ SubmissionHistory
     updatedAt UTCTime
     updatedBy Text
 
-
 Submissionfile json
     submissionId SubmissionId
     rawdataId RawdataId
@@ -131,6 +130,28 @@ SubmissionfileHistory
     createdBy Text
     updatedAt UTCTime
     updatedBy Text
+
+
+
+Issue json
+    name Text
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+IssueHistory
+    Id sql=vid
+    id Int MigrationOnly
+    name Text
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
 
 
 -- gen models - end
