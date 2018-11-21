@@ -16,7 +16,6 @@ context =
   { bContextCrudModels =
       [ BCrudModel
         { bCrudModelName = "user"
-        , bCrudModelLabel = "User"
         , bCrudModelIsJson = False
         , bCrudModelDbUniquenesses = ["UniqueUser ident"]
         , bCrudModelDbHasHistoryTable = True
@@ -332,7 +331,6 @@ context =
         }
       , BCrudModel
         { bCrudModelName = "config"
-        , bCrudModelLabel = "Config"
         , bCrudModelIsJson = True
         , bCrudModelDbUniquenesses = ["UniqueCode code"]
         , bCrudModelDbHasHistoryTable = True
@@ -554,7 +552,6 @@ context =
         }
       , BCrudModel
         { bCrudModelName = "testmail"
-        , bCrudModelLabel = "Test Mail"
         , bCrudModelIsJson = False
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = False
@@ -613,7 +610,6 @@ context =
 
       , BCrudModel
         { bCrudModelName = "Rawdata"
-        , bCrudModelLabel = "Rawdata"
         , bCrudModelIsJson = False
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = True
@@ -661,7 +657,6 @@ context =
 
       , BCrudModel
         { bCrudModelName = "submission"
-        , bCrudModelLabel = "Submission"
         , bCrudModelIsJson = True
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = True
@@ -745,7 +740,6 @@ context =
 
       , BCrudModel
         { bCrudModelName = "authorsubmission"
-        , bCrudModelLabel = "Author Submission"
         , bCrudModelIsJson = False
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = False
@@ -895,7 +889,6 @@ context =
 
       , BCrudModel
         { bCrudModelName = "submissionfile"
-        , bCrudModelLabel = "Submission File"
         , bCrudModelIsJson = True
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = True
@@ -1005,7 +998,6 @@ context =
 
       , BCrudModel
         { bCrudModelName = "authorsubmissionfile"
-        , bCrudModelLabel = "Author Submission File"
         , bCrudModelIsJson = False
         , bCrudModelDbUniquenesses = []
         , bCrudModelDbHasHistoryTable = False
