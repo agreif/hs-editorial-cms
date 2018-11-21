@@ -178,6 +178,8 @@ data JDataPages = JDataPages
   , jDataPageAdmin :: Maybe JDataPageAdmin
   , jDataPageAuthorsubmissionList :: Maybe JDataPageAuthorsubmissionList
   , jDataPageAuthorsubmissionDetail :: Maybe JDataPageAuthorsubmissionDetail
+  , jDataPageIssueList :: Maybe JDataPageIssueList
+  , jDataPageIssueDetail :: Maybe JDataPageIssueDetail
   }
 instance ToJSON JDataPages where
   toJSON o = object
@@ -185,6 +187,8 @@ instance ToJSON JDataPages where
     , "admin" .= jDataPageAdmin o
     , "authorsubmissionList" .= jDataPageAuthorsubmissionList o
     , "authorsubmissionDetail" .= jDataPageAuthorsubmissionDetail o
+    , "issueList" .= jDataPageIssueList o
+    , "issueDetail" .= jDataPageIssueDetail o
     ]
 
 defaultDataPages :: JDataPages
@@ -193,6 +197,8 @@ defaultDataPages = JDataPages
   , jDataPageAdmin = Nothing
   , jDataPageAuthorsubmissionList = Nothing
   , jDataPageAuthorsubmissionDetail = Nothing
+  , jDataPageIssueList = Nothing
+  , jDataPageIssueDetail = Nothing
   }
 
 
@@ -292,6 +298,43 @@ instance ToJSON JDataAuthorsubmissionfile where
     ]
 
 
+data JDataPageIssueList = JDataPageIssueList
+  { jDataPageIssueListIssues :: [JDataIssue]
+  , jDataPageIssueListAddFormUrl :: Text
+  , jDataPageIssueListPaginationItems :: Maybe [JDataPaginationItem]
+  }
+instance ToJSON JDataPageIssueList where
+  toJSON o = object
+    [ "issues" .= jDataPageIssueListIssues o
+    ]
+
+data JDataIssue = JDataIssue
+  { jDataIssueEnt :: Entity Issue
+  , jDataIssueDetailUrl :: Text
+  , jDataIssueDetailDataUrl :: Text
+  , jDataIssueDeleteFormUrl :: Text
+  }
+instance ToJSON JDataIssue where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataIssueEnt o)
+    , "detailUrl" .= jDataIssueDetailUrl o
+    , "detailDataUrl" .= jDataIssueDetailDataUrl o
+    , "deleteFormUrl" .= jDataIssueDeleteFormUrl o
+    ]
+
+data JDataPageIssueDetail = JDataPageIssueDetail
+  { jDataPageIssueDetailIssueEnt :: Entity Issue
+--  , jDataPageIssueDetailDemocs :: [JDataDemoc]
+  , jDataPageIssueDetailIssueEditFormUrl :: Text
+--  , jDataPageIssueDetailDemocAddFormUrl :: Text
+  }
+instance ToJSON JDataPageIssueDetail where
+  toJSON o = object
+    [ "issueEnt" .= jDataPageIssueDetailIssueEnt o
+--    , "democs" .= jDataPageIssueDetailDemocs o
+    , "issueEditFormUrl" .= jDataPageIssueDetailIssueEditFormUrl o
+--    , "democAddFormUrl" .= jDataPageIssueDetailDemocAddFormUrl o
+    ]
 
 
 
@@ -322,6 +365,7 @@ mainNavData user mainNav = do
   msgReviewer <- localizedMsg MsgGlobalReviewer
   msgAuthor <- localizedMsg MsgGlobalAuthor
   msgSubmissions <- localizedMsg MsgAuthorsubmissionSubmissions
+  msgIssues <- localizedMsg MsgIssueIssues
   return $
     [ JDataNavItem
       { jDataNavItemLabel = msgHome
@@ -352,7 +396,16 @@ mainNavData user mainNav = do
              , jDataNavItemUrl = Nothing
              , jDataNavItemDataUrl = Nothing
              , jDataNavItemBadge = Nothing
-             , jDataNavItemDropdownItems = Nothing
+             , jDataNavItemDropdownItems = Just $
+               [ JDataNavItem
+                 { jDataNavItemLabel = msgIssues
+                 , jDataNavItemIsActive = False
+                 , jDataNavItemUrl = Just $ urlRenderer $ EditorR IssueListR
+                 , jDataNavItemDataUrl = Just $ urlRenderer $ EditorR IssueListDataR
+                 , jDataNavItemBadge = Nothing
+                 , jDataNavItemDropdownItems = Nothing
+                 }
+               ]
              }
            ]
       else []

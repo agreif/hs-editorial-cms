@@ -5,6 +5,8 @@
     <admin-page-tag>
     <authorsubmission-list-page-tag>
     <authorsubmission-detail-page-tag>
+    <issue-list-page-tag>
+    <issue-detail-page-tag>
   <script>
     \ tag = this
     \ tag.data = null
@@ -357,10 +359,6 @@
     \   parent.tag.showModalForm("@{AdminR AddTestmailFormR}")
     \ }
 
-
-
-
-
 <authorsubmission-list-page-tag>
   <div if="{parent.data.pages.authorsubmissionList}">
     <h1>
@@ -467,8 +465,6 @@
               <span uk-icon="icon: pencil">
             <a .uk-float-right title="{parent.parent.data.translation.msgAuthorsubmissionfileDownloadSubmissionfile}" uk-tooltip href="{downloadUrl}">
               <span uk-icon="icon: download">
-
-
   <script>
     \ editAuthorsubmission(event) {
     \   event.preventDefault()
@@ -486,6 +482,109 @@
     \   event.currentTarget.blur()
     \ }
     \ deleteAuthorsubmissionfile(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.deleteFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+
+<issue-list-page-tag>
+  <div if="{parent.data.pages.issueList}">
+    <h1>
+      {parent.data.translation.msgIssueIssues}
+    <pagination-tag items="{parent.data.pages.issueList.paginationItems}">
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgIssueName}
+          <th .uk-align-right>
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgIssueAddIssue}" uk-tooltip onclick="{addIssue}">
+              <span uk-icon="icon: plus">
+      <tbody>
+        <tr each="{parent.data.pages.issueList.issues}">
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailIssue}" .uk-link-reset>
+              {entity.name}
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgIssueDeleteIssue}" uk-tooltip onclick="{deleteIssue}">
+              <span uk-icon="icon: trash">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgIssueEditIssue}" uk-tooltip onclick="{detailIssue}">
+              <span uk-icon="icon: file-edit">
+    <button .uk-button .scrollToTop uk-totop onclick="{parent.scrollToTop}">
+  <script>
+    \ addIssue(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm("@{EditorR AddIssueFormR}")
+    \   event.currentTarget.blur()
+    \ }
+    \ detailIssue(event) {
+    \   event.preventDefault()
+    \   parent.tag.refreshData(event.item.detailDataUrl, true, true)
+    \   event.currentTarget.blur()
+    \ }
+    \ deleteIssue(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.deleteFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+
+<issue-detail-page-tag>
+  <div if="{parent.data.pages.issueDetail}">
+    <h1>
+      {parent.data.translation.msgIssueIssue}:
+      {parent.data.pages.issueDetail.issueEnt.myattr}
+    <!-- master data -->
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgIssueName}
+          <th .uk-align-right>
+      <tbody>
+        <tr>
+          <td .uk-table-link>
+            <a onclick="{editIssue}" .uk-link-reset>
+              {parent.data.pages.issueDetail.issueEnt.name}
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgIssueEditIssue}" uk-tooltip onclick="{editIssue}">
+              <span uk-icon="icon: pencil">
+    <h2>
+      {parent.data.translation.msgDemocDemocs}
+    <!-- democ list -->
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgDemocMyattr}
+          <th .uk-align-right>
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgDemocAddDemoc}" uk-tooltip onclick="{addDemoc}">
+              <span uk-icon="icon: plus">
+      <tbody>
+        <tr each="{parent.data.pages.issueDetail.democs}">
+          <td .uk-table-link>
+            <a onclick="{editDemoc}" .uk-link-reset>{entity.myattr}
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgDemocDeleteDemoc}" uk-tooltip onclick="{deleteDemoc}">
+              <span uk-icon="icon: trash">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgDemocEditDemoc}" uk-tooltip onclick="{editDemoc}">
+              <span uk-icon="icon: pencil">
+  <script>
+    \ editIssue(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(parent.tag.data.pages.issueDetail.issueEditFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ addDemoc(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(parent.tag.data.pages.issueDetail.democAddFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ editDemoc(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.editFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ deleteDemoc(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.deleteFormUrl)
     \   event.currentTarget.blur()
