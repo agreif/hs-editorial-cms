@@ -17,8 +17,6 @@ import qualified Data.Text.Encoding as TE
 import qualified Data.CaseInsensitive as CI
 import qualified Database.Esqueleto as E
 
-import Handler.Editorsubmission
-
 -------------------------------------------------------
 -- list
 -------------------------------------------------------
