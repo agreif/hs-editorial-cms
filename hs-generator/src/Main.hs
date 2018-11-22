@@ -1239,21 +1239,38 @@ context =
         , bCrudModelAddFormEntityLoader = Nothing
         , bCrudModelEditFormEntityLoader = Nothing
         , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Just "EditorR EditorsubmissionListDataR"
+        , bCrudModelAddFormDataJsonUrl = Just "EditorR $ IssueDetailDataR issueId"
         , bCrudModelEditFormDataJsonUrl = Just "EditorR $ EditorsubmissionDetailDataR editorsubmissionId"
-        , bCrudModelDeleteFormDataJsonUrl = Just "EditorR $ EditorsubmissionListDataR"
+        , bCrudModelDeleteFormDataJsonUrl = Just "EditorR $ IssueDetailDataR $ submissionIssueId editorsubmission"
         , bCrudModelAddFormHasDefaultModel = False
         , bCrudModelEditPostLoadsModel = False
-        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = True
         , bCrudModelAddPostExtraStoreFunc = Nothing
         , bCrudModelEditPostExtraStoreFunc = Nothing
         , bCrudModelAddFormTitleMsg = Just "MsgEditorsubmissionAddSubmission"
         , bCrudModelEditFormTitleMsg = Just "MsgEditorsubmissionEditSubmission"
         , bCrudModelDeleteFormTitleMsg = Just "MsgEditorsubmissionDeleteSubmission"
-        , bCrudModelParentHsType = Nothing
+        , bCrudModelParentHsType = Just "Issue"
         , bCrudModelFormRouteHsType = "EditorR"
         , bCrudModelFields =
             [ BCrudField
+              { bCrudFieldName = "issueId"
+              , bCrudFieldLabelDe = Just "Ausgabe"
+              , bCrudFieldLabelEn = Just "Issue"
+              , bCrudFieldHsType = "IssueId"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "issueSelectField"
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
               { bCrudFieldName = "headline"
               , bCrudFieldLabelDe = Just "Headline"
               , bCrudFieldLabelEn = Just "Headline"

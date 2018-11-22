@@ -180,6 +180,7 @@ data JDataPages = JDataPages
   , jDataPageAuthorsubmissionDetail :: Maybe JDataPageAuthorsubmissionDetail
   , jDataPageIssueList :: Maybe JDataPageIssueList
   , jDataPageIssueDetail :: Maybe JDataPageIssueDetail
+  , jDataPageEditorsubmissionDetail :: Maybe JDataPageEditorsubmissionDetail
   }
 instance ToJSON JDataPages where
   toJSON o = object
@@ -189,6 +190,7 @@ instance ToJSON JDataPages where
     , "authorsubmissionDetail" .= jDataPageAuthorsubmissionDetail o
     , "issueList" .= jDataPageIssueList o
     , "issueDetail" .= jDataPageIssueDetail o
+    , "editorsubmissionDetail" .= jDataPageEditorsubmissionDetail o
     ]
 
 defaultDataPages :: JDataPages
@@ -199,6 +201,7 @@ defaultDataPages = JDataPages
   , jDataPageAuthorsubmissionDetail = Nothing
   , jDataPageIssueList = Nothing
   , jDataPageIssueDetail = Nothing
+  , jDataPageEditorsubmissionDetail = Nothing
   }
 
 
@@ -324,20 +327,60 @@ instance ToJSON JDataIssue where
 
 data JDataPageIssueDetail = JDataPageIssueDetail
   { jDataPageIssueDetailIssueEnt :: Entity Issue
---  , jDataPageIssueDetailDemocs :: [JDataDemoc]
+  , jDataPageIssueDetailEditorsubmissions :: [JDataEditorsubmission]
   , jDataPageIssueDetailIssueEditFormUrl :: Text
---  , jDataPageIssueDetailDemocAddFormUrl :: Text
+  , jDataPageIssueDetailEditorsubmissionAddFormUrl :: Text
   }
 instance ToJSON JDataPageIssueDetail where
   toJSON o = object
     [ "issueEnt" .= jDataPageIssueDetailIssueEnt o
---    , "democs" .= jDataPageIssueDetailDemocs o
+    , "editorsubmissions" .= jDataPageIssueDetailEditorsubmissions o
     , "issueEditFormUrl" .= jDataPageIssueDetailIssueEditFormUrl o
---    , "democAddFormUrl" .= jDataPageIssueDetailDemocAddFormUrl o
+    , "editorsubmissionAddFormUrl" .= jDataPageIssueDetailEditorsubmissionAddFormUrl o
     ]
 
 
+data JDataEditorsubmission = JDataEditorsubmission
+  { jDataEditorsubmissionEnt :: Entity Submission
+  , jDataEditorsubmissionDetailUrl :: Text
+  , jDataEditorsubmissionDetailDataUrl :: Text
+  , jDataEditorsubmissionDeleteFormUrl :: Text
+  }
+instance ToJSON JDataEditorsubmission where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataEditorsubmissionEnt o)
+    , "detailUrl" .= jDataEditorsubmissionDetailUrl o
+    , "detailDataUrl" .= jDataEditorsubmissionDetailDataUrl o
+    , "deleteFormUrl" .= jDataEditorsubmissionDeleteFormUrl o
+    ]
 
+data JDataPageEditorsubmissionDetail = JDataPageEditorsubmissionDetail
+  { jDataPageEditorsubmissionDetailEditorsubmissionEnt :: Entity Submission
+  , jDataPageEditorsubmissionDetailEditorsubmissionEditFormUrl :: Text
+  , jDataPageEditorsubmissionDetailEditorsubmissionfiles :: [JDataEditorsubmissionfile]
+  , jDataPageEditorsubmissionDetailEditorsubmissionfileAddFormUrl :: Text
+  }
+instance ToJSON JDataPageEditorsubmissionDetail where
+  toJSON o = object
+    [ "editorsubmissionEnt" .= jDataPageEditorsubmissionDetailEditorsubmissionEnt o
+    , "editorsubmissionEditFormUrl" .= jDataPageEditorsubmissionDetailEditorsubmissionEditFormUrl o
+    , "editorsubmissionfiles" .= jDataPageEditorsubmissionDetailEditorsubmissionfiles o
+    , "editorsubmissionfileAddFormUrl" .= jDataPageEditorsubmissionDetailEditorsubmissionfileAddFormUrl o
+    ]
+
+data JDataEditorsubmissionfile = JDataEditorsubmissionfile
+  { jDataEditorsubmissionfileEnt :: Entity Submissionfile
+  , jDataEditorsubmissionfileEditFormUrl :: Text
+  , jDataEditorsubmissionfileDeleteFormUrl :: Text
+  , jDataEditorsubmissionfileDownloadUrl :: Text
+  }
+instance ToJSON JDataEditorsubmissionfile where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataEditorsubmissionfileEnt o)
+    , "editFormUrl" .= jDataEditorsubmissionfileEditFormUrl o
+    , "deleteFormUrl" .= jDataEditorsubmissionfileDeleteFormUrl o
+    , "downloadUrl" .= jDataEditorsubmissionfileDownloadUrl o
+    ]
 
 
 
@@ -582,6 +625,9 @@ verticalCheckboxesField ioptlist = (multiSelectField ioptlist)
 --------------------------------------------------------------------------------
 -- app specific helpers
 --------------------------------------------------------------------------------
+
+issueSelectField :: Field Handler (Key Issue)
+issueSelectField = selectField $ optionsPersistKey [] [Asc IssueId] issueName
 
 
 --------------------------------------------------------------------------------

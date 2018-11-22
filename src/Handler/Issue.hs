@@ -17,6 +17,8 @@ import qualified Data.Text.Encoding as TE
 import qualified Data.CaseInsensitive as CI
 import qualified Database.Esqueleto as E
 
+import Handler.Editorsubmission
+
 -------------------------------------------------------
 -- list
 -------------------------------------------------------
@@ -143,16 +145,16 @@ getIssueDetailDataR issueId = do
   appName <- runDB $ configAppName
   mainNavItems <- mainNavData user MainNavEditor
   issue <- runDB $ get404 issueId
-  -- jDataDemocs <- democJDatas issueId
+  jDataEditorsubmissions <- editorsubmissionJDatas issueId
   urlRenderer <- getUrlRender
   let pages =
         defaultDataPages
         { jDataPageIssueDetail =
             Just $ JDataPageIssueDetail
             { jDataPageIssueDetailIssueEnt = Entity issueId issue
-            -- , jDataPageIssueDetailDemocs = jDataDemocs
+            , jDataPageIssueDetailEditorsubmissions = jDataEditorsubmissions
             , jDataPageIssueDetailIssueEditFormUrl = urlRenderer $ EditorR $ EditIssueFormR issueId
-            -- , jDataPageIssueDetailDemocAddFormUrl = urlRenderer $ EditorR $ AddDemocFormR issueId
+            , jDataPageIssueDetailEditorsubmissionAddFormUrl = urlRenderer $ EditorR $ AddEditorsubmissionFormR issueId
             }
         }
   msgHome <- localizedMsg MsgGlobalHome
@@ -189,30 +191,26 @@ getIssueDetailDataR issueId = do
     , jDataLanguageEnUrl = urlRenderer $ EcmsR $ LanguageEnR currentDataUrl
     }
 
--- democJDatas :: IssueId -> Handler [JDataDemoc]
--- democJDatas issueId = do
---   urlRenderer <- getUrlRender
---   democTuples <- runDB $ loadDemocTuples issueId
---   return $ map
---     (\(democEnt@(Entity democId _)) ->
---        JDataDemoc
---        { jDataDemocEnt = democEnt
---        , jDataDemocEditFormUrl = urlRenderer $ EditorR $ EditDemocFormR democId
---        , jDataDemocDeleteFormUrl = urlRenderer $ EditorR $ DeleteDemocFormR democId
---        })
---     democTuples
+editorsubmissionJDatas :: IssueId -> Handler [JDataEditorsubmission]
+editorsubmissionJDatas issueId = do
+  urlRenderer <- getUrlRender
+  editorsubmissionTuples <- runDB $ loadEditorsubmissionTuples issueId
+  return $ map
+    (\(editorsubmissionEnt@(Entity editorsubmissionId _)) ->
+       JDataEditorsubmission
+       { jDataEditorsubmissionEnt = editorsubmissionEnt
+       , jDataEditorsubmissionDetailUrl = urlRenderer $ EditorR $ EditorsubmissionDetailR editorsubmissionId
+       , jDataEditorsubmissionDetailDataUrl = urlRenderer $ EditorR $ EditorsubmissionDetailDataR editorsubmissionId
+       , jDataEditorsubmissionDeleteFormUrl = urlRenderer $ EditorR $ DeleteEditorsubmissionFormR editorsubmissionId
+       })
+    editorsubmissionTuples
 
--- loadDemocTuples :: IssueId -> YesodDB App [(Entity Democ)]
--- loadDemocTuples issueId = do
---   E.select $ E.from $ \(dc) -> do
---     E.orderBy [ E.desc (dc E.^. DemocId) ]
---     E.where_ (dc E.^. DemocIssueId E.==. E.val issueId)
---     return (dc)
-
-
-
-
-
+loadEditorsubmissionTuples :: IssueId -> YesodDB App [(Entity Submission)]
+loadEditorsubmissionTuples issueId = do
+  E.select $ E.from $ \(s) -> do
+    E.orderBy [ E.desc (s E.^. SubmissionId) ]
+    E.where_ (s E.^. SubmissionIssueId E.==. E.val issueId)
+    return (s)
 
 -------------------------------------------------------
 -- add

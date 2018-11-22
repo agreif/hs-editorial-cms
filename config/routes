@@ -40,22 +40,22 @@
   -- editorsubmissionList EditorsubmissionListR GET
   -- editorsubmissionListDataR EditorsubmissionListDataR GET
   -- editorsubmissionListDataR/#Int EditorsubmissionListPageNumDataR GET POST
-  -- addEditorsubmissionForm AddEditorsubmissionFormR GET
-  -- addEditorsubmission AddEditorsubmissionR POST
-  -- editorsubmissionDetail/#SubmissionId EditorsubmissionDetailR GET
-  -- editorsubmissionDetailDataR/#SubmissionId EditorsubmissionDetailDataR GET
-  -- editEditorsubmissionForm/#SubmissionId EditEditorsubmissionFormR GET
-  -- editEditorsubmission/#SubmissionId EditEditorsubmissionR POST
-  -- deleteEditorsubmissionForm/#SubmissionId DeleteEditorsubmissionFormR GET
-  -- deleteEditorsubmission/#SubmissionId DeleteEditorsubmissionR POST
+  addEditorsubmissionForm/#IssueId AddEditorsubmissionFormR GET
+  addEditorsubmission/#IssueId AddEditorsubmissionR POST
+  editorsubmissionDetail/#SubmissionId EditorsubmissionDetailR GET
+  editorsubmissionDetailDataR/#SubmissionId EditorsubmissionDetailDataR GET
+  editEditorsubmissionForm/#SubmissionId EditEditorsubmissionFormR GET
+  editEditorsubmission/#SubmissionId EditEditorsubmissionR POST
+  deleteEditorsubmissionForm/#SubmissionId DeleteEditorsubmissionFormR GET
+  deleteEditorsubmission/#SubmissionId DeleteEditorsubmissionR POST
 
-  -- addEditorsubmissionfileForm/#SubmissionId AddEditorsubmissionfileFormR GET
-  -- addEditorsubmissionfile/#SubmissionId AddEditorsubmissionfileR POST
-  -- editEditorsubmissionfileForm/#SubmissionfileId EditEditorsubmissionfileFormR GET
-  -- editEditorsubmissionfile/#SubmissionfileId EditEditorsubmissionfileR POST
-  -- deleteEditorsubmissionfileForm/#SubmissionfileId DeleteEditorsubmissionfileFormR GET
-  -- deleteEditorsubmissionfile/#SubmissionfileId DeleteEditorsubmissionfileR POST
-  -- downloadEditorsubmissionfile/#SubmissionfileId DownloadEditorsubmissionfileR GET
+  addEditorsubmissionfileForm/#SubmissionId AddEditorsubmissionfileFormR GET
+  addEditorsubmissionfile/#SubmissionId AddEditorsubmissionfileR POST
+  editEditorsubmissionfileForm/#SubmissionfileId EditEditorsubmissionfileFormR GET
+  editEditorsubmissionfile/#SubmissionfileId EditEditorsubmissionfileR POST
+  deleteEditorsubmissionfileForm/#SubmissionfileId DeleteEditorsubmissionfileFormR GET
+  deleteEditorsubmissionfile/#SubmissionfileId DeleteEditorsubmissionfileR POST
+  downloadEditorsubmissionfile/#SubmissionfileId DownloadEditorsubmissionfileR GET
 
 
 -- /ecms/reviewer ReviewerR:

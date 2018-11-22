@@ -7,6 +7,7 @@
     <authorsubmission-detail-page-tag>
     <issue-list-page-tag>
     <issue-detail-page-tag>
+    <editorsubmission-detail-page-tag>
   <script>
     \ tag = this
     \ tag.data = null
@@ -371,6 +372,8 @@
             {parent.data.translation.msgAuthorsubmissionHeadline}
           <th>
             {parent.data.translation.msgAuthorsubmissionSubline}
+          <th>
+            {parent.data.translation.msgAuthorsubmissionText}
           <th .uk-align-right>
             <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgAuthorsubmissionAddSubmission}" uk-tooltip onclick="{addAuthorsubmission}">
               <span uk-icon="icon: plus">
@@ -382,6 +385,11 @@
           <td .uk-table-link>
             <a href="{detailUrl}" onclick="{detailAuthorsubmission}" .uk-link-reset>
               {entity.subline}
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailAuthorsubmission}" .uk-link-reset>
+              {entity.text.substring(1,100)}
+              <span if="{entity.text.length > 100}">
+                ...
           <td .uk-width-small>
             <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgAuthorsubmissionDeleteSubmission}" uk-tooltip onclick="{deleteAuthorsubmission}">
               <span uk-icon="icon: trash">
@@ -532,7 +540,7 @@
   <div if="{parent.data.pages.issueDetail}">
     <h1>
       {parent.data.translation.msgIssueIssue}:
-      {parent.data.pages.issueDetail.issueEnt.myattr}
+      {parent.data.pages.issueDetail.issueEnt.name}
     <!-- master data -->
     <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
       <thead>
@@ -549,42 +557,137 @@
             <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgIssueEditIssue}" uk-tooltip onclick="{editIssue}">
               <span uk-icon="icon: pencil">
     <h2>
-      {parent.data.translation.msgDemocDemocs}
-    <!-- democ list -->
+      {parent.data.translation.msgEditorsubmissionSubmissions}
+    <!-- editorsubmission list -->
     <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
       <thead>
         <tr>
           <th>
-            {parent.data.translation.msgDemocMyattr}
+            {parent.data.translation.msgEditorsubmissionHeadline}
+          <th>
+            {parent.data.translation.msgEditorsubmissionSubline}
+          <th>
+            {parent.data.translation.msgEditorsubmissionText}
           <th .uk-align-right>
-            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgDemocAddDemoc}" uk-tooltip onclick="{addDemoc}">
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgEditorsubmissionAddEditorsubmission}" uk-tooltip onclick="{addEditorsubmission}">
               <span uk-icon="icon: plus">
       <tbody>
-        <tr each="{parent.data.pages.issueDetail.democs}">
+        <tr each="{parent.data.pages.issueDetail.editorsubmissions}">
           <td .uk-table-link>
-            <a onclick="{editDemoc}" .uk-link-reset>{entity.myattr}
+            <a href="{detailUrl}" onclick="{detailEditorsubmission}" .uk-link-reset>
+              {entity.headline}
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailEditorsubmission}" .uk-link-reset>
+              {entity.subline}
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailEditorsubmission}" .uk-link-reset>
+              {entity.text.substring(1,100)}
+              <span if="{entity.text.length > 100}">
+                ...
           <td .uk-width-small>
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgDemocDeleteDemoc}" uk-tooltip onclick="{deleteDemoc}">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgEditorsubmissionDeleteSubmission}" uk-tooltip onclick="{deleteEditorsubmission}">
               <span uk-icon="icon: trash">
-            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgDemocEditDemoc}" uk-tooltip onclick="{editDemoc}">
-              <span uk-icon="icon: pencil">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgEditorsubmissionEditSubmission}" uk-tooltip onclick="{detailEditorsubmission}">
+              <span uk-icon="icon: file-edit">
   <script>
     \ editIssue(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(parent.tag.data.pages.issueDetail.issueEditFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ addDemoc(event) {
+    \ addEditorsubmission(event) {
     \   event.preventDefault()
-    \   parent.tag.showModalForm(parent.tag.data.pages.issueDetail.democAddFormUrl)
+    \   parent.tag.showModalForm(parent.tag.data.pages.issueDetail.editorsubmissionAddFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ editDemoc(event) {
+    \ detailEditorsubmission(event) {
+    \   event.preventDefault()
+    \   parent.tag.refreshData(event.item.detailDataUrl, true, true)
+    \   event.currentTarget.blur()
+    \ }
+    \ deleteEditorsubmission(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(event.item.deleteFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+
+<editorsubmission-detail-page-tag>
+  <div if="{parent.data.pages.editorsubmissionDetail}">
+    <h1>
+      {parent.data.translation.msgEditorsubmissionSubmission}:
+      {parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.headline}
+    <!-- master data -->
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgEditorsubmissionHeadline}
+          <th>
+            {parent.data.translation.msgEditorsubmissionSubline}
+          <th>
+            {parent.data.translation.msgEditorsubmissionText}
+          <th .uk-align-right>
+      <tbody>
+        <tr>
+          <td .uk-table-link>
+            <a onclick="{editEditorsubmission}" .uk-link-reset>
+              {parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.headline}
+          <td .uk-table-link>
+            <a onclick="{editEditorsubmission}" .uk-link-reset>
+              {parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.subline}
+          <td .uk-table-link>
+            <a onclick="{editEditorsubmission}" .uk-link-reset>
+              {parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.text.substring(1,100)}
+              <span if="{parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.text.length > 100}">
+                ...
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.data.translation.msgEditorsubmissionEditSubmission}" uk-tooltip onclick="{editEditorsubmission}">
+              <span uk-icon="icon: pencil">
+    <h2>
+      {parent.data.translation.msgEditorsubmissionfileSubmissionfiles}
+    <!-- file list -->
+    <table .uk-table .uk-table-small .uk-table-divider .uk-table-hover .uk-background-muted>
+      <thead>
+        <tr>
+          <th>
+            {parent.data.translation.msgEditorsubmissionfileFilename}
+          <th>
+            {parent.data.translation.msgEditorsubmissionfileSize}
+          <th .uk-align-right>
+            <button .uk-background-primary .uk-light .uk-padding-small .modal-form-link .uk-button .uk-button-link title="{parent.data.translation.msgEditorsubmissionfileAddSubmissionfile}" uk-tooltip onclick="{addEditorsubmissionfile}">
+              <span uk-icon="icon: plus">
+      <tbody>
+        <tr each="{parent.data.pages.editorsubmissionDetail.editorsubmissionfiles}">
+          <td .uk-table-link>
+            <a href="{downloadUrl}" .uk-link-reset>
+              {entity.filename}
+          <td .uk-table-link>
+            <a href="{downloadUrl}" .uk-link-reset>
+              {fileSize(entity.size, parent.parent.data.currentLanguage)}
+          <td .uk-width-small>
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgEditorsubmissionfileDeleteSubmissionfile}" uk-tooltip onclick="{deleteEditorsubmissionfile}">
+              <span uk-icon="icon: trash">
+            <button .uk-float-right .uk-button .uk-button-link title="{parent.parent.data.translation.msgEditorsubmissionfileEditSubmissionfile}" uk-tooltip onclick="{editEditorsubmissionfile}">
+              <span uk-icon="icon: pencil">
+            <a .uk-float-right title="{parent.parent.data.translation.msgEditorsubmissionfileDownloadSubmissionfile}" uk-tooltip href="{downloadUrl}">
+              <span uk-icon="icon: download">
+  <script>
+    \ editEditorsubmission(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(parent.tag.data.pages.editorsubmissionDetail.editorsubmissionEditFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ addEditorsubmissionfile(event) {
+    \   event.preventDefault()
+    \   parent.tag.showModalForm(parent.tag.data.pages.editorsubmissionDetail.editorsubmissionfileAddFormUrl)
+    \   event.currentTarget.blur()
+    \ }
+    \ editEditorsubmissionfile(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.editFormUrl)
     \   event.currentTarget.blur()
     \ }
-    \ deleteDemoc(event) {
+    \ deleteEditorsubmissionfile(event) {
     \   event.preventDefault()
     \   parent.tag.showModalForm(event.item.deleteFormUrl)
     \   event.currentTarget.blur()
