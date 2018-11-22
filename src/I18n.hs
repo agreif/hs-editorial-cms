@@ -53,6 +53,7 @@ data AppMessage =
   | MsgAuthorsubmissionfileSize
   | MsgAuthorsubmissionfileFile
   | MsgIssueName
+  | MsgEditorsubmissionIssueId
   | MsgEditorsubmissionHeadline
   | MsgEditorsubmissionSubline
   | MsgEditorsubmissionText
@@ -143,6 +144,7 @@ renderMessageGerman MsgAuthorsubmissionfileMimetype = "MIME Type"
 renderMessageGerman MsgAuthorsubmissionfileSize = "Groesse"
 renderMessageGerman MsgAuthorsubmissionfileFile = "Datei"
 renderMessageGerman MsgIssueName = "Name"
+renderMessageGerman MsgEditorsubmissionIssueId = "Ausgabe"
 renderMessageGerman MsgEditorsubmissionHeadline = "Headline"
 renderMessageGerman MsgEditorsubmissionSubline = "Subline"
 renderMessageGerman MsgEditorsubmissionText = "Text"
@@ -233,6 +235,7 @@ renderMessageEnglish MsgAuthorsubmissionfileMimetype = "MIME Type"
 renderMessageEnglish MsgAuthorsubmissionfileSize = "Size"
 renderMessageEnglish MsgAuthorsubmissionfileFile = "File"
 renderMessageEnglish MsgIssueName = "Name"
+renderMessageEnglish MsgEditorsubmissionIssueId = "Issue"
 renderMessageEnglish MsgEditorsubmissionHeadline = "Headline"
 renderMessageEnglish MsgEditorsubmissionSubline = "Subline"
 renderMessageEnglish MsgEditorsubmissionText = "Text"
@@ -323,6 +326,7 @@ data Translation = Translation
   , msgAuthorsubmissionfileSize :: Text
   , msgAuthorsubmissionfileFile :: Text
   , msgIssueName :: Text
+  , msgEditorsubmissionIssueId :: Text
   , msgEditorsubmissionHeadline :: Text
   , msgEditorsubmissionSubline :: Text
   , msgEditorsubmissionText :: Text
@@ -417,6 +421,7 @@ translationDe = Translation
   , msgAuthorsubmissionfileSize = "Groesse"
   , msgAuthorsubmissionfileFile = "Datei"
   , msgIssueName = "Name"
+  , msgEditorsubmissionIssueId = "Ausgabe"
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"
@@ -508,6 +513,7 @@ translationEn = Translation
   , msgAuthorsubmissionfileSize = "Size"
   , msgAuthorsubmissionfileFile = "File"
   , msgIssueName = "Name"
+  , msgEditorsubmissionIssueId = "Issue"
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"

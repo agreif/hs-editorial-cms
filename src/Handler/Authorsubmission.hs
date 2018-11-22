@@ -35,10 +35,6 @@ authorsubmissionText = submissionText
 authorsubmissionVersion :: Submission -> Int
 authorsubmissionVersion = submissionVersion
 
-issueSelectField :: Field Handler (Key Issue)
-issueSelectField = do
-  selectField $ optionsPersistKey [] [Asc IssueId] issueName
-
 -------------------------------------------------------
 -- list
 -------------------------------------------------------
@@ -407,7 +403,8 @@ postEditAuthorsubmissionR authorsubmissionId = do
       Entity _ authUser <- requireAuth
       urlRenderer <- getUrlRender
       let persistFields =
-            [ SubmissionHeadline =. vEditAuthorsubmissionHeadline vEditAuthorsubmission
+            [ SubmissionIssueId =. vEditAuthorsubmissionIssueId vEditAuthorsubmission
+            , SubmissionHeadline =. vEditAuthorsubmissionHeadline vEditAuthorsubmission
             , SubmissionSubline =. vEditAuthorsubmissionSubline vEditAuthorsubmission
             , SubmissionText =. vEditAuthorsubmissionText vEditAuthorsubmission
             , SubmissionVersion =. vEditAuthorsubmissionVersion vEditAuthorsubmission + 1
