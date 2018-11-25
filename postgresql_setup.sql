@@ -144,4 +144,27 @@ create trigger audit_issue after insert or update on public.issue for each row e
 
 
 
+
+
+drop function public.process_audit_rubric_type() cascade;
+create or replace function public.process_audit_rubric_type()
+ returns trigger
+ language plpgsql
+as $function$
+   begin
+       if to_regclass('rubric_type_history') is not null then
+           if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
+                insert into rubric_type_history
+                       (id, name, sort_index, version, created_at, created_by, updated_at, updated_by)
+                       values
+                       (new.id, new.name, new.sort_index, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                return new;
+            end if;
+       end if;
+       return null; -- result is ignored since this is an after trigger
+    end;
+$function$;
+
+create trigger audit_rubric_type after insert or update on public.rubric_type for each row execute procedure public.process_audit_rubric_type();
+
 -- gen triggers - end

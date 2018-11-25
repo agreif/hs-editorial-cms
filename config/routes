@@ -24,6 +24,13 @@
   sendTestMailForm AddTestmailFormR GET
   sendTestMail AddTestmailR POST
 
+  addRubricTypeForm AddRubricTypeFormR GET
+  addRubricType AddRubricTypeR POST
+  editRubricTypeForm/#RubricTypeId EditRubricTypeFormR GET
+  editRubricType/#RubricTypeId EditRubricTypeR POST
+  deleteRubricTypeForm/#RubricTypeId DeleteRubricTypeFormR GET
+  deleteRubricType/#RubricTypeId DeleteRubricTypeR POST
+
 /ecms/editor EditorR:
   issueList IssueListR GET
   issueListDataR IssueListDataR GET
