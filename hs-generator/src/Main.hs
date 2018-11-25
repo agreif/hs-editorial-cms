@@ -1507,6 +1507,128 @@ context =
 
 
 
+
+      , BCrudModel
+        { bCrudModelName = "rubricType"
+        , bCrudModelIsJson = True
+        , bCrudModelDbUniquenesses = []
+        , bCrudModelDbHasHistoryTable = True
+        , bCrudModelHsDerivings = []
+        , bCrudModelAddFormArgs = Nothing
+        , bCrudModelEditFormArgs = Nothing
+        , bCrudModelAddFormEntityLoader = Nothing
+        , bCrudModelEditFormEntityLoader = Nothing
+        , bCrudModelDeleteFormEntityLoader = Nothing
+        , bCrudModelAddFormDataJsonUrl = Just "AdminR AdminDataR"
+        , bCrudModelEditFormDataJsonUrl = Just "AdminR AdminDataR"
+        , bCrudModelDeleteFormDataJsonUrl = Just "AdminR AdminDataR"
+        , bCrudModelAddFormHasDefaultModel = False
+        , bCrudModelEditPostLoadsModel = False
+        , bCrudModelDeletePostLoadsModel = False
+        , bCrudModelAddPostExtraStoreFunc = Nothing
+        , bCrudModelEditPostExtraStoreFunc = Nothing
+        , bCrudModelAddFormTitleMsg = Just "MsgRubricTypeAddRubricType"
+        , bCrudModelEditFormTitleMsg = Just "MsgRubricTypeEditRubricType"
+        , bCrudModelDeleteFormTitleMsg = Just "MsgRubricTypeDeleteRubricType"
+        , bCrudModelParentHsType = Nothing
+        , bCrudModelFormRouteHsType = "AdminR"
+        , bCrudModelFields =
+            [ BCrudField
+              { bCrudFieldName = "name"
+              , bCrudFieldLabelDe = Just "Name"
+              , bCrudFieldLabelEn = Just "Name"
+              , bCrudFieldHsType = "Text"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "textField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "sortIndex"
+              , bCrudFieldLabelDe = Just "Sortierungs-Index"
+              , bCrudFieldLabelEn = Just "Sort Index"
+              , bCrudFieldHsType = "Int"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = False
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Just "intField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-medium"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-medium"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            ]
+        , bCrudModelTranslations = Just
+          [ BTranslation { bTranslationKey = "rubric", bTranslationDe = "Rubrik", bTranslationEn = "Rubric" }
+          , BTranslation { bTranslationKey = "rubricTypes", bTranslationDe = "Rubrik-Typen", bTranslationEn = "Rubric types" }
+          , BTranslation { bTranslationKey = "addRubricType", bTranslationDe = "Rubrik-Typ hinzufügen", bTranslationEn = "Add rubric type" }
+          , BTranslation { bTranslationKey = "deleteRubricType", bTranslationDe = "Rubrik-Typ löschen", bTranslationEn = "Delete rubric type" }
+          , BTranslation { bTranslationKey = "editRubricType", bTranslationDe = "Rubrik-Typ bearbeiten", bTranslationEn = "Edit rubric type" }
+          ]
+        }
+
+
+
       ]
 
 

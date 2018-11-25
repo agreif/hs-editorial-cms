@@ -217,11 +217,13 @@ instance ToJSON JDataPageHome where
 data JDataPageAdmin = JDataPageAdmin
   { jDataPageAdminUsers :: [JDataUser]
   , jDataPageAdminConfigs :: [JDataConfig]
+  , jDataPageAdminRubricTypes :: [JDataRubricType]
   }
 instance ToJSON JDataPageAdmin where
   toJSON o = object
     [ "users" .= jDataPageAdminUsers o
     , "configs" .= jDataPageAdminConfigs o
+    , "rubricTypes" .= jDataPageAdminRubricTypes o
     ]
 
 
@@ -342,6 +344,7 @@ instance ToJSON JDataPageIssueDetail where
 
 data JDataEditorsubmission = JDataEditorsubmission
   { jDataEditorsubmissionEnt :: Entity Submission
+  , jDataInspectionRubricTypeEnt :: Entity RubricType
   , jDataEditorsubmissionDetailUrl :: Text
   , jDataEditorsubmissionDetailDataUrl :: Text
   , jDataEditorsubmissionDeleteFormUrl :: Text
@@ -349,6 +352,7 @@ data JDataEditorsubmission = JDataEditorsubmission
 instance ToJSON JDataEditorsubmission where
   toJSON o = object
     [ "entity" .= entityIdToJSON (jDataEditorsubmissionEnt o)
+    , "rubricTypeEnt" .= entityIdToJSON (jDataInspectionRubricTypeEnt o)
     , "detailUrl" .= jDataEditorsubmissionDetailUrl o
     , "detailDataUrl" .= jDataEditorsubmissionDetailDataUrl o
     , "deleteFormUrl" .= jDataEditorsubmissionDeleteFormUrl o
@@ -383,6 +387,17 @@ instance ToJSON JDataEditorsubmissionfile where
     ]
 
 
+data JDataRubricType = JDataRubricType
+  { jDataRubricTypeEnt :: Entity RubricType
+  , jDataRubricTypeEditFormUrl :: Text
+  , jDataRubricTypeDeleteFormUrl :: Text
+  }
+instance ToJSON JDataRubricType where
+  toJSON o = object
+    [ "entity" .= entityIdToJSON (jDataRubricTypeEnt o)
+    , "editFormUrl" .= jDataRubricTypeEditFormUrl o
+    , "deleteFormUrl" .= jDataRubricTypeDeleteFormUrl o
+    ]
 
 
 

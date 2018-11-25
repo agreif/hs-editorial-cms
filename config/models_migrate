@@ -156,4 +156,25 @@ IssueHistory
 
 
 
+RubricType json
+    name Text
+    sortIndex Int
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
+
+RubricTypeHistory
+    Id sql=vid
+    id Int MigrationOnly
+    name Text
+    sortIndex Int
+    version Int
+    createdAt UTCTime
+    createdBy Text
+    updatedAt UTCTime
+    updatedBy Text
+
 -- gen models - end

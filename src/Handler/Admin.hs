@@ -33,12 +33,14 @@ getAdminDataR = do
   mainNavItems <- mainNavData user MainNavAdmin
   jDataUsers <- userListJDataEnts
   jDataConfigs <- configListJDataEnts
+  jDataRubricTypes <- rubricTypeListJDataEnts
   let pages =
         defaultDataPages
         { jDataPageAdmin =
             Just $ JDataPageAdmin
             { jDataPageAdminUsers = jDataUsers
             , jDataPageAdminConfigs = jDataConfigs
+            , jDataPageAdminRubricTypes = jDataRubricTypes
             }
         }
   msgHome <- localizedMsg MsgGlobalHome
@@ -108,4 +110,24 @@ loadConfigListTuples = do
   tuples <- E.select $ E.from $ \(config) -> do
     E.orderBy [E.asc (config E.^. ConfigId)]
     return (config)
+  return tuples
+
+rubricTypeListJDataEnts :: Handler [JDataRubricType]
+rubricTypeListJDataEnts = do
+  urlRenderer <- getUrlRender
+  rubricTypeTuples <- runDB loadRubricTypeListTuples
+  let jRubricTypeList = map (\(rubricTypeEnt@(Entity rubricTypeId _)) ->
+                                 JDataRubricType
+                                { jDataRubricTypeEnt = rubricTypeEnt
+                                , jDataRubricTypeEditFormUrl = urlRenderer $ AdminR $ EditRubricTypeFormR rubricTypeId
+                                , jDataRubricTypeDeleteFormUrl = urlRenderer $ AdminR $ DeleteRubricTypeFormR rubricTypeId
+                                }
+                              ) rubricTypeTuples
+  return jRubricTypeList
+
+loadRubricTypeListTuples :: YesodDB App [(Entity RubricType)]
+loadRubricTypeListTuples = do
+  tuples <- E.select $ E.from $ \(rubricType) -> do
+    E.orderBy [E.asc (rubricType E.^. RubricTypeSortIndex)]
+    return (rubricType)
   return tuples

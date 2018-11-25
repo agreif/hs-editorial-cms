@@ -63,6 +63,8 @@ data AppMessage =
   | MsgEditorsubmissionfileMimetype
   | MsgEditorsubmissionfileSize
   | MsgEditorsubmissionfileFile
+  | MsgRubricTypeName
+  | MsgRubricTypeSortIndex
   | MsgUserUsers
   | MsgUserAddUser
   | MsgUserEditUser
@@ -96,6 +98,11 @@ data AppMessage =
   | MsgEditorsubmissionfileEditSubmissionfile
   | MsgEditorsubmissionfileDeleteSubmissionfile
   | MsgEditorsubmissionfileDownloadSubmissionfile
+  | MsgRubricTypeRubric
+  | MsgRubricTypeRubricTypes
+  | MsgRubricTypeAddRubricType
+  | MsgRubricTypeDeleteRubricType
+  | MsgRubricTypeEditRubricType
 
 renderMessageGerman :: AppMessage -> Text
 renderMessageGerman MsgGlobalHome = "Home"
@@ -154,6 +161,8 @@ renderMessageGerman MsgEditorsubmissionfileFilename = "Dateiname"
 renderMessageGerman MsgEditorsubmissionfileMimetype = "MIME Type"
 renderMessageGerman MsgEditorsubmissionfileSize = "Groesse"
 renderMessageGerman MsgEditorsubmissionfileFile = "Datei"
+renderMessageGerman MsgRubricTypeName = "Name"
+renderMessageGerman MsgRubricTypeSortIndex = "Sortierungs-Index"
 renderMessageGerman MsgUserUsers = "Nutzer"
 renderMessageGerman MsgUserAddUser = "Nutzer hinzufügen"
 renderMessageGerman MsgUserEditUser = "Nutzer bearbeiten"
@@ -187,6 +196,11 @@ renderMessageGerman MsgEditorsubmissionfileAddSubmissionfile = "Datei hinzufüge
 renderMessageGerman MsgEditorsubmissionfileEditSubmissionfile = "Datei bearbeiten"
 renderMessageGerman MsgEditorsubmissionfileDeleteSubmissionfile = "Datei löschen"
 renderMessageGerman MsgEditorsubmissionfileDownloadSubmissionfile = "Datei runterladen"
+renderMessageGerman MsgRubricTypeRubric = "Rubrik"
+renderMessageGerman MsgRubricTypeRubricTypes = "Rubrik-Typen"
+renderMessageGerman MsgRubricTypeAddRubricType = "Rubrik-Typ hinzufügen"
+renderMessageGerman MsgRubricTypeDeleteRubricType = "Rubrik-Typ löschen"
+renderMessageGerman MsgRubricTypeEditRubricType = "Rubrik-Typ bearbeiten"
 
 renderMessageEnglish :: AppMessage -> Text
 renderMessageEnglish MsgGlobalHome = "Home"
@@ -245,6 +259,8 @@ renderMessageEnglish MsgEditorsubmissionfileFilename = "Filename"
 renderMessageEnglish MsgEditorsubmissionfileMimetype = "MIME Type"
 renderMessageEnglish MsgEditorsubmissionfileSize = "Size"
 renderMessageEnglish MsgEditorsubmissionfileFile = "File"
+renderMessageEnglish MsgRubricTypeName = "Name"
+renderMessageEnglish MsgRubricTypeSortIndex = "Sort Index"
 renderMessageEnglish MsgUserUsers = "Users"
 renderMessageEnglish MsgUserAddUser = "Add user"
 renderMessageEnglish MsgUserEditUser = "Edit user"
@@ -278,6 +294,11 @@ renderMessageEnglish MsgEditorsubmissionfileAddSubmissionfile = "Add file"
 renderMessageEnglish MsgEditorsubmissionfileEditSubmissionfile = "Edit file"
 renderMessageEnglish MsgEditorsubmissionfileDeleteSubmissionfile = "Delete file"
 renderMessageEnglish MsgEditorsubmissionfileDownloadSubmissionfile = "Download file"
+renderMessageEnglish MsgRubricTypeRubric = "Rubric"
+renderMessageEnglish MsgRubricTypeRubricTypes = "Rubric types"
+renderMessageEnglish MsgRubricTypeAddRubricType = "Add rubric type"
+renderMessageEnglish MsgRubricTypeDeleteRubricType = "Delete rubric type"
+renderMessageEnglish MsgRubricTypeEditRubricType = "Edit rubric type"
 
 data Translation = Translation
   { msgGlobalHome :: Text
@@ -336,6 +357,8 @@ data Translation = Translation
   , msgEditorsubmissionfileMimetype :: Text
   , msgEditorsubmissionfileSize :: Text
   , msgEditorsubmissionfileFile :: Text
+  , msgRubricTypeName :: Text
+  , msgRubricTypeSortIndex :: Text
   , msgUserUsers :: Text
   , msgUserAddUser :: Text
   , msgUserEditUser :: Text
@@ -369,6 +392,11 @@ data Translation = Translation
   , msgEditorsubmissionfileEditSubmissionfile :: Text
   , msgEditorsubmissionfileDeleteSubmissionfile :: Text
   , msgEditorsubmissionfileDownloadSubmissionfile :: Text
+  , msgRubricTypeRubric :: Text
+  , msgRubricTypeRubricTypes :: Text
+  , msgRubricTypeAddRubricType :: Text
+  , msgRubricTypeDeleteRubricType :: Text
+  , msgRubricTypeEditRubricType :: Text
   } deriving Generic
 
 instance ToJSON Translation
@@ -431,6 +459,8 @@ translationDe = Translation
   , msgEditorsubmissionfileMimetype = "MIME Type"
   , msgEditorsubmissionfileSize = "Groesse"
   , msgEditorsubmissionfileFile = "Datei"
+  , msgRubricTypeName = "Name"
+  , msgRubricTypeSortIndex = "Sortierungs-Index"
   , msgUserUsers = "Nutzer"
   , msgUserAddUser = "Nutzer hinzufügen"
   , msgUserEditUser = "Nutzer bearbeiten"
@@ -463,7 +493,12 @@ translationDe = Translation
   , msgEditorsubmissionfileAddSubmissionfile = "Datei hinzufügen"
   , msgEditorsubmissionfileEditSubmissionfile = "Datei bearbeiten"
   , msgEditorsubmissionfileDeleteSubmissionfile = "Datei löschen"
-  , msgEditorsubmissionfileDownloadSubmissionfile = "Datei runterladen"}
+  , msgEditorsubmissionfileDownloadSubmissionfile = "Datei runterladen"
+  , msgRubricTypeRubric = "Rubrik"
+  , msgRubricTypeRubricTypes = "Rubrik-Typen"
+  , msgRubricTypeAddRubricType = "Rubrik-Typ hinzufügen"
+  , msgRubricTypeDeleteRubricType = "Rubrik-Typ löschen"
+  , msgRubricTypeEditRubricType = "Rubrik-Typ bearbeiten"}
 
 translationEn :: Translation
 translationEn = Translation
@@ -523,6 +558,8 @@ translationEn = Translation
   , msgEditorsubmissionfileMimetype = "MIME Type"
   , msgEditorsubmissionfileSize = "Size"
   , msgEditorsubmissionfileFile = "File"
+  , msgRubricTypeName = "Name"
+  , msgRubricTypeSortIndex = "Sort Index"
   , msgUserUsers = "Users"
   , msgUserAddUser = "Add user"
   , msgUserEditUser = "Edit user"
@@ -555,6 +592,11 @@ translationEn = Translation
   , msgEditorsubmissionfileAddSubmissionfile = "Add file"
   , msgEditorsubmissionfileEditSubmissionfile = "Edit file"
   , msgEditorsubmissionfileDeleteSubmissionfile = "Delete file"
-  , msgEditorsubmissionfileDownloadSubmissionfile = "Download file"}
+  , msgEditorsubmissionfileDownloadSubmissionfile = "Download file"
+  , msgRubricTypeRubric = "Rubric"
+  , msgRubricTypeRubricTypes = "Rubric types"
+  , msgRubricTypeAddRubricType = "Add rubric type"
+  , msgRubricTypeDeleteRubricType = "Delete rubric type"
+  , msgRubricTypeEditRubricType = "Edit rubric type"}
 
 -- gen i18n - end
