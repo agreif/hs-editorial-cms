@@ -269,6 +269,7 @@ postAddAuthorsubmissionR = do
       let submission =
             Submission
             { submissionIssueId = vAddAuthorsubmissionIssueId vAddAuthorsubmission
+            , submissionRubricTypeId = Nothing
             , submissionHeadline = vAddAuthorsubmissionHeadline vAddAuthorsubmission
             , submissionSubline = vAddAuthorsubmissionSubline vAddAuthorsubmission
             , submissionText = vAddAuthorsubmissionText vAddAuthorsubmission

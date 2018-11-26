@@ -194,21 +194,23 @@ editorsubmissionJDatas issueId = do
   urlRenderer <- getUrlRender
   editorsubmissionTuples <- runDB $ loadEditorsubmissionTuples issueId
   return $ map
-    (\(editorsubmissionEnt@(Entity editorsubmissionId _)) ->
+    (\(editorsubmissionEnt@(Entity editorsubmissionId _), maybeRubricTypeEnt) ->
        JDataEditorsubmission
        { jDataEditorsubmissionEnt = editorsubmissionEnt
+       , jDataInspectionRubricTypeEnt = maybeRubricTypeEnt
        , jDataEditorsubmissionDetailUrl = urlRenderer $ EditorR $ EditorsubmissionDetailR editorsubmissionId
        , jDataEditorsubmissionDetailDataUrl = urlRenderer $ EditorR $ EditorsubmissionDetailDataR editorsubmissionId
        , jDataEditorsubmissionDeleteFormUrl = urlRenderer $ EditorR $ DeleteEditorsubmissionFormR editorsubmissionId
        })
     editorsubmissionTuples
 
-loadEditorsubmissionTuples :: IssueId -> YesodDB App [(Entity Submission)]
+loadEditorsubmissionTuples :: IssueId -> YesodDB App [(Entity Submission, Maybe (Entity RubricType))]
 loadEditorsubmissionTuples issueId = do
-  E.select $ E.from $ \(s) -> do
+  E.select $ E.from $ \(s `E.LeftOuterJoin` rt) -> do
+    E.on (s E.^. SubmissionRubricTypeId E.==. rt E.?. RubricTypeId)
     E.orderBy [ E.desc (s E.^. SubmissionId) ]
     E.where_ (s E.^. SubmissionIssueId E.==. E.val issueId)
-    return (s)
+    return (s, rt)
 
 -------------------------------------------------------
 -- add

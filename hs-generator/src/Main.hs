@@ -697,6 +697,22 @@ context =
               , bCrudFieldEditView = Nothing
               }
             , BCrudField
+              { bCrudFieldName = "rubricTypeId"
+              , bCrudFieldLabelDe = Nothing
+              , bCrudFieldLabelEn = Nothing
+              , bCrudFieldHsType = "RubricTypeId"
+              , bCrudFieldDb =
+                  Just $
+                  BCrudFieldDb
+                  { bCrudFieldDbIsNullable = True
+                  , bCrudFieldDbDefault = Nothing
+                  , bCrudFieldDbCanUpdate = True
+                  }
+              , bCrudFieldFormFieldType = Nothing
+              , bCrudFieldAddView = Nothing
+              , bCrudFieldEditView = Nothing
+              }
+            , BCrudField
               { bCrudFieldName = "headline"
               , bCrudFieldLabelDe = Nothing
               , bCrudFieldLabelEn = Nothing
@@ -1228,6 +1244,9 @@ context =
         }
 
 
+
+
+
       , BCrudModel
         { bCrudModelName = "editorsubmission"
         , bCrudModelIsJson = False
@@ -1265,6 +1284,30 @@ context =
                   Just $
                   BFieldView
                   { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            , BCrudField
+              { bCrudFieldName = "rubricTypeId"
+              , bCrudFieldLabelDe = Just "Rubrik"
+              , bCrudFieldLabelEn = Just "Rubric"
+              , bCrudFieldHsType = "RubricTypeId"
+              , bCrudFieldDb = Nothing
+              , bCrudFieldFormFieldType = Just "rubricTypeSelectField"
+              , bCrudFieldAddView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = False
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs = []
+                  , bFieldViewDefault = Nothing
+                  }
+              , bCrudFieldEditView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = False
                   , bFieldViewIsDisabled = False
                   , bFieldViewAttrs = []
                   , bFieldViewDefault = Nothing

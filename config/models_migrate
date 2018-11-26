@@ -83,6 +83,7 @@ RawdataHistory
 
 Submission json
     issueId IssueId
+    rubricTypeId RubricTypeId Maybe
     headline Text
     subline Text
     text Textarea
@@ -97,6 +98,7 @@ SubmissionHistory
     Id sql=vid
     id Int MigrationOnly
     issueId Int
+    rubricTypeId Int Maybe
     headline Text
     subline Text
     text Textarea

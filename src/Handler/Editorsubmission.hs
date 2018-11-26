@@ -23,6 +23,9 @@ type EditorsubmissionId = SubmissionId
 editorsubmissionIssueId :: Submission -> IssueId
 editorsubmissionIssueId = submissionIssueId
 
+editorsubmissionRubricTypeId :: Submission -> Maybe RubricTypeId
+editorsubmissionRubricTypeId = submissionRubricTypeId
+
 editorsubmissionHeadline :: Submission -> Text
 editorsubmissionHeadline = submissionHeadline
 
@@ -34,6 +37,10 @@ editorsubmissionText = submissionText
 
 editorsubmissionVersion :: Submission -> Int
 editorsubmissionVersion = submissionVersion
+
+rubricTypeSelectField :: Field Handler (Key RubricType)
+rubricTypeSelectField = do
+  selectField $ optionsPersistKey [] [Asc RubricTypeSortIndex] rubricTypeName
 
 -------------------------------------------------------
 -- detail
@@ -58,6 +65,11 @@ getEditorsubmissionDetailDataR editorsubmissionId = do
   mainNavItems <- mainNavData user MainNavEditor
   editorsubmission <- runDB $ get404 editorsubmissionId
   issue <- runDB $ get404 $ submissionIssueId editorsubmission
+  maybeRubricTypeEnt <- case submissionRubricTypeId editorsubmission of
+    Just rubricTypeId -> do
+      rubricType <- runDB $ get404 rubricTypeId
+      return $ Just $ Entity rubricTypeId rubricType
+    _ -> return Nothing
   urlRenderer <- getUrlRender
   jDataEditorsubmissionfiles <- editorsubmissionDetailFileJDatas editorsubmissionId
   let pages =
@@ -65,6 +77,7 @@ getEditorsubmissionDetailDataR editorsubmissionId = do
         { jDataPageEditorsubmissionDetail =
             Just $ JDataPageEditorsubmissionDetail
             { jDataPageEditorsubmissionDetailEditorsubmissionEnt = Entity editorsubmissionId editorsubmission
+            , jDataPageEditorsubmissionDetailEditorsubmissionRubricTypeEnt = maybeRubricTypeEnt
             , jDataPageEditorsubmissionDetailEditorsubmissionEditFormUrl = urlRenderer $ EditorR $ EditEditorsubmissionFormR editorsubmissionId
             , jDataPageEditorsubmissionDetailEditorsubmissionfiles = jDataEditorsubmissionfiles
             , jDataPageEditorsubmissionDetailEditorsubmissionfileAddFormUrl = urlRenderer $ EditorR $ AddEditorsubmissionfileFormR editorsubmissionId
@@ -136,7 +149,8 @@ editorsubmissionDetailFileJDatas editorsubmissionId = do
 
 -- gen data add - start
 data VAddEditorsubmission = VAddEditorsubmission
-  { vAddEditorsubmissionHeadline :: Text
+  { vAddEditorsubmissionRubricTypeId :: Maybe RubricTypeId
+  , vAddEditorsubmissionHeadline :: Text
   , vAddEditorsubmissionSubline :: Text
   , vAddEditorsubmissionText :: Textarea
   }
@@ -167,6 +181,7 @@ postAddEditorsubmissionR issueId = do
       let submission =
             Submission
             { submissionIssueId = issueId
+            , submissionRubricTypeId = vAddEditorsubmissionRubricTypeId vAddEditorsubmission
             , submissionHeadline = vAddEditorsubmissionHeadline vAddEditorsubmission
             , submissionSubline = vAddEditorsubmissionSubline vAddEditorsubmission
             , submissionText = vAddEditorsubmissionText vAddEditorsubmission
@@ -188,6 +203,9 @@ postAddEditorsubmissionR issueId = do
 -- gen add form - start
 vAddEditorsubmissionForm :: Maybe Editorsubmission -> Html -> MForm Handler (FormResult VAddEditorsubmission, Widget)
 vAddEditorsubmissionForm maybeEditorsubmission extra = do
+  (rubricTypeIdResult, rubricTypeIdView) <- mopt rubricTypeSelectField
+    rubricTypeIdFs
+    (editorsubmissionRubricTypeId <$> maybeEditorsubmission)
   (headlineResult, headlineView) <- mreq textField
     headlineFs
     (editorsubmissionHeadline <$> maybeEditorsubmission)
@@ -197,9 +215,15 @@ vAddEditorsubmissionForm maybeEditorsubmission extra = do
   (textResult, textView) <- mreq textareaField
     textFs
     (editorsubmissionText <$> maybeEditorsubmission)
-  let vAddEditorsubmissionResult = VAddEditorsubmission <$> headlineResult <*> sublineResult <*> textResult
+  let vAddEditorsubmissionResult = VAddEditorsubmission <$> rubricTypeIdResult <*> headlineResult <*> sublineResult <*> textResult
   let formWidget = toWidget [whamlet|
     #{extra}
+    <div .uk-margin-small :not $ null $ fvErrors rubricTypeIdView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors rubricTypeIdView:.uk-text-danger for=#{fvId rubricTypeIdView}>#{fvLabel rubricTypeIdView}
+      <div .uk-form-controls>
+        ^{fvInput rubricTypeIdView}
+        $maybe err <- fvErrors rubricTypeIdView
+          &nbsp;#{err}
     <div .uk-margin-small :not $ null $ fvErrors headlineView:.uk-form-danger>
       <label .uk-form-label :not $ null $ fvErrors headlineView:.uk-text-danger for=#{fvId headlineView}>#{fvLabel headlineView}
       <div .uk-form-controls>
@@ -221,6 +245,14 @@ vAddEditorsubmissionForm maybeEditorsubmission extra = do
     |]
   return (vAddEditorsubmissionResult, formWidget)
   where
+    rubricTypeIdFs :: FieldSettings App
+    rubricTypeIdFs = FieldSettings
+      { fsLabel = SomeMessage MsgEditorsubmissionRubricTypeId
+      , fsTooltip = Nothing
+      , fsId = Just "rubricTypeId"
+      , fsName = Just "rubricTypeId"
+      , fsAttrs = [  ]
+      }
     headlineFs :: FieldSettings App
     headlineFs = FieldSettings
       { fsLabel = SomeMessage MsgEditorsubmissionHeadline
@@ -254,6 +286,7 @@ vAddEditorsubmissionForm maybeEditorsubmission extra = do
 -- gen data edit - start
 data VEditEditorsubmission = VEditEditorsubmission
   { vEditEditorsubmissionIssueId :: IssueId
+  , vEditEditorsubmissionRubricTypeId :: Maybe RubricTypeId
   , vEditEditorsubmissionHeadline :: Text
   , vEditEditorsubmissionSubline :: Text
   , vEditEditorsubmissionText :: Textarea
@@ -285,6 +318,7 @@ postEditEditorsubmissionR editorsubmissionId = do
       urlRenderer <- getUrlRender
       let persistFields =
             [ SubmissionIssueId =. vEditEditorsubmissionIssueId vEditEditorsubmission
+            , SubmissionRubricTypeId =. vEditEditorsubmissionRubricTypeId vEditEditorsubmission
             , SubmissionHeadline =. vEditEditorsubmissionHeadline vEditEditorsubmission
             , SubmissionSubline =. vEditEditorsubmissionSubline vEditEditorsubmission
             , SubmissionText =. vEditEditorsubmissionText vEditEditorsubmission
@@ -311,6 +345,9 @@ vEditEditorsubmissionForm maybeEditorsubmission extra = do
   (issueIdResult, issueIdView) <- mreq issueSelectField
     issueIdFs
     (editorsubmissionIssueId <$> maybeEditorsubmission)
+  (rubricTypeIdResult, rubricTypeIdView) <- mopt rubricTypeSelectField
+    rubricTypeIdFs
+    (editorsubmissionRubricTypeId <$> maybeEditorsubmission)
   (headlineResult, headlineView) <- mreq textField
     headlineFs
     (editorsubmissionHeadline <$> maybeEditorsubmission)
@@ -323,7 +360,7 @@ vEditEditorsubmissionForm maybeEditorsubmission extra = do
   (versionResult, versionView) <- mreq hiddenField
     versionFs
     (editorsubmissionVersion <$> maybeEditorsubmission)
-  let vEditEditorsubmissionResult = VEditEditorsubmission <$> issueIdResult <*> headlineResult <*> sublineResult <*> textResult <*> versionResult
+  let vEditEditorsubmissionResult = VEditEditorsubmission <$> issueIdResult <*> rubricTypeIdResult <*> headlineResult <*> sublineResult <*> textResult <*> versionResult
   let formWidget = toWidget [whamlet|
     #{extra}
     ^{fvInput versionView}
@@ -332,6 +369,12 @@ vEditEditorsubmissionForm maybeEditorsubmission extra = do
       <div .uk-form-controls>
         ^{fvInput issueIdView}
         $maybe err <- fvErrors issueIdView
+          &nbsp;#{err}
+    <div .uk-margin-small :not $ null $ fvErrors rubricTypeIdView:.uk-form-danger>
+      <label .uk-form-label :not $ null $ fvErrors rubricTypeIdView:.uk-text-danger for=#{fvId rubricTypeIdView}>#{fvLabel rubricTypeIdView}
+      <div .uk-form-controls>
+        ^{fvInput rubricTypeIdView}
+        $maybe err <- fvErrors rubricTypeIdView
           &nbsp;#{err}
     <div .uk-margin-small :not $ null $ fvErrors headlineView:.uk-form-danger>
       <label .uk-form-label :not $ null $ fvErrors headlineView:.uk-text-danger for=#{fvId headlineView}>#{fvLabel headlineView}
@@ -360,6 +403,14 @@ vEditEditorsubmissionForm maybeEditorsubmission extra = do
       , fsTooltip = Nothing
       , fsId = Just "issueId"
       , fsName = Just "issueId"
+      , fsAttrs = [  ]
+      }
+    rubricTypeIdFs :: FieldSettings App
+    rubricTypeIdFs = FieldSettings
+      { fsLabel = SomeMessage MsgEditorsubmissionRubricTypeId
+      , fsTooltip = Nothing
+      , fsId = Just "rubricTypeId"
+      , fsName = Just "rubricTypeId"
       , fsAttrs = [  ]
       }
     headlineFs :: FieldSettings App

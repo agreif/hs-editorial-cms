@@ -82,9 +82,9 @@ as $function$
        if to_regclass('submission_history') is not null then
            if (TG_OP = 'UPDATE' or TG_OP = 'INSERT') then
                 insert into submission_history
-                       (id, issue_id, headline, subline, text, version, created_at, created_by, updated_at, updated_by)
+                       (id, issue_id, rubric_type_id, headline, subline, text, version, created_at, created_by, updated_at, updated_by)
                        values
-                       (new.id, new.issue_id, new.headline, new.subline, new.text, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
+                       (new.id, new.issue_id, new.rubric_type_id, new.headline, new.subline, new.text, new.version, new.created_at, new.created_by, new.updated_at, new.updated_by);
                 return new;
             end if;
        end if;
