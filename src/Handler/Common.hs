@@ -344,7 +344,7 @@ instance ToJSON JDataPageIssueDetail where
 
 data JDataEditorsubmission = JDataEditorsubmission
   { jDataEditorsubmissionEnt :: Entity Submission
-  , jDataInspectionRubricTypeEnt :: Entity RubricType
+  , jDataInspectionRubricTypeEnt :: Maybe (Entity RubricType)
   , jDataEditorsubmissionDetailUrl :: Text
   , jDataEditorsubmissionDetailDataUrl :: Text
   , jDataEditorsubmissionDeleteFormUrl :: Text
@@ -352,7 +352,7 @@ data JDataEditorsubmission = JDataEditorsubmission
 instance ToJSON JDataEditorsubmission where
   toJSON o = object
     [ "entity" .= entityIdToJSON (jDataEditorsubmissionEnt o)
-    , "rubricTypeEnt" .= entityIdToJSON (jDataInspectionRubricTypeEnt o)
+    , "rubricTypeEnt" .= jDataInspectionRubricTypeEnt o
     , "detailUrl" .= jDataEditorsubmissionDetailUrl o
     , "detailDataUrl" .= jDataEditorsubmissionDetailDataUrl o
     , "deleteFormUrl" .= jDataEditorsubmissionDeleteFormUrl o
@@ -360,6 +360,7 @@ instance ToJSON JDataEditorsubmission where
 
 data JDataPageEditorsubmissionDetail = JDataPageEditorsubmissionDetail
   { jDataPageEditorsubmissionDetailEditorsubmissionEnt :: Entity Submission
+  , jDataPageEditorsubmissionDetailEditorsubmissionRubricTypeEnt :: Maybe (Entity RubricType)
   , jDataPageEditorsubmissionDetailEditorsubmissionEditFormUrl :: Text
   , jDataPageEditorsubmissionDetailEditorsubmissionfiles :: [JDataEditorsubmissionfile]
   , jDataPageEditorsubmissionDetailEditorsubmissionfileAddFormUrl :: Text
@@ -367,6 +368,7 @@ data JDataPageEditorsubmissionDetail = JDataPageEditorsubmissionDetail
 instance ToJSON JDataPageEditorsubmissionDetail where
   toJSON o = object
     [ "editorsubmissionEnt" .= jDataPageEditorsubmissionDetailEditorsubmissionEnt o
+    , "editorsubmissionRubricTypeEnt" .= jDataPageEditorsubmissionDetailEditorsubmissionRubricTypeEnt o
     , "editorsubmissionEditFormUrl" .= jDataPageEditorsubmissionDetailEditorsubmissionEditFormUrl o
     , "editorsubmissionfiles" .= jDataPageEditorsubmissionDetailEditorsubmissionfiles o
     , "editorsubmissionfileAddFormUrl" .= jDataPageEditorsubmissionDetailEditorsubmissionfileAddFormUrl o

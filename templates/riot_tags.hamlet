@@ -609,6 +609,8 @@
       <thead>
         <tr>
           <th>
+            {parent.data.translation.msgEditorsubmissionRubricTypeId}
+          <th>
             {parent.data.translation.msgEditorsubmissionHeadline}
           <th>
             {parent.data.translation.msgEditorsubmissionSubline}
@@ -619,6 +621,9 @@
               <span uk-icon="icon: plus">
       <tbody>
         <tr each="{parent.data.pages.issueDetail.editorsubmissions}">
+          <td .uk-table-link>
+            <a href="{detailUrl}" onclick="{detailEditorsubmission}" .uk-link-reset>
+              {rubricTypeEnt.name}
           <td .uk-table-link>
             <a href="{detailUrl}" onclick="{detailEditorsubmission}" .uk-link-reset>
               {entity.headline}
@@ -667,6 +672,8 @@
       <thead>
         <tr>
           <th>
+            {parent.data.translation.msgEditorsubmissionRubricTypeId}
+          <th>
             {parent.data.translation.msgEditorsubmissionHeadline}
           <th>
             {parent.data.translation.msgEditorsubmissionSubline}
@@ -675,6 +682,9 @@
           <th .uk-align-right>
       <tbody>
         <tr>
+          <td .uk-table-link>
+            <a onclick="{editEditorsubmission}" .uk-link-reset>
+              {parent.data.pages.editorsubmissionDetail.editorsubmissionRubricTypeEnt.name}
           <td .uk-table-link>
             <a onclick="{editEditorsubmission}" .uk-link-reset>
               {parent.data.pages.editorsubmissionDetail.editorsubmissionEnt.headline}

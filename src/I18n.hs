@@ -34,6 +34,7 @@ data AppMessage =
   | MsgTestmailEmail
   | MsgRawdataBytes
   | MsgSubmissionIssueId
+  | MsgSubmissionRubricTypeId
   | MsgSubmissionHeadline
   | MsgSubmissionSubline
   | MsgSubmissionText
@@ -54,6 +55,7 @@ data AppMessage =
   | MsgAuthorsubmissionfileFile
   | MsgIssueName
   | MsgEditorsubmissionIssueId
+  | MsgEditorsubmissionRubricTypeId
   | MsgEditorsubmissionHeadline
   | MsgEditorsubmissionSubline
   | MsgEditorsubmissionText
@@ -132,6 +134,7 @@ renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
 renderMessageGerman MsgTestmailEmail = "Email"
 renderMessageGerman MsgRawdataBytes = "Bytes"
 renderMessageGerman MsgSubmissionIssueId = ""
+renderMessageGerman MsgSubmissionRubricTypeId = ""
 renderMessageGerman MsgSubmissionHeadline = ""
 renderMessageGerman MsgSubmissionSubline = ""
 renderMessageGerman MsgSubmissionText = ""
@@ -152,6 +155,7 @@ renderMessageGerman MsgAuthorsubmissionfileSize = "Groesse"
 renderMessageGerman MsgAuthorsubmissionfileFile = "Datei"
 renderMessageGerman MsgIssueName = "Name"
 renderMessageGerman MsgEditorsubmissionIssueId = "Ausgabe"
+renderMessageGerman MsgEditorsubmissionRubricTypeId = "Rubrik"
 renderMessageGerman MsgEditorsubmissionHeadline = "Headline"
 renderMessageGerman MsgEditorsubmissionSubline = "Subline"
 renderMessageGerman MsgEditorsubmissionText = "Text"
@@ -230,6 +234,7 @@ renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
 renderMessageEnglish MsgTestmailEmail = "Email"
 renderMessageEnglish MsgRawdataBytes = "Bytes"
 renderMessageEnglish MsgSubmissionIssueId = ""
+renderMessageEnglish MsgSubmissionRubricTypeId = ""
 renderMessageEnglish MsgSubmissionHeadline = ""
 renderMessageEnglish MsgSubmissionSubline = ""
 renderMessageEnglish MsgSubmissionText = ""
@@ -250,6 +255,7 @@ renderMessageEnglish MsgAuthorsubmissionfileSize = "Size"
 renderMessageEnglish MsgAuthorsubmissionfileFile = "File"
 renderMessageEnglish MsgIssueName = "Name"
 renderMessageEnglish MsgEditorsubmissionIssueId = "Issue"
+renderMessageEnglish MsgEditorsubmissionRubricTypeId = "Rubric"
 renderMessageEnglish MsgEditorsubmissionHeadline = "Headline"
 renderMessageEnglish MsgEditorsubmissionSubline = "Subline"
 renderMessageEnglish MsgEditorsubmissionText = "Text"
@@ -328,6 +334,7 @@ data Translation = Translation
   , msgTestmailEmail :: Text
   , msgRawdataBytes :: Text
   , msgSubmissionIssueId :: Text
+  , msgSubmissionRubricTypeId :: Text
   , msgSubmissionHeadline :: Text
   , msgSubmissionSubline :: Text
   , msgSubmissionText :: Text
@@ -348,6 +355,7 @@ data Translation = Translation
   , msgAuthorsubmissionfileFile :: Text
   , msgIssueName :: Text
   , msgEditorsubmissionIssueId :: Text
+  , msgEditorsubmissionRubricTypeId :: Text
   , msgEditorsubmissionHeadline :: Text
   , msgEditorsubmissionSubline :: Text
   , msgEditorsubmissionText :: Text
@@ -430,6 +438,7 @@ translationDe = Translation
   , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
   , msgSubmissionIssueId = ""
+  , msgSubmissionRubricTypeId = ""
   , msgSubmissionHeadline = ""
   , msgSubmissionSubline = ""
   , msgSubmissionText = ""
@@ -450,6 +459,7 @@ translationDe = Translation
   , msgAuthorsubmissionfileFile = "Datei"
   , msgIssueName = "Name"
   , msgEditorsubmissionIssueId = "Ausgabe"
+  , msgEditorsubmissionRubricTypeId = "Rubrik"
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"
@@ -529,6 +539,7 @@ translationEn = Translation
   , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
   , msgSubmissionIssueId = ""
+  , msgSubmissionRubricTypeId = ""
   , msgSubmissionHeadline = ""
   , msgSubmissionSubline = ""
   , msgSubmissionText = ""
@@ -549,6 +560,7 @@ translationEn = Translation
   , msgAuthorsubmissionfileFile = "File"
   , msgIssueName = "Name"
   , msgEditorsubmissionIssueId = "Issue"
+  , msgEditorsubmissionRubricTypeId = "Rubric"
   , msgEditorsubmissionHeadline = "Headline"
   , msgEditorsubmissionSubline = "Subline"
   , msgEditorsubmissionText = "Text"
