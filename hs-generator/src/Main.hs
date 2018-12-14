@@ -550,60 +550,60 @@ context =
           , BTranslation { bTranslationKey = "editConfig", bTranslationDe = "Konfiguration bearbeiten", bTranslationEn = "Edit config" }
           ]
         }
-      , BCrudModel
-        { bCrudModelName = "testmail"
-        , bCrudModelIsJson = False
-        , bCrudModelDbUniquenesses = []
-        , bCrudModelDbHasHistoryTable = False
-        , bCrudModelHsDerivings = []
-        , bCrudModelAddFormArgs = Nothing
-        , bCrudModelEditFormArgs = Nothing
-        , bCrudModelAddFormEntityLoader = Nothing
-        , bCrudModelEditFormEntityLoader = Nothing
-        , bCrudModelDeleteFormEntityLoader = Nothing
-        , bCrudModelAddFormDataJsonUrl = Nothing
-        , bCrudModelEditFormDataJsonUrl = Just "EcmsR TestMailDataJsonR"
-        , bCrudModelDeleteFormDataJsonUrl = Nothing
-        , bCrudModelAddFormHasDefaultModel = False
-        , bCrudModelEditPostLoadsModel = False
-        , bCrudModelDeletePostLoadsModel = False
-        , bCrudModelAddPostExtraStoreFunc = Nothing
-        , bCrudModelEditPostExtraStoreFunc = Nothing
-        , bCrudModelAddFormTitleMsg = Just "MsgTestmailSendTestMail"
-        , bCrudModelEditFormTitleMsg = Nothing
-        , bCrudModelDeleteFormTitleMsg = Nothing
-        , bCrudModelParentHsType = Nothing
-        , bCrudModelFormRouteHsType = "AdminR"
-        , bCrudModelFields =
-            [ BCrudField
-              { bCrudFieldName = "email"
-              , bCrudFieldLabelDe = Just "Email"
-              , bCrudFieldLabelEn = Just "Email"
-              , bCrudFieldHsType = "Text"
-              , bCrudFieldDb = Nothing
-              , bCrudFieldFormFieldType = Just "textField"
-              , bCrudFieldAddView =
-                  Just $
-                  BFieldView
-                  { bFieldViewIsRequired = True
-                  , bFieldViewIsDisabled = False
-                  , bFieldViewAttrs =
-                      [ BFieldAttr
-                        { bFieldAttrKey = "class"
-                        , bFieldAttrValue =
-                            "uk-input uk-form-small uk-form-width-large"
-                        }
-                      ]
-                  , bFieldViewDefault = Nothing
-                  }
-              , bCrudFieldEditView = Nothing
-              }
-            ]
-        , bCrudModelTranslations = Just
-          [ BTranslation { bTranslationKey = "testMail", bTranslationDe = "Test-Mail", bTranslationEn = "Test-Mail" }
-          , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
-          ]
-        }
+      -- , BCrudModel
+      --   { bCrudModelName = "testmail"
+      --   , bCrudModelIsJson = False
+      --   , bCrudModelDbUniquenesses = []
+      --   , bCrudModelDbHasHistoryTable = False
+      --   , bCrudModelHsDerivings = []
+      --   , bCrudModelAddFormArgs = Nothing
+      --   , bCrudModelEditFormArgs = Nothing
+      --   , bCrudModelAddFormEntityLoader = Nothing
+      --   , bCrudModelEditFormEntityLoader = Nothing
+      --   , bCrudModelDeleteFormEntityLoader = Nothing
+      --   , bCrudModelAddFormDataJsonUrl = Nothing
+      --   , bCrudModelEditFormDataJsonUrl = Just "EcmsR TestMailDataJsonR"
+      --   , bCrudModelDeleteFormDataJsonUrl = Nothing
+      --   , bCrudModelAddFormHasDefaultModel = False
+      --   , bCrudModelEditPostLoadsModel = False
+      --   , bCrudModelDeletePostLoadsModel = False
+      --   , bCrudModelAddPostExtraStoreFunc = Nothing
+      --   , bCrudModelEditPostExtraStoreFunc = Nothing
+      --   , bCrudModelAddFormTitleMsg = Just "MsgTestmailSendTestMail"
+      --   , bCrudModelEditFormTitleMsg = Nothing
+      --   , bCrudModelDeleteFormTitleMsg = Nothing
+      --   , bCrudModelParentHsType = Nothing
+      --   , bCrudModelFormRouteHsType = "AdminR"
+      --   , bCrudModelFields =
+      --       [ BCrudField
+      --         { bCrudFieldName = "email"
+      --         , bCrudFieldLabelDe = Just "Email"
+      --         , bCrudFieldLabelEn = Just "Email"
+      --         , bCrudFieldHsType = "Text"
+      --         , bCrudFieldDb = Nothing
+      --         , bCrudFieldFormFieldType = Just "textField"
+      --         , bCrudFieldAddView =
+      --             Just $
+      --             BFieldView
+      --             { bFieldViewIsRequired = True
+      --             , bFieldViewIsDisabled = False
+      --             , bFieldViewAttrs =
+      --                 [ BFieldAttr
+      --                   { bFieldAttrKey = "class"
+      --                   , bFieldAttrValue =
+      --                       "uk-input uk-form-small uk-form-width-large"
+      --                   }
+      --                 ]
+      --             , bFieldViewDefault = Nothing
+      --             }
+      --         , bCrudFieldEditView = Nothing
+      --         }
+      --       ]
+      --   , bCrudModelTranslations = Just
+      --     [ BTranslation { bTranslationKey = "testMail", bTranslationDe = "Test-Mail", bTranslationEn = "Test-Mail" }
+      --     , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
+      --     ]
+      --   }
 
 
 
@@ -1680,11 +1680,46 @@ context =
 
 
 
-
-
-
   , bContextActionModels =
-      [
+      [ BActionModel
+        { bActionModelName = "testmail"
+        , bActionModelAction = "send"
+        , bActionModelFormArgs = Nothing
+        , bActionModelFormEntityLoader = Nothing
+        , bActionModelFormDataJsonUrl = Nothing
+        , bActionModelFormHasDefaultModel = False
+        , bActionModelPostExtraStoreFunc = Nothing
+        , bActionModelFormTitleMsg = Just "MsgTestmailSendTestMail"
+        , bActionModelFormRouteHsType = "AdminR"
+        , bActionModelFields =
+            [ BActionField
+              { bActionFieldName = "email"
+              , bActionFieldLabelDe = Just "Email"
+              , bActionFieldLabelEn = Just "Email"
+              , bActionFieldHsType = "Text"
+              , bActionFieldFormFieldType = Just "textField"
+              , bActionFieldView =
+                  Just $
+                  BFieldView
+                  { bFieldViewIsRequired = True
+                  , bFieldViewIsDisabled = False
+                  , bFieldViewAttrs =
+                      [ BFieldAttr
+                        { bFieldAttrKey = "class"
+                        , bFieldAttrValue =
+                            "uk-input uk-form-small uk-form-width-large"
+                        }
+                      ]
+                  , bFieldViewDefault = Nothing
+                  }
+              }
+            ]
+        , bActionModelTranslations =
+          Just
+          [ BTranslation { bTranslationKey = "testMail", bTranslationDe = "Test-Mail", bTranslationEn = "Test-Mail" }
+          , BTranslation { bTranslationKey = "sendTestMail", bTranslationDe = "Test-Mail senden...", bTranslationEn = "Send Test-Mail..." }
+          ]
+        }
       ]
 
 

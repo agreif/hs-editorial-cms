@@ -49,7 +49,6 @@ create trigger audit_config after insert or update on public.config for each row
 
 
 
-
 drop function public.process_audit_rawdata() cascade;
 create or replace function public.process_audit_rawdata()
  returns trigger
