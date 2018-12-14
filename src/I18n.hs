@@ -31,7 +31,6 @@ data AppMessage =
   | MsgConfigIntValue
   | MsgConfigDoubleValue
   | MsgConfigBoolValue
-  | MsgTestmailEmail
   | MsgRawdataBytes
   | MsgSubmissionIssueId
   | MsgSubmissionRubricTypeId
@@ -73,8 +72,6 @@ data AppMessage =
   | MsgUserDeleteUser
   | MsgConfigConfigurations
   | MsgConfigEditConfig
-  | MsgTestmailTestMail
-  | MsgTestmailSendTestMail
   | MsgAuthorsubmissionSubmission
   | MsgAuthorsubmissionSubmissions
   | MsgAuthorsubmissionAddSubmission
@@ -105,6 +102,9 @@ data AppMessage =
   | MsgRubricTypeAddRubricType
   | MsgRubricTypeDeleteRubricType
   | MsgRubricTypeEditRubricType
+  | MsgTestmailEmail
+  | MsgTestmailTestMail
+  | MsgTestmailSendTestMail
 
 renderMessageGerman :: AppMessage -> Text
 renderMessageGerman MsgGlobalHome = "Home"
@@ -131,7 +131,6 @@ renderMessageGerman MsgConfigStringValue = "String-Wert"
 renderMessageGerman MsgConfigIntValue = "Integer-Wert"
 renderMessageGerman MsgConfigDoubleValue = "Double-Wert"
 renderMessageGerman MsgConfigBoolValue = "Boolean-Wert"
-renderMessageGerman MsgTestmailEmail = "Email"
 renderMessageGerman MsgRawdataBytes = "Bytes"
 renderMessageGerman MsgSubmissionIssueId = ""
 renderMessageGerman MsgSubmissionRubricTypeId = ""
@@ -173,8 +172,6 @@ renderMessageGerman MsgUserEditUser = "Nutzer bearbeiten"
 renderMessageGerman MsgUserDeleteUser = "Nutzer löschen"
 renderMessageGerman MsgConfigConfigurations = "Konfigurationen"
 renderMessageGerman MsgConfigEditConfig = "Konfiguration bearbeiten"
-renderMessageGerman MsgTestmailTestMail = "Test-Mail"
-renderMessageGerman MsgTestmailSendTestMail = "Test-Mail senden..."
 renderMessageGerman MsgAuthorsubmissionSubmission = "Beitrag"
 renderMessageGerman MsgAuthorsubmissionSubmissions = "Beiträge"
 renderMessageGerman MsgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
@@ -205,6 +202,9 @@ renderMessageGerman MsgRubricTypeRubricTypes = "Rubrik-Typen"
 renderMessageGerman MsgRubricTypeAddRubricType = "Rubrik-Typ hinzufügen"
 renderMessageGerman MsgRubricTypeDeleteRubricType = "Rubrik-Typ löschen"
 renderMessageGerman MsgRubricTypeEditRubricType = "Rubrik-Typ bearbeiten"
+renderMessageGerman MsgTestmailEmail = "Email"
+renderMessageGerman MsgTestmailTestMail = "Test-Mail"
+renderMessageGerman MsgTestmailSendTestMail = "Test-Mail senden..."
 
 renderMessageEnglish :: AppMessage -> Text
 renderMessageEnglish MsgGlobalHome = "Home"
@@ -231,7 +231,6 @@ renderMessageEnglish MsgConfigStringValue = "String-Value"
 renderMessageEnglish MsgConfigIntValue = "Integer-Value"
 renderMessageEnglish MsgConfigDoubleValue = "Double-Value"
 renderMessageEnglish MsgConfigBoolValue = "Boolean-Value"
-renderMessageEnglish MsgTestmailEmail = "Email"
 renderMessageEnglish MsgRawdataBytes = "Bytes"
 renderMessageEnglish MsgSubmissionIssueId = ""
 renderMessageEnglish MsgSubmissionRubricTypeId = ""
@@ -273,8 +272,6 @@ renderMessageEnglish MsgUserEditUser = "Edit user"
 renderMessageEnglish MsgUserDeleteUser = "Delete user"
 renderMessageEnglish MsgConfigConfigurations = "Configurations"
 renderMessageEnglish MsgConfigEditConfig = "Edit config"
-renderMessageEnglish MsgTestmailTestMail = "Test-Mail"
-renderMessageEnglish MsgTestmailSendTestMail = "Send Test-Mail..."
 renderMessageEnglish MsgAuthorsubmissionSubmission = "Submission"
 renderMessageEnglish MsgAuthorsubmissionSubmissions = "Submissions"
 renderMessageEnglish MsgAuthorsubmissionAddSubmission = "Add submission"
@@ -305,6 +302,9 @@ renderMessageEnglish MsgRubricTypeRubricTypes = "Rubric types"
 renderMessageEnglish MsgRubricTypeAddRubricType = "Add rubric type"
 renderMessageEnglish MsgRubricTypeDeleteRubricType = "Delete rubric type"
 renderMessageEnglish MsgRubricTypeEditRubricType = "Edit rubric type"
+renderMessageEnglish MsgTestmailEmail = "Email"
+renderMessageEnglish MsgTestmailTestMail = "Test-Mail"
+renderMessageEnglish MsgTestmailSendTestMail = "Send Test-Mail..."
 
 data Translation = Translation
   { msgGlobalHome :: Text
@@ -331,7 +331,6 @@ data Translation = Translation
   , msgConfigIntValue :: Text
   , msgConfigDoubleValue :: Text
   , msgConfigBoolValue :: Text
-  , msgTestmailEmail :: Text
   , msgRawdataBytes :: Text
   , msgSubmissionIssueId :: Text
   , msgSubmissionRubricTypeId :: Text
@@ -373,8 +372,6 @@ data Translation = Translation
   , msgUserDeleteUser :: Text
   , msgConfigConfigurations :: Text
   , msgConfigEditConfig :: Text
-  , msgTestmailTestMail :: Text
-  , msgTestmailSendTestMail :: Text
   , msgAuthorsubmissionSubmission :: Text
   , msgAuthorsubmissionSubmissions :: Text
   , msgAuthorsubmissionAddSubmission :: Text
@@ -405,6 +402,9 @@ data Translation = Translation
   , msgRubricTypeAddRubricType :: Text
   , msgRubricTypeDeleteRubricType :: Text
   , msgRubricTypeEditRubricType :: Text
+  , msgTestmailEmail :: Text
+  , msgTestmailTestMail :: Text
+  , msgTestmailSendTestMail :: Text
   } deriving Generic
 
 instance ToJSON Translation
@@ -435,7 +435,6 @@ translationDe = Translation
   , msgConfigIntValue = "Integer-Wert"
   , msgConfigDoubleValue = "Double-Wert"
   , msgConfigBoolValue = "Boolean-Wert"
-  , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
   , msgSubmissionIssueId = ""
   , msgSubmissionRubricTypeId = ""
@@ -477,8 +476,6 @@ translationDe = Translation
   , msgUserDeleteUser = "Nutzer löschen"
   , msgConfigConfigurations = "Konfigurationen"
   , msgConfigEditConfig = "Konfiguration bearbeiten"
-  , msgTestmailTestMail = "Test-Mail"
-  , msgTestmailSendTestMail = "Test-Mail senden..."
   , msgAuthorsubmissionSubmission = "Beitrag"
   , msgAuthorsubmissionSubmissions = "Beiträge"
   , msgAuthorsubmissionAddSubmission = "Beitrag hinzufügen"
@@ -508,7 +505,10 @@ translationDe = Translation
   , msgRubricTypeRubricTypes = "Rubrik-Typen"
   , msgRubricTypeAddRubricType = "Rubrik-Typ hinzufügen"
   , msgRubricTypeDeleteRubricType = "Rubrik-Typ löschen"
-  , msgRubricTypeEditRubricType = "Rubrik-Typ bearbeiten"}
+  , msgRubricTypeEditRubricType = "Rubrik-Typ bearbeiten"
+  , msgTestmailEmail = "Email"
+  , msgTestmailTestMail = "Test-Mail"
+  , msgTestmailSendTestMail = "Test-Mail senden..."}
 
 translationEn :: Translation
 translationEn = Translation
@@ -536,7 +536,6 @@ translationEn = Translation
   , msgConfigIntValue = "Integer-Value"
   , msgConfigDoubleValue = "Double-Value"
   , msgConfigBoolValue = "Boolean-Value"
-  , msgTestmailEmail = "Email"
   , msgRawdataBytes = "Bytes"
   , msgSubmissionIssueId = ""
   , msgSubmissionRubricTypeId = ""
@@ -578,8 +577,6 @@ translationEn = Translation
   , msgUserDeleteUser = "Delete user"
   , msgConfigConfigurations = "Configurations"
   , msgConfigEditConfig = "Edit config"
-  , msgTestmailTestMail = "Test-Mail"
-  , msgTestmailSendTestMail = "Send Test-Mail..."
   , msgAuthorsubmissionSubmission = "Submission"
   , msgAuthorsubmissionSubmissions = "Submissions"
   , msgAuthorsubmissionAddSubmission = "Add submission"
@@ -609,6 +606,9 @@ translationEn = Translation
   , msgRubricTypeRubricTypes = "Rubric types"
   , msgRubricTypeAddRubricType = "Add rubric type"
   , msgRubricTypeDeleteRubricType = "Delete rubric type"
-  , msgRubricTypeEditRubricType = "Edit rubric type"}
+  , msgRubricTypeEditRubricType = "Edit rubric type"
+  , msgTestmailEmail = "Email"
+  , msgTestmailTestMail = "Test-Mail"
+  , msgTestmailSendTestMail = "Send Test-Mail..."}
 
 -- gen i18n - end
